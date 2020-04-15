@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script> 
+  
+ <script src="Logic/jquery-1.11.0.min.js"></script>
+     <script src="Phaser/phaser-arcade-physics.min.js"></script>
+     
+
 </head>
 <body>
-
+<!--<input type="text" id="myText"/>-->
+<!--<textarea id="area51">SOME TEXT HERE</textarea>-->
     <script>
         class Stage1 extends Phaser.Scene {
 constructor() {
         super({key: 'Stage1'});
+        this.scoreInt = 0;
+        this.vidasInt = 5;
         this.player = null;
         this.cursor = null;
         this.bullet = null;
@@ -23,14 +30,28 @@ preload ()
         this.load.image('bg', 'img/jugador.png');
   this.load.image('wall', 'img/wall.png');
    this.load.image('ship',  'img/jugador.png');
+   this.load.image('vida',  'img/vida.png');
    
 }
 
 create ()
 {
+     this.vida = this.physics.add.sprite(92, 226+48, 'vida');
+     
+var vidas = this.add.text(118, 240, this.vidasInt, { fontFamily: '"Arial Black"' });
+vidas.setFontSize(64);
+
+
      this.cursors = this.input.keyboard.createCursorKeys();
       // this.myShip = new Ship(this, 400, 500);
-        this.myShip = this.physics.add.sprite(400, 600, 'ship');
+        this.myShip = this.physics.add.sprite(600, 600, 'ship');
+
+var txt = this.add.text(64, 64, 'Puntaje', { fontFamily: '"Arial Black"' });
+txt.setFontSize(64);
+
+   
+var score = this.add.text(64, 128, this.scoreInt, { fontFamily: '"Arial Black"' });
+score.setFontSize(64);
 
 
  this.myShip.setCollideWorldBounds(true);
@@ -38,18 +59,36 @@ create ()
          this.box = this.physics.add.staticGroup();
     for (var i = 0; i < 200; i++)
     {
-        var x = Phaser.Math.Between(0, 1920);
-        var y = Phaser.Math.Between(0, 1080);
+        var x = Phaser.Math.Between(0, (1920 - 32*18)/32 );
+        var y = Phaser.Math.Between(0, (1080 - 32*6)/32);
 
 
    
-        this.box.create(x, y, 'wall');
+        this.box.create(480+ x*32, 64 + y*32, 'wall');
 
      //   var box = this.add.image(x, y, 'crate');
       //      box.setInteractive();
 
 
      }
+
+for (var i = 1; i < 30; i++)
+    {
+     this.box.create(12*32-32 + 32, 32 + i*32, 'wall');
+}
+for (var i = 1; i < 30; i++)
+    {
+     this.box.create(1920-64 + 32, 32 + i*32, 'wall');
+}
+
+for (var i = 0; i < 47; i++)
+    {
+     this.box.create(12*32 + 32*i, 32 + 32, 'wall');
+}
+for (var i = 0; i < 47; i++)
+    {
+    this.box.create(12*32 + 32*i, 896+ 32 + 32, 'wall');
+}
 
 
    this.physics.add.collider(this.myShip, this.box);
@@ -62,8 +101,10 @@ create ()
 update ()
 {
 
+this.scoreInt = this.scoreInt + 30;
 
     if (this.cursors.left.isDown) {
+        
             this.myShip.setVelocityY(0);
             this.myShip.setVelocityX(-520);
         }
@@ -110,7 +151,7 @@ var config = {
             debug: false
         }
     },
-    scene: [ Stage1 ],};
+    scene: [ Stage1 ], };
 
 var info;
 var timer;
@@ -121,5 +162,6 @@ var game = new Phaser.Game(config);
 
     </script>
 
+ 
 </body>
 </html>
