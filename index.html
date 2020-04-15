@@ -11,9 +11,18 @@
 <!--<input type="text" id="myText"/>-->
 <!--<textarea id="area51">SOME TEXT HERE</textarea>-->
     <script>
-        class Stage1 extends Phaser.Scene {
-constructor() {
-        super({key: 'Stage1'});
+
+
+       
+function constructor() {
+       this.CrearX = 0;
+     this.CrearY = 0;
+        this.limpiarLlama = 50;
+        this.llama = 2;
+        this.countExplosion = 30,
+        this.countBomb = 0;
+        this.myShip = null;
+        this.bombbutton = null;
         this.scoreInt = 0;
         this.vidasInt = 5;
         this.player = null;
@@ -23,19 +32,47 @@ constructor() {
         this.playerBulletLive = false;
         this.playerDirection = 'up';
     }
-preload ()
+function preload ()
 {
+      this.CrearObjeto = 1;
+    this.CrearX = 0;
+     this.CrearY = 0;
+     this.limpiarLlama = 50;
+        this.llama = 2;
+        this.countExplosion = 30,
+        this.countBomb = 0;
+        this.myShip = null;
+        this.bombbutton = null;
+        this.scoreInt = 0;
+        this.vidasInt = 5;
+        this.player = null;
+        this.cursor = null;
+        this.bullet = null;
+        this.brick = null;
+        this.playerBulletLive = false;
+        this.playerDirection = 'up';
       //   this.load.setBaseURL('http://labs.phaser.io');
 
         this.load.image('bg', 'img/jugador.png');
   this.load.image('wall', 'img/wall.png');
+   this.load.image('wall2', 'img/wall2.png');
    this.load.image('ship',  'img/jugador.png');
    this.load.image('vida',  'img/vida.png');
+      this.load.image('bomba',  'img/bomba.png');
+   this.load.image('explosion',  'img/explosion.png');
+    this.load.image('poderllama',  'img/poderllama.png');
+      this.load.image('poderbomba',  'img/poderbomba.png');
+   this.load.image('poderpatin',  'img/poderpatin.png');
    
 }
 
-create ()
+function create()
 {
+ 
+   //  this.bomba = this.physics.add.sprite(-50,-50, 'bomba');
+
+    this.countBomb = 0;
+    this.countExplosion =0;
      this.vida = this.physics.add.sprite(92, 226+48, 'vida');
      
 var vidas = this.add.text(118, 240, this.vidasInt, { fontFamily: '"Arial Black"' });
@@ -43,6 +80,8 @@ vidas.setFontSize(64);
 
 
      this.cursors = this.input.keyboard.createCursorKeys();
+    this.bombbutton = this.input.keyboard.addKey('X');
+     
       // this.myShip = new Ship(this, 400, 500);
         this.myShip = this.physics.add.sprite(600, 600, 'ship');
 
@@ -55,15 +94,28 @@ score.setFontSize(64);
 
 
  this.myShip.setCollideWorldBounds(true);
-       
+       this.explosion = this.physics.add.staticGroup();
          this.box = this.physics.add.staticGroup();
+        this.boxFuerte = this.physics.add.staticGroup();
+        
+         this.powerups = this.physics.add.staticGroup();
+
     for (var i = 0; i < 200; i++)
     {
         var x = Phaser.Math.Between(0, (1920 - 32*18)/32 );
         var y = Phaser.Math.Between(0, (1080 - 32*6)/32);
+         var item = Phaser.Math.Between(0,5);
 
-
+     if(item ==1)
+     this.powerups.create(480+ x*32,  64 + y*32, 'poderllama');
+    if(item ==2)
+     this.powerups.create(480+ x*32,  64 + y*32, 'poderbomba');
+    if(item ==3)
+     this.powerups.create(480+ x*32,  64 + y*32, 'poderpatin');
+   if(item ==4)
+     this.boxFuerte.create(480+ x*32,  64 + y*32, 'wall2');
    
+    if(item !=4)
         this.box.create(480+ x*32, 64 + y*32, 'wall');
 
      //   var box = this.add.image(x, y, 'crate');
@@ -74,37 +126,121 @@ score.setFontSize(64);
 
 for (var i = 1; i < 30; i++)
     {
-     this.box.create(12*32-32 + 32, 32 + i*32, 'wall');
+     this.boxFuerte.create(12*32-32 + 32, 32 + i*32, 'wall2');
+
 }
 for (var i = 1; i < 30; i++)
     {
-     this.box.create(1920-64 + 32, 32 + i*32, 'wall');
+     this.boxFuerte.create(1920-64 + 32, 32 + i*32, 'wall2');
 }
 
 for (var i = 0; i < 47; i++)
     {
-     this.box.create(12*32 + 32*i, 32 + 32, 'wall');
+     this.boxFuerte.create(12*32 + 32*i, 32 + 32, 'wall2');
 }
 for (var i = 0; i < 47; i++)
     {
-    this.box.create(12*32 + 32*i, 896+ 32 + 32, 'wall');
+    this.boxFuerte.create(12*32 + 32*i, 896+ 32 + 32, 'wall2');
 }
-
 
    this.physics.add.collider(this.myShip, this.box);
-//myShip.setInteractive();
-  
 
+   this.physics.add.collider(this.myShip, this.explosion, function(col1,col2){
    
+
+  
+    col1.visible = false;
+    col1.enable = false;
+    
+   });
+
+   this.physics.add.collider(this.myShip, this.boxFuerte);
+   this.physics.add.collider(this.explosion,this.box, function(col1,col2){
+   
+
+  
+    col1.destroy();
+    col2.destroy();
+         
+    
+   });
+
+   this.physics.add.collider(this.myShip,this.powerups, function(col1,col2){
+   
+
+    col2.destroy();
+         
+    
+   });
+}
+function update ()
+{
+ 
+ if(this.CrearObjeto == 1)
+  {
+    console.log("xd");
+
+    // this.powerups.create(this.CrearX, this.CrearY, 'poderllama');
+    this.CrearObjeto = 0;
+  }
+if(this.limpiarLlama >0)
+{
+    this.limpiarLlama = this.limpiarLlama-1;
+}
+//this.scoreInt = this.scoreInt + 30;
+if(this.limpiarLlama ==0)
+{
+this.explosion.clear(this.scene);
+ 
 }
 
-update ()
+if(this.countExplosion >0)
 {
+    this.countExplosion = this.countExplosion-1;
+}
+if(this.countExplosion ==0 && this.countBomb == 1)
+{
+this.bomba.destroy();
+this.countBomb = 0;
 
-this.scoreInt = this.scoreInt + 30;
+for (var i = 0; i < 1; i++)
+    {
+        this.explosion.create(this.bomba.x, this.bomba.y, 'explosion');
+     }
+    for (var i = 0; i <this.llama; i++)
+    {
+        this.explosion.create(this.bomba.x - 32*i, this.bomba.y, 'explosion');
+     }
+      for (var i = 0; i < this.llama; i++)
+    {
+        this.explosion.create(this.bomba.x + 32*i, this.bomba.y, 'explosion');
+     }
+     for (var i = 0; i < this.llama; i++)
+    {
+        this.explosion.create(this.bomba.x, this.bomba.y -32*i, 'explosion');
+     }
+      for (var i = 0; i < this.llama; i++)
+    {
+        this.explosion.create(this.bomba.x, this.bomba.y +32*i, 'explosion');
+     }
+        this.limpiarLlama =50;
+ }
 
-    if (this.cursors.left.isDown) {
+
+
+ if (this.bombbutton.isDown) { 
         
+
+        if(this.countBomb==0)
+        {
+                     this.bomba = this.physics.add.sprite(this.myShip.x, this.myShip.y, 'bomba');
+//this.bomba.visible = true;
+this.countBomb = 1;
+this.countExplosion = 100;
+                 }
+
+        }else if (this.cursors.left.isDown) { 
+                  
             this.myShip.setVelocityY(0);
             this.myShip.setVelocityX(-520);
         }
@@ -127,16 +263,23 @@ this.scoreInt = this.scoreInt + 30;
             this.myShip.setVelocityY(0);
             
         }
-
+ 
  this.physics.add.collider(this.myShip, this.box);
 
 
 }
-gameOver ()
+function gameOver ()
 {
     this.input.off('gameobjectup');
 }
+
+function createPowerUp(col1,col2)
+{
+    this.powerups.create(col1, col2, 'ship');
 }
+
+
+
 
   var SCREEN_WIDTH = 1920;
 var SCREEN_HEIGHT = 1080;
@@ -151,15 +294,20 @@ var config = {
             debug: false
         }
     },
-    scene: [ Stage1 ], };
+    scene: { constructor: constructor,
+        preload: preload,
+        create: create,
+        update: update,
+createPowerUp: createPowerUp}
+};
 
 var info;
 var timer;
 var alive = 0;
 
 var game = new Phaser.Game(config);
-
-
+game.prototype = {
+}
     </script>
 
  
