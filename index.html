@@ -15,6 +15,9 @@
 
        
 function constructor() {
+    
+    this.patin = 10;
+    this.coliderLlama =false;
        this.CrearX = 0;
      this.CrearY = 0;
         this.limpiarLlama = 50;
@@ -34,6 +37,8 @@ function constructor() {
     }
 function preload ()
 {
+    this.bombas = 1;
+    this.patin = 10;
       this.CrearObjeto = 1;
     this.CrearX = 0;
      this.CrearY = 0;
@@ -94,11 +99,15 @@ score.setFontSize(64);
 
 
  this.myShip.setCollideWorldBounds(true);
+ this.bombasFull = this.physics.add.staticGroup();
        this.explosion = this.physics.add.staticGroup();
          this.box = this.physics.add.staticGroup();
         this.boxFuerte = this.physics.add.staticGroup();
         
          this.powerups = this.physics.add.staticGroup();
+        this.powerupsLlamas = this.physics.add.staticGroup();
+   this.powerupsPatin = this.physics.add.staticGroup();
+   this.powerupsBombas = this.physics.add.staticGroup();
 
     for (var i = 0; i < 200; i++)
     {
@@ -107,11 +116,11 @@ score.setFontSize(64);
          var item = Phaser.Math.Between(0,5);
 
      if(item ==1)
-     this.powerups.create(480+ x*32,  64 + y*32, 'poderllama');
+     this.powerupsLlamas.create(480+ x*32,  64 + y*32, 'poderllama');
     if(item ==2)
-     this.powerups.create(480+ x*32,  64 + y*32, 'poderbomba');
+     this.powerupsPatin.create(480+ x*32,  64 + y*32, 'poderpatin');
     if(item ==3)
-     this.powerups.create(480+ x*32,  64 + y*32, 'poderpatin');
+     this.powerupsBombas.create(480+ x*32,  64 + y*32, 'poderbomba');
    if(item ==4)
      this.boxFuerte.create(480+ x*32,  64 + y*32, 'wall2');
    
@@ -150,8 +159,7 @@ for (var i = 0; i < 47; i++)
 
   
     col1.visible = false;
-    col1.enable = false;
-    
+  
    });
 
    this.physics.add.collider(this.myShip, this.boxFuerte);
@@ -165,6 +173,48 @@ for (var i = 0; i < 47; i++)
     
    });
 
+function aumentarllamas()
+{
+    this.llama = this.llama +1;  console.log("llama");
+}
+  function aumentarBombas()
+{
+    this.bombas = this.bombas +1;  console.log("bomba");
+}
+function aumentarPatin()
+{
+    this.patin = this.patin +5;
+    console.log("velocidad");
+}
+
+
+this.physics.add.collider(this.myShip,this.powerupsBombas, aumentarBombas, function(col1,col2){
+  
+
+
+    col2.destroy();
+         
+    
+   },this);
+
+
+  this.physics.add.collider(this.myShip,this.powerupsLlamas, aumentarllamas, function(col1,col2){
+  
+
+
+    col2.destroy();
+         
+    
+   },this);
+
+
+  this.physics.add.collider(this.myShip,this.powerupsPatin, aumentarPatin, function(col1,col2){
+   
+
+
+    col2.destroy();    
+   },this);
+         
    this.physics.add.collider(this.myShip,this.powerups, function(col1,col2){
    
 
@@ -175,10 +225,10 @@ for (var i = 0; i < 47; i++)
 }
 function update ()
 {
+   
  
  if(this.CrearObjeto == 1)
   {
-    console.log("xd");
 
     // this.powerups.create(this.CrearX, this.CrearY, 'poderllama');
     this.CrearObjeto = 0;
@@ -198,9 +248,31 @@ if(this.countExplosion >0)
 {
     this.countExplosion = this.countExplosion-1;
 }
-if(this.countExplosion ==0 && this.countBomb == 1)
+//console.log(this.bombasFull.getLength())
+//console.log(this.bombas);
+if(this.bombasFull.getLength()>0 && this.countExplosion ==0)
 {
-this.bomba.destroy();
+     this.bomba = this.bombasFull.getFirst();
+     this.bombasFull.children.iterate(child => {
+        if (true) {
+
+             this.bomba = child;
+            //child.destroy(child, true);
+            return;
+            }
+          
+        })
+
+     this.bombasFull.children.iterate(child => {
+        if (child.x == this.bomba.x && child.y == this.bomba.y) {
+
+             //this.bomba = child;
+            child.destroy(child, true);
+            return;
+            }
+           
+        })
+
 this.countBomb = 0;
 
 for (var i = 0; i < 1; i++)
@@ -231,33 +303,33 @@ for (var i = 0; i < 1; i++)
  if (this.bombbutton.isDown) { 
         
 
-        if(this.countBomb==0)
+        if(this.bombasFull.getLength()< this.bombas)
         {
-                     this.bomba = this.physics.add.sprite(this.myShip.x, this.myShip.y, 'bomba');
+                     this.bombasFull.create(this.myShip.x, this.myShip.y, 'bomba');
 //this.bomba.visible = true;
-this.countBomb = 1;
+
 this.countExplosion = 100;
                  }
 
         }else if (this.cursors.left.isDown) { 
                   
             this.myShip.setVelocityY(0);
-            this.myShip.setVelocityX(-520);
+            this.myShip.setVelocityX(-20*this.patin);
         }
 
        else if (this.cursors.right.isDown) {
            this.myShip.setVelocityY(0);
-            this.myShip.setVelocityX(520);
+            this.myShip.setVelocityX(20*this.patin);
         }
 
         else if (this.cursors.up.isDown) {
              this.myShip.setVelocityX(0);
-            this.myShip.setVelocityY(-520);
+            this.myShip.setVelocityY(-20*this.patin);
         }
 
         else if (this.cursors.down.isDown) {
            this.myShip.setVelocityX(0);
-            this.myShip.setVelocityY(520);
+            this.myShip.setVelocityY(20*this.patin);
         } else {
             this.myShip.setVelocityX(0);
             this.myShip.setVelocityY(0);
@@ -284,7 +356,7 @@ function createPowerUp(col1,col2)
   var SCREEN_WIDTH = 1920;
 var SCREEN_HEIGHT = 1080;
 var config = {
-    type: Phaser.AUTO,
+    type: Phaser.arcade,
     width: 1920,
     height: 1080,
      pixelArt: true,
