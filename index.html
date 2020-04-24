@@ -15,8 +15,8 @@
 
        
 function constructor() {
-    
-    this.patin = 10;
+
+  /*  this.patin = 10;
     this.coliderLlama =false;
        this.CrearX = 0;
      this.CrearY = 0;
@@ -33,10 +33,12 @@ function constructor() {
         this.bullet = null;
         this.brick = null;
         this.playerBulletLive = false;
-        this.playerDirection = 'up';
+        this.playerDirection = 'up';*/
     }
 function preload ()
 {
+    this.colocarBomba = 0;
+
     this.bombas = 1;
     this.patin = 10;
       this.CrearObjeto = 1;
@@ -75,7 +77,6 @@ function create()
 {
  
    //  this.bomba = this.physics.add.sprite(-50,-50, 'bomba');
-
     this.countBomb = 0;
     this.countExplosion =0;
      this.vida = this.physics.add.sprite(92, 226+48, 'vida');
@@ -100,7 +101,13 @@ score.setFontSize(64);
 
  this.myShip.setCollideWorldBounds(true);
  this.bombasFull = this.physics.add.staticGroup();
-       this.explosion = this.physics.add.staticGroup();
+       this.explosion = this.physics.add.group();
+
+       this.explosionUp = this.physics.add.group();
+       this.explosionDown = this.physics.add.group();
+       this.explosionLeft = this.physics.add.group();
+       this.explosionRight = this.physics.add.group();
+
          this.box = this.physics.add.staticGroup();
         this.boxFuerte = this.physics.add.staticGroup();
         
@@ -109,8 +116,10 @@ score.setFontSize(64);
    this.powerupsPatin = this.physics.add.staticGroup();
    this.powerupsBombas = this.physics.add.staticGroup();
 
-    for (var i = 0; i < 200; i++)
+//random
+  /*   for (var i = 0; i < 600; i++)
     {
+
         var x = Phaser.Math.Between(0, (1920 - 32*18)/32 );
         var y = Phaser.Math.Between(0, (1080 - 32*6)/32);
          var item = Phaser.Math.Between(0,5);
@@ -132,6 +141,42 @@ score.setFontSize(64);
 
 
      }
+*/
+
+//Modo no aleatorio
+    for (var i = -2; i < 44; i++)
+    {
+for (var j = 0; j < 28; j++)
+    {
+          var item = Phaser.Math.Between(0,20);
+
+     if(item ==1)
+     {
+     this.powerupsLlamas.create(480+ i*32,  64 + j*32, 'poderllama');
+     this.box.create(480+ i*32, 64 + j*32, 'wall');
+    }
+    if(item ==2)
+    {
+     this.powerupsPatin.create(480+ i*32,  64 + j*32, 'poderpatin');
+     this.box.create(480+ i*32, 64 + j*32, 'wall');
+    }
+    if(item ==3)
+    {
+     this.powerupsBombas.create(480+ i*32,  64 + j*32, 'poderbomba');
+     this.box.create(480+ i*32, 64 + j*32, 'wall');
+    }
+   if(item ==4)
+     this.boxFuerte.create(480+ i*32,  64 + j*32, 'wall2');
+   
+    if(item >5 && item < 10)
+        this.box.create(480+ i*32, 64 + j*32, 'wall');
+
+     //   var box = this.add.image(x, y, 'crate');
+      //      box.setInteractive();
+
+
+     }
+ }
 
 for (var i = 1; i < 30; i++)
     {
@@ -155,24 +200,78 @@ for (var i = 0; i < 47; i++)
    this.physics.add.collider(this.myShip, this.box);
 
    this.physics.add.collider(this.myShip, this.explosion, function(col1,col2){
+col1.visible = false;
+   });
+
+this.physics.add.collider(this.myShip, this.explosionUp, function(col1,col2){
+col1.visible = false;
+   });
+   
+   this.physics.add.collider(this.myShip, this.explosionDown, function(col1,col2){
+col1.visible = false;
+   });
+   
+   this.physics.add.collider(this.myShip, this.explosionLeft, function(col1,col2){
+col1.visible = false;
+   });
    
 
-  
-    col1.visible = false;
-  
+   this.physics.add.collider(this.myShip, this.explosionRight, function(col1,col2){
+col1.visible = false;
    });
+   
 
    this.physics.add.collider(this.myShip, this.boxFuerte);
-   this.physics.add.collider(this.explosion,this.box, function(col1,col2){
-   
 
-  
+ 
+   this.physics.add.collider(this.boxFuerte,this.powerups,function(col1,col2)
+    {
+        col2.destroy();
+    });
+   
+   this.physics.add.collider(this.explosion,this.box, function(col1,col2){
     col1.destroy();
     col2.destroy();
-         
-    
    });
 
+    this.physics.add.collider(this.explosionUp,this.box, function(col1,col2){
+    col1.destroy();
+    col2.destroy();
+   });
+     this.physics.add.collider(this.explosionDown,this.box, function(col1,col2){
+    col1.destroy();
+    col2.destroy();
+   });
+   this.physics.add.collider(this.explosionLeft,this.box, function(col1,col2){
+    col1.destroy();
+    col2.destroy();
+   });
+   this.physics.add.collider(this.explosionRight,this.box, function(col1,col2){
+    col1.destroy();
+    col2.destroy();
+   });
+
+ this.physics.add.collider(this.explosion,this.boxFuerte, function(col1,col2){
+    col1.destroy();
+  
+   });
+
+    this.physics.add.collider(this.explosionUp,this.boxFuerte, function(col1,col2){
+    col1.destroy();
+    
+   });
+     this.physics.add.collider(this.explosionDown,this.boxFuerte, function(col1,col2){
+    col1.destroy();
+   
+   });
+   this.physics.add.collider(this.explosionLeft,this.boxFuerte, function(col1,col2){
+    col1.destroy();
+  
+   });
+   this.physics.add.collider(this.explosionRight,this.boxFuerte, function(col1,col2){
+    col1.destroy();
+    
+   });
 function aumentarllamas()
 {
     this.llama = this.llama +1;  console.log("llama");
@@ -222,7 +321,23 @@ this.physics.add.collider(this.myShip,this.powerupsBombas, aumentarBombas, funct
          
     
    });
+
+function actualizarEstado()
+{
+      if(this.bombasFull.getLength()< this.bombas)
+        {
+                     this.bombasFull.create(this.myShip.x, this.myShip.y, 'bomba');
+//this.bomba.visible = true;
+
+this.countExplosion = 100;
+                 }
+             
 }
+
+   this.input.keyboard.on('keydown_X', actualizarEstado, this);
+
+}
+
 function update ()
 {
    
@@ -241,6 +356,10 @@ if(this.limpiarLlama >0)
 if(this.limpiarLlama ==0)
 {
 this.explosion.clear(this.scene);
+ this.explosionUp.clear(this.scene);
+  this.explosionDown.clear(this.scene);
+  this.explosionLeft.clear(this.scene);
+ this.explosionRight.clear(this.scene);
  
 }
 
@@ -275,43 +394,42 @@ if(this.bombasFull.getLength()>0 && this.countExplosion ==0)
 
 this.countBomb = 0;
 
-for (var i = 0; i < 1; i++)
-    {
+//for (var i = 0; i < 1; i++)
+    //{
         this.explosion.create(this.bomba.x, this.bomba.y, 'explosion');
-     }
-    for (var i = 0; i <this.llama; i++)
-    {
-        this.explosion.create(this.bomba.x - 32*i, this.bomba.y, 'explosion');
-     }
-      for (var i = 0; i < this.llama; i++)
-    {
-        this.explosion.create(this.bomba.x + 32*i, this.bomba.y, 'explosion');
-     }
-     for (var i = 0; i < this.llama; i++)
-    {
-        this.explosion.create(this.bomba.x, this.bomba.y -32*i, 'explosion');
-     }
-      for (var i = 0; i < this.llama; i++)
-    {
-        this.explosion.create(this.bomba.x, this.bomba.y +32*i, 'explosion');
-     }
+     //}
+    //for (var i = 0; i <this.llama; i++)
+    //{
+        this.explosionUp.create(this.bomba.x - 32, this.bomba.y, 'explosion');
+        this.explosionUp.setVelocityX(-20*this.llama);
+    // }
+      //for (var i = 0; i < this.llama; i++)
+    //{
+        this.explosionDown.create(this.bomba.x + 32, this.bomba.y, 'explosion');
+           this.explosionDown.setVelocityX(20*this.llama);
+     //}
+     //for (var i = 0; i < this.llama; i++)
+    //{
+        this.explosionLeft.create(this.bomba.x, this.bomba.y -32, 'explosion');
+         this.explosionLeft.setVelocityY(-20*this.llama);
+     //}
+      //for (var i = 0; i < this.llama; i++)
+   // {
+        this.explosionRight.create(this.bomba.x, this.bomba.y +32, 'explosion');
+        this.explosionRight.setVelocityY(20*this.llama);
+     //}
         this.limpiarLlama =50;
  }
 
 
 
- if (this.bombbutton.isDown) { 
-        
+ if (this.colocarBomba ==1) { 
+     
+     
 
-        if(this.bombasFull.getLength()< this.bombas)
-        {
-                     this.bombasFull.create(this.myShip.x, this.myShip.y, 'bomba');
-//this.bomba.visible = true;
+        }
 
-this.countExplosion = 100;
-                 }
-
-        }else if (this.cursors.left.isDown) { 
+        if (this.cursors.left.isDown) { 
                   
             this.myShip.setVelocityY(0);
             this.myShip.setVelocityX(-20*this.patin);
