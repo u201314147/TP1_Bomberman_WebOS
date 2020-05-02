@@ -60,9 +60,9 @@ function preload ()
         this.playerBulletLive = false;
         this.playerDirection = 'up';
       //   this.load.setBaseURL('http://labs.phaser.io');
- // this.load.setBaseURL('https://i.ibb.co');
+  this.load.setBaseURL('https://i.ibb.co');
 
-        this.load.image('bg', 'img/jugador.png');
+      /*  this.load.image('bg', 'img/jugador.png');
   this.load.image('wall', 'img/wall.png');
    this.load.image('wall2', 'img/wall2.png');
 
@@ -77,19 +77,26 @@ function preload ()
   this.load.image('kills',  'img/kills.png');
  this.load.image('mina',  'img/mina.png');
 
-  //th this.load.image('mina',  'img/mina.png');
-this.load.image('wall3', 'img/wall3.png');
+
+this.load.image('wall3', 'img/wall3.png');*/
  
- /* this.load.image('wall', 'vVRyMy1/wall.png');
-   this.load.image('wall2', 'L1M0zTH/wall2.png');
-   this.load.image('ship',  'Jr6gmc8/jugador.png');
-   this.load.image('vida',  'C2jGBff/vida.png');
-      this.load.image('bomba',  'nkYxzL3/bomba.png');
-   this.load.image('explosion',  'WDfgT6N/explosion.png');
-    this.load.image('poderllama',  'TLTgbwr/poderllama.png');
-      this.load.image('poderbomba',  'Qdvmnms/poderbomba.png');
-   this.load.image('poderpatin',  'y6nHzT9/poderpatin.png');
-   */
+
+
+           this.load.image('bg', 'img/jugador.png');
+  this.load.image('wall', 'd5yWhk2/wall.png');
+   this.load.image('wall2', 'WykRp6s/wall2.png');
+
+   this.load.image('enemigo',  'ZTncpxD/enemigo.png');
+   this.load.image('ship',  'gS3q1mR/jugador.png');
+   this.load.image('vida',  'S0Dhc2Z/vida.png');
+      this.load.image('bomba',  't3yMFrb/bomba.png');
+   this.load.image('explosion',  'qdWNxpn/explosion.png');
+    this.load.image('poderllama',  'XYxjxYy/poderllama.png');
+      this.load.image('poderbomba',  '7YWC3kM/poderbomba.png');
+   this.load.image('poderpatin',  'pXpHRBL/poderpatin.png');
+  this.load.image('kills',  'MVSVd2P/kills.png');
+ this.load.image('mina',  'tHvckRK/mina.png');
+this.load.image('wall3', '4tpt7bs/wall3.png');
 }
 
 function create()
@@ -247,12 +254,12 @@ for (var i = 1; i < 30; i++)
        this.boxFuerte2.create(1920-64 + 32 + 64, 32 + i*32, 'wall3');
 }
 
-for (var i = 0; i < 47; i++)
+for (var i = -3; i < 49; i++)
     {
      this.boxFuerte2.create(12*32 + 32*i, 32 + 32, 'wall3');
       this.boxFuerte2.create(12*32 + 32*i, 32-32, 'wall3');
 }
-for (var i = 0; i < 47; i++)
+for (var i = -3; i < 49; i++)
     {
     this.boxFuerte2.create(12*32 + 32*i, 896+ 32 + 32, 'wall3');
      this.boxFuerte2.create(12*32 + 32*i, 896+ 32 + 32+64, 'wall3');
@@ -706,6 +713,9 @@ function crearmapa()
 function update ()
 {
    
+
+
+
   this.enemigos.children.iterate(child => {
       
      
@@ -828,43 +838,54 @@ this.countBomb = 0;
 
  this.myShip.setVelocityX(0);
   this.myShip.setVelocityY(0);
+
+
+
+    switch (this.cursors.isDown) {
+      case "left":
+          console.log("xd");
+         this.myShip.setVelocityX(-20*this.patin);
+         break;
+      case "right":
+          console.log("xd");
+           this.myShip.setVelocityX(20*this.patin);
+         break;
+      case "up":
+          console.log("xd");
+            this.myShip.setVelocityY(-20*this.patin);
+          break;
+      case "down":
+          console.log("xd");
+          this.myShip.setVelocityY(20*this.patin);
+    }
+
+
         if (this.cursors.left.isDown) { 
-                  
-         //   this.myShip.setVelocityY(0);
             this.myShip.setVelocityX(-20*this.patin);
         }
         else{
-         //    this.myShip.setVelocityX(0);
         }
 
 
         if (this.cursors.right.isDown) {
-         //  this.myShip.setVelocityY(0);
             this.myShip.setVelocityX(20*this.patin);
         }
         else{
-           //  this.myShip.setVelocityX(0);
         }
 
         if (this.cursors.up.isDown) {
-            // this.myShip.setVelocityX(0);
             this.myShip.setVelocityY(-20*this.patin);
         }
         else
         {
-          //   this.myShip.setVelocityY(0);
         }
 
           if (this.cursors.down.isDown) {
-       //    this.myShip.setVelocityX(0);
             this.myShip.setVelocityY(20*this.patin);
         }
         else{
-          //   this.myShip.setVelocityY(0);
         }
  
- this.physics.add.collider(this.myShip, this.box);
-
 
 }
 function gameOver ()
