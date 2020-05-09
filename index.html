@@ -16,12 +16,13 @@
        
 function constructor() {
 
-
-  /*  this.patin = 10;
-    this.coliderLlama =false;
-       this.CrearX = 0;
+ this.colocarBomba = 0;
+    this.bombas = 1;
+    this.patin = 10;
+      this.CrearObjeto = 1;
+    this.CrearX = 0;
      this.CrearY = 0;
-        this.limpiarLlama = 50;
+     this.limpiarLlama = 50;
         this.llama = 2;
         this.countExplosion = 30,
         this.countBomb = 0;
@@ -34,7 +35,8 @@ function constructor() {
         this.bullet = null;
         this.brick = null;
         this.playerBulletLive = false;
-        this.playerDirection = 'up';*/
+        this.playerDirection = 'up';
+        
     }
 function preload ()
 {
@@ -60,9 +62,9 @@ function preload ()
         this.playerBulletLive = false;
         this.playerDirection = 'up';
       //   this.load.setBaseURL('http://labs.phaser.io');
-  this.load.setBaseURL('https://i.ibb.co');
+  //this.load.setBaseURL('https://i.ibb.co');
 
-      /*  this.load.image('bg', 'img/jugador.png');
+      this.load.image('bg', 'img/jugador.png');
   this.load.image('wall', 'img/wall.png');
    this.load.image('wall2', 'img/wall2.png');
 
@@ -74,13 +76,18 @@ function preload ()
     this.load.image('poderllama',  'img/poderllama.png');
       this.load.image('poderbomba',  'img/poderbomba.png');
    this.load.image('poderpatin',  'img/poderpatin.png');
+    this.load.image('podervida',  'img/podervida.png');
   this.load.image('kills',  'img/kills.png');
  this.load.image('mina',  'img/mina.png');
 
 
-this.load.image('wall3', 'img/wall3.png');*/
- 
+this.load.image('wall3', 'img/wall3.png');
+this.load.image('wallkill','img/wallkill.png')
+this.load.image('pisor1', 'img/pisor1.png');
+this.load.image('pisor2', 'img/pisor2.png');
+ this.load.image('pisomov', 'img/pisomov.png');
 
+/*
 
            this.load.image('bg', 'img/jugador.png');
   this.load.image('wall', 'd5yWhk2/wall.png');
@@ -96,15 +103,20 @@ this.load.image('wall3', 'img/wall3.png');*/
    this.load.image('poderpatin',  'pXpHRBL/poderpatin.png');
   this.load.image('kills',  'MVSVd2P/kills.png');
  this.load.image('mina',  'tHvckRK/mina.png');
-this.load.image('wall3', '4tpt7bs/wall3.png');
+this.load.image('wall3', '4tpt7bs/wall3.png');*/
 }
 
 function create()
 {
+     this.caerparedX =-2;
+ this.caerparedY = 1;
 
+this.tick1 = 0;
     this.nivelInt = 1;
-
-   
+this.relojInt = 300;
+    this.resbalar = 0;
+   this.pisor2X = 0;
+   this.pisor2Y = 0;
   this.scoreInt = 0;
    //  this.bomba = this.physics.add.sprite(-50,-50, 'bomba');
     this.countBomb = 0;
@@ -138,6 +150,12 @@ this.vidas.setFontSize(64);
 this.txt = this.add.text(64, 96, 'Puntaje', { fontFamily: '"Arial Black"' });
 this.txt.setFontSize(32);
 
+  this.tiempo = this.add.text(64, 396, 'Tiempo', { fontFamily: '"Arial Black"' });
+this.tiempo.setFontSize(32);
+
+   this.reloj = this.add.text(64, 446, this.relojInt, { fontFamily: '"Arial Black"' });
+this.reloj.setFontSize(64);
+
   
 
    
@@ -148,6 +166,7 @@ this.score.setFontSize(64);
  this.myShip.setCollideWorldBounds(true);
  this.bombasFull = this.physics.add.staticGroup();
  
+
 this.enemigos = this.physics.add.group();
 
        this.explosionUp = this.physics.add.group();
@@ -156,6 +175,9 @@ this.enemigos = this.physics.add.group();
        this.explosionRight = this.physics.add.group();
 
          this.box = this.physics.add.staticGroup();
+         this.pisor1 = this.physics.add.staticGroup();
+          this.pisor2 = this.physics.add.staticGroup();
+           this.pisomov = this.physics.add.staticGroup();
         this.boxFuerte = this.physics.add.staticGroup();
         this.boxFuerte2 = this.physics.add.staticGroup();
         
@@ -163,6 +185,9 @@ this.enemigos = this.physics.add.group();
         this.powerupsLlamas = this.physics.add.staticGroup();
    this.powerupsPatin = this.physics.add.staticGroup();
    this.powerupsBombas = this.physics.add.staticGroup();
+ this.powerupsVidas = this.physics.add.staticGroup();
+
+ this.wallkill = this.physics.add.staticGroup();
 
 //random
   /*   for (var i = 0; i < 600; i++)
@@ -193,9 +218,9 @@ this.enemigos = this.physics.add.group();
 
 //Modo no aleatorio
 
-    for (var i = -2; i < 22; i++)
+    for (var i = -1; i < 22; i++)
     {
-for (var j = 0; j < 14; j++)
+for (var j = 1; j < 14; j++)
     {
         if(i > -2 && i < 1 && j > 0 && j < 3)
         {
@@ -220,6 +245,11 @@ for (var j = 0; j < 14; j++)
      this.powerupsBombas.create(480+ i*32*2,  64 + j*32*2, 'poderbomba');
      this.box.create(480+ i*32*2, 64 + j*32*2, 'wall');
     }
+     if(item ==36)
+    {
+     this.powerupsVidas.create(480+ i*32*2,  64 + j*32*2, 'podervida');
+     this.box.create(480+ i*32*2, 64 + j*32*2, 'wall');
+    }
    if(item ==4)
      this.boxFuerte.create(480+ i*32*2,  64 + j*32*2, 'wall2');
    if(item > 5 && item <6+this.nivelInt){
@@ -235,6 +265,11 @@ for (var j = 0; j < 14; j++)
 
     if(item >16 && item < 28)
         this.box.create(480+ i*32*2, 64 + j*32*2, 'wall');
+
+  if(item >29 && item < 32)
+        this.pisor1.create(480+ i*32*2, 64 + j*32*2, 'pisor1');
+  if(item >33 && item < 35)
+        this.pisomov.create(480+ i*32*2, 64 + j*32*2, 'pisomov');
 
      //   var box = this.add.image(x, y, 'crate');
       //      box.setInteractive();
@@ -272,6 +307,18 @@ this.kills.setFontSize(64);
 
    this.physics.add.collider(this.myShip, this.box);
 
+
+
+   function pisoMovPasar()
+   {
+    this.resbalar = 1;
+
+   }
+   this.physics.add.overlap(this.myShip, this.pisomov, pisoMovPasar, function(col1,col2){
+
+   },this);
+
+
 this.physics.add.collider(this.myShip, this.explosionUp,bajarvidas, function(col1,col2){
 
    },this);
@@ -286,12 +333,28 @@ this.physics.add.collider(this.myShip, this.explosionUp,bajarvidas, function(col
    this.physics.add.collider(this.myShip, this.explosionRight,bajarvidas, function(col1,col2){
    },this);
    
+   this.physics.add.collider(this.myShip,this.wallkill);
+
+   this.physics.add.overlap(this.myShip,this.wallkill,bajarvidas, function(col1,col2){
+
+   },this);
+   
+
+    this.physics.add.collider(this.enemigos,this.wallkill);
+
+   this.physics.add.overlap(this.enemigos,this.wallkill, aumentarScore, function(col1,col2){
+    col1.destroy();
+   },this);
+   
 this.physics.add.collider(this.myShip,this.bombasFull);
 
 this.physics.add.collider(this.enemigos,this.bombasFull);
+this.physics.add.collider(this.enemigos,this.pisor2);
 
    this.physics.add.collider(this.myShip, this.boxFuerte);
  this.physics.add.collider(this.myShip, this.boxFuerte2);
+
+  this.physics.add.collider(this.myShip, this.pisor2);
 
  
    this.physics.add.collider(this.boxFuerte,this.powerups,function(col1,col2)
@@ -316,6 +379,35 @@ this.physics.add.collider(this.enemigos,this.bombasFull);
     col1.destroy();
     col2.destroy();
    });
+
+function crearpisor2()
+{
+    this.pisor2.create(this.pisor2X, this.pisor2Y,'pisor2');
+}
+
+  
+   this.physics.add.collider(this.explosionUp,this.pisor1,crearpisor2, function(col1,col2){
+      this.pisor2X = col2.x;
+this.pisor2Y = col2.y;
+      col2.destroy();
+    
+   },this);
+
+     this.physics.add.collider(this.explosionDown,this.pisor1,crearpisor2, function(col1,col2){
+          this.pisor2X = col2.x;
+this.pisor2Y = col2.y;
+    col2.destroy();
+  },this);
+   this.physics.add.collider(this.explosionLeft,this.pisor1,crearpisor2, function(col1,col2){
+      this.pisor2X = col2.x;
+this.pisor2Y = col2.y;
+    col2.destroy();
+  },this);
+   this.physics.add.collider(this.explosionRight,this.pisor1,crearpisor2, function(col1,col2){
+      this.pisor2X = col2.x;
+this.pisor2Y = col2.y;
+    col2.destroy();
+   },this);
 
 
 //COLISION CON ENEMIGOS
@@ -354,14 +446,18 @@ this.physics.add.collider(this.enemigos,this.explosionRight, aumentarScore, func
 
 function bajarvidas()
 {
-
+      this.caerparedX =-2;
+ this.caerparedY = 1;
+this.wallkill.clear(this.scene);
    if(this.vidasInt > 0)
    {
+      this.caerparedX =-2;
+ this.caerparedY = 1;
     this.explosionRight.clear(this.scene);
 this.explosionLeft.clear(this.scene);
 this.explosionDown.clear(this.scene);
 this.explosionUp.clear(this.scene);
-
+this.relojInt = 300;
     this.vidasInt = this.vidasInt - 1;
    
    this.myShip.x = 430;
@@ -381,6 +477,10 @@ this.vidasInt = 5;
    this.score.setText(this.scoreInt);
     this.vidas.setText(this.vidasInt);
 this.powerupsLlamas.clear(this.scene);
+this.powerupsVidas.clear(this.scene);
+this.pisor1.clear(this.scene);
+this.pisor2.clear(this.scene);
+this.wallkill.clear(this.scene);
 
 this.powerupsPatin.clear(this.scene);
 this.powerupsBombas.clear(this.scene);
@@ -391,9 +491,9 @@ this.explosionRight.clear(this.scene);
 this.explosionLeft.clear(this.scene);
 this.explosionDown.clear(this.scene);
 this.explosionUp.clear(this.scene);
-    for (var i = -2; i < 22; i++)
+    for (var i = -1; i < 22; i++)
     {
-for (var j = 0; j < 14; j++)
+for (var j = 1; j < 14; j++)
     {
         if(i > -2 && i < 1 && j > 0 && j < 3)
         {
@@ -418,9 +518,14 @@ for (var j = 0; j < 14; j++)
      this.powerupsBombas.create(480+ i*32*2,  64 + j*32*2, 'poderbomba');
      this.box.create(480+ i*32*2, 64 + j*32*2, 'wall');
     }
+    if(item ==36)
+    {
+     this.powerupsVidas.create(480+ i*32*2,  64 + j*32*2, 'podervida');
+     this.box.create(480+ i*32*2, 64 + j*32*2, 'wall');
+    }
    if(item ==4)
      this.boxFuerte.create(480+ i*32*2,  64 + j*32*2, 'wall2');
-    if(item > 5 && item <6+this.nivelInt){
+   if(item > 5 && item <6+this.nivelInt){
 
      if(i > 0 && i < 20 && j > 2 && j < 12)
         {
@@ -433,6 +538,12 @@ for (var j = 0; j < 14; j++)
 
     if(item >16 && item < 28)
         this.box.create(480+ i*32*2, 64 + j*32*2, 'wall');
+
+  if(item >29 && item < 32)
+        this.pisor1.create(480+ i*32*2, 64 + j*32*2, 'pisor1');
+  if(item >33 && item < 35)
+        this.pisomov.create(480+ i*32*2, 64 + j*32*2, 'pisomov');
+
 
      //   var box = this.add.image(x, y, 'crate');
       //      box.setInteractive();
@@ -520,17 +631,23 @@ this.physics.add.collider(this.explosionUp,this.minas, function(col1,col2){
     if(this.enemigos.getLength() ==0)
     {
     
-
+  this.caerparedX =-2;
+ this.caerparedY = 1;
     this.myShip.x = 430;
     this.myShip.y = 130;
     this.nivelInt = this.nivelInt + 1;
-
+this.wallkill.clear(this.scene);
+this.relojInt = 300;
 
    this.nivel.setText(this.nivelInt);
    this.score.setText(this.scoreInt);
     this.vidas.setText(this.vidasInt);
 this.powerupsLlamas.clear(this.scene);
+this.powerupsVidas.clear(this.scene);
+this.wallkill.clear(this.scene);
 
+this.pisor1.clear(this.scene);
+this.pisor2.clear(this.scene);
 this.powerupsPatin.clear(this.scene);
 this.powerupsBombas.clear(this.scene);
 this.box.clear(this.scene);
@@ -540,9 +657,9 @@ this.explosionRight.clear(this.scene);
 this.explosionLeft.clear(this.scene);
 this.explosionDown.clear(this.scene);
 this.explosionUp.clear(this.scene);
-    for (var i = -2; i < 22; i++)
+    for (var i = -1; i < 22; i++)
     {
-for (var j = 0; j < 14; j++)
+for (var j = 1; j < 14; j++)
     {
         if(i > -2 && i < 1 && j > 0 && j < 3)
         {
@@ -567,10 +684,14 @@ for (var j = 0; j < 14; j++)
      this.powerupsBombas.create(480+ i*32*2,  64 + j*32*2, 'poderbomba');
      this.box.create(480+ i*32*2, 64 + j*32*2, 'wall');
     }
+    if(item ==36)
+    {
+     this.powerupsVidas.create(480+ i*32*2,  64 + j*32*2, 'podervida');
+     this.box.create(480+ i*32*2, 64 + j*32*2, 'wall');
+    }
    if(item ==4)
      this.boxFuerte.create(480+ i*32*2,  64 + j*32*2, 'wall2');
-
- if(item > 5 && item <6+this.nivelInt){
+   if(item > 5 && item <6+this.nivelInt){
 
      if(i > 0 && i < 20 && j > 2 && j < 12)
         {
@@ -581,9 +702,14 @@ for (var j = 0; j < 14; j++)
 }
     }
 
- 
     if(item >16 && item < 28)
         this.box.create(480+ i*32*2, 64 + j*32*2, 'wall');
+
+  if(item >29 && item < 32)
+        this.pisor1.create(480+ i*32*2, 64 + j*32*2, 'pisor1');
+  if(item >33 && item < 35)
+        this.pisomov.create(480+ i*32*2, 64 + j*32*2, 'pisomov');
+
 
    
         
@@ -625,6 +751,16 @@ function aumentarPatin()
     this.score.setText(this.scoreInt);
 }
 
+function aumentarVida()
+{
+     this.scoreInt = this.scoreInt + 500;
+    this.vidasInt = this.vidasInt + 1;
+    console.log("vida");
+    this.vidas.setText(this.vidasInt);
+      this.score.setText(this.scoreInt);
+}
+
+
 
 this.physics.add.collider(this.myShip,this.powerupsBombas, aumentarBombas, function(col1,col2){
   
@@ -645,6 +781,13 @@ this.physics.add.collider(this.myShip,this.powerupsBombas, aumentarBombas, funct
     
    },this);
 
+
+ this.physics.add.collider(this.myShip,this.powerupsVidas, aumentarVida, function(col1,col2){
+   
+
+
+    col2.destroy();    
+   },this);
 
   this.physics.add.collider(this.myShip,this.powerupsPatin, aumentarPatin, function(col1,col2){
    
@@ -713,7 +856,46 @@ function crearmapa()
 function update ()
 {
    
+this.tick1 = this.tick1 +1;
+ 
+ if(this.tick1 >10)
+    {
+        this.tick1=0;
 
+        if(this.relojInt > 0)
+   this.relojInt = this.relojInt-1;
+
+    this.reloj.setText(this.relojInt);
+
+    if(this.relojInt < 60)
+{
+
+
+this.caerparedX = this.caerparedX +1;
+
+         //   var i = Phaser.Math.Between(-1,22);
+            
+        //    var j = Phaser.Math.Between(1,14);
+            
+        var i = this.caerparedX;
+            
+            var j = this.caerparedY;
+
+
+
+     this.wallkill.create(480+ i*32*2, 64 + j*32*2, 'wallkill');
+
+
+if(this.caerparedX> 20)
+{
+    this.caerparedX = -2;
+    this.caerparedY = this.caerparedY+1;
+     // 
+}
+
+}
+
+}
 
 
   this.enemigos.children.iterate(child => {
@@ -836,9 +1018,11 @@ this.countBomb = 0;
 
         }
 
+if(this.resbalar==0)
+{
  this.myShip.setVelocityX(0);
   this.myShip.setVelocityY(0);
-
+}
 
 
     switch (this.cursors.isDown) {
@@ -864,6 +1048,7 @@ this.countBomb = 0;
             this.myShip.setVelocityX(-20*this.patin);
         }
         else{
+             
         }
 
 
@@ -871,6 +1056,7 @@ this.countBomb = 0;
             this.myShip.setVelocityX(20*this.patin);
         }
         else{
+           
         }
 
         if (this.cursors.up.isDown) {
@@ -878,15 +1064,18 @@ this.countBomb = 0;
         }
         else
         {
+           
         }
 
           if (this.cursors.down.isDown) {
             this.myShip.setVelocityY(20*this.patin);
         }
         else{
+           
         }
  
 
+this.resbalar = 0;
 }
 function gameOver ()
 {
