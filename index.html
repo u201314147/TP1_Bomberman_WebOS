@@ -16,26 +16,6 @@
        
 function constructor() {
 
- this.colocarBomba = 0;
-    this.bombas = 1;
-    this.patin = 10;
-      this.CrearObjeto = 1;
-    this.CrearX = 0;
-     this.CrearY = 0;
-     this.limpiarLlama = 50;
-        this.llama = 2;
-        this.countExplosion = 30,
-        this.countBomb = 0;
-        this.myShip = null;
-        this.bombbutton = null;
-        this.scoreInt = 0;
-        this.vidasInt = 5;
-        this.player = null;
-        this.cursor = null;
-        this.bullet = null;
-        this.brick = null;
-        this.playerBulletLive = false;
-        this.playerDirection = 'up';
         
     }
 function preload ()
@@ -43,18 +23,36 @@ function preload ()
     this.colocarBomba = 0;
 
     this.bombas = 1;
+     this.bombas2 = 1;
+      this.bombas3 = 1;
+       this.bombas4 = 1;
     this.patin = 10;
+    this.patin2 = 10;
+    this.patin3 = 10;
+    this.patin4 = 10;
       this.CrearObjeto = 1;
     this.CrearX = 0;
      this.CrearY = 0;
      this.limpiarLlama = 50;
         this.llama = 2;
-        this.countExplosion = 30,
+        this.llama2 = 2;
+        this.llama3 = 2;
+        this.llama4 = 2;
+        this.countExplosion = 30;
+        this.countExplosion2 = 30;
+        this.countExplosion3 = 30;
+        this.countExplosion4 = 30;
         this.countBomb = 0;
+        this.countBomb2 = 0;
+        this.countBomb3 = 0;
+        this.countBomb4 = 0;
         this.myShip = null;
         this.bombbutton = null;
         this.scoreInt = 0;
         this.vidasInt = 5;
+        this.vidasInt2 = 5;
+        this.vidasInt3 = 5;
+        this.vidasInt4 = 5;
         this.player = null;
         this.cursor = null;
         this.bullet = null;
@@ -108,6 +106,7 @@ this.load.image('wall3', '4tpt7bs/wall3.png');*/
 
 function create()
 {
+
      this.caerparedX =-2;
  this.caerparedY = 1;
 
@@ -115,17 +114,62 @@ this.tick1 = 0;
     this.nivelInt = 1;
 this.relojInt = 300;
     this.resbalar = 0;
+    this.resbalar2 = 0;
+    this.resbalar3 = 0;
+    this.resbalar4 = 0;
    this.pisor2X = 0;
    this.pisor2Y = 0;
   this.scoreInt = 0;
    //  this.bomba = this.physics.add.sprite(-50,-50, 'bomba');
     this.countBomb = 0;
+     this.countBomb2 = 0;
+      this.countBomb3 = 0;
+       this.countBomb4 = 0;
     this.countExplosion =0;
+      this.countExplosion2 =0;
+      this.countExplosion3 =0;
+      this.countExplosion4 =0;
      
 //sprites de puntuacion
-     this.vida = this.physics.add.sprite(92, 226+48, 'vida');
 
-       this.kill = this.physics.add.sprite(92, 226+96, 'kills');
+//jugadores
+
+    this.jugador1 = this.add.text(32+32, 216+96, 'Jugador1', { fontFamily: '"Arial Black"' });
+this.jugador1.setFontSize(32);
+
+
+    this.jugador2 = this.add.text(32+32, 366+96, 'Jugador2', { fontFamily: '"Arial Black"' });
+this.jugador2.setFontSize(32);
+
+    this.jugador3 = this.add.text(32+32, 516+96, 'Jugador3', { fontFamily: '"Arial Black"' });
+this.jugador3.setFontSize(32);
+
+    this.jugador4 = this.add.text(32+32, 666+96, 'Jugador4', { fontFamily: '"Arial Black"' });
+this.jugador4.setFontSize(32);
+
+
+     this.vida = this.physics.add.sprite(92, 336+48, 'vida');
+
+       this.kill = this.physics.add.sprite(92, 336+96, 'kills');
+
+       //jugador 2
+
+          this.vida = this.physics.add.sprite(92, 486+48, 'vida');
+
+       this.kill = this.physics.add.sprite(92, 486+96, 'kills');
+
+          //jugador 3
+
+          this.vida = this.physics.add.sprite(92, 636+48, 'vida');
+
+       this.kill = this.physics.add.sprite(92, 636+96, 'kills');
+
+            //jugador 4
+
+          this.vida = this.physics.add.sprite(92, 786+48, 'vida');
+
+       this.kill = this.physics.add.sprite(92, 786+96, 'kills');
+
      this.minas = this.physics.add.group();
 
 
@@ -137,36 +181,76 @@ this.nivel = this.add.text(160, 16, this.nivelInt, { fontFamily: '"Arial Black"'
 this.nivel.setFontSize(64);
 
 
-this.vidas = this.add.text(118, 240, this.vidasInt, { fontFamily: '"Arial Black"' });
+this.vidas = this.add.text(120, 345, this.vidasInt, { fontFamily: '"Arial Black"' });
 this.vidas.setFontSize(64);
+
+this.vidasJ2 = this.add.text(120, 495, this.vidasInt2, { fontFamily: '"Arial Black"' });
+this.vidasJ2.setFontSize(64);
+
+this.vidasJ3 = this.add.text(120, 645, this.vidasInt3, { fontFamily: '"Arial Black"' });
+this.vidasJ3.setFontSize(64);
+
+this.vidasJ4 = this.add.text(120, 795, this.vidasInt4, { fontFamily: '"Arial Black"' });
+this.vidasJ4.setFontSize(64);
 
 
      this.cursors = this.input.keyboard.createCursorKeys();
     this.bombbutton = this.input.keyboard.addKey('X');
      
-      // this.myShip = new Ship(this, 400, 500);
-        this.myShip = this.physics.add.sprite(430, 130, 'ship');
+      this.upjugador2 = this.input.keyboard.addKey('W');    
+      this.downjugador2 = this.input.keyboard.addKey('S');    
+      this.leftjugador2 = this.input.keyboard.addKey('A');  
+      this.rightjugador2 = this.input.keyboard.addKey('D');
+     
 
-this.txt = this.add.text(64, 96, 'Puntaje', { fontFamily: '"Arial Black"' });
+      this.upjugador3 = this.input.keyboard.addKey('T');    
+      this.downjugador3 = this.input.keyboard.addKey('G');    
+      this.leftjugador3 = this.input.keyboard.addKey('F');  
+      this.rightjugador3 = this.input.keyboard.addKey('H');
+     
+
+      this.upjugador4 = this.input.keyboard.addKey('I');    
+      this.downjugador4 = this.input.keyboard.addKey('K');    
+      this.leftjugador4 = this.input.keyboard.addKey('J');  
+      this.rightjugador4 = this.input.keyboard.addKey('L');
+     
+
+      // this.myShip = new Ship(this, 400, 500);
+        this.myShip = this.physics.add.sprite(420, 130, 'ship');
+
+   this.myShip2 = this.physics.add.sprite(1820, 130, 'ship');
+
+      this.myShip3 = this.physics.add.sprite(420, 885, 'ship');
+
+         this.myShip4 = this.physics.add.sprite(1820, 885, 'ship');
+
+this.txt = this.add.text(64, 196, 'Puntaje', { fontFamily: '"Arial Black"' });
 this.txt.setFontSize(32);
 
-  this.tiempo = this.add.text(64, 396, 'Tiempo', { fontFamily: '"Arial Black"' });
+  this.tiempo = this.add.text(64, 96, 'Tiempo', { fontFamily: '"Arial Black"' });
 this.tiempo.setFontSize(32);
 
-   this.reloj = this.add.text(64, 446, this.relojInt, { fontFamily: '"Arial Black"' });
+   this.reloj = this.add.text(64, 128, this.relojInt, { fontFamily: '"Arial Black"' });
 this.reloj.setFontSize(64);
 
-  
+
 
    
-this.score = this.add.text(64, 128, this.scoreInt, { fontFamily: '"Arial Black"' });
+this.score = this.add.text(64, 226, this.scoreInt, { fontFamily: '"Arial Black"' });
 this.score.setFontSize(64);
 
 
  this.myShip.setCollideWorldBounds(true);
+ this.myShip2.setCollideWorldBounds(true);
+ this.myShip3.setCollideWorldBounds(true);
+ this.myShip4.setCollideWorldBounds(true);
+
  this.bombasFull = this.physics.add.staticGroup();
  
-
+this.bombasFull2 = this.physics.add.staticGroup();
+ this.bombasFull3 = this.physics.add.staticGroup();
+ this.bombasFull4 = this.physics.add.staticGroup();
+ 
 this.enemigos = this.physics.add.group();
 
        this.explosionUp = this.physics.add.group();
@@ -174,12 +258,31 @@ this.enemigos = this.physics.add.group();
        this.explosionLeft = this.physics.add.group();
        this.explosionRight = this.physics.add.group();
 
+  this.explosionUp2 = this.physics.add.group();
+       this.explosionDown2 = this.physics.add.group();
+       this.explosionLeft2 = this.physics.add.group();
+       this.explosionRight2 = this.physics.add.group();
+
+ this.explosionUp3 = this.physics.add.group();
+       this.explosionDown3 = this.physics.add.group();
+       this.explosionLeft3 = this.physics.add.group();
+       this.explosionRight3 = this.physics.add.group();
+
+ this.explosionUp4 = this.physics.add.group();
+       this.explosionDown4 = this.physics.add.group();
+       this.explosionLeft4 = this.physics.add.group();
+       this.explosionRight4 = this.physics.add.group();
+
+
+
          this.box = this.physics.add.staticGroup();
          this.pisor1 = this.physics.add.staticGroup();
           this.pisor2 = this.physics.add.staticGroup();
            this.pisomov = this.physics.add.staticGroup();
         this.boxFuerte = this.physics.add.staticGroup();
         this.boxFuerte2 = this.physics.add.staticGroup();
+        
+         this.boxFuerteSprite = this.physics.add.staticGroup();
         
          this.powerups = this.physics.add.staticGroup();
         this.powerupsLlamas = this.physics.add.staticGroup();
@@ -222,7 +325,8 @@ this.enemigos = this.physics.add.group();
     {
 for (var j = 1; j < 14; j++)
     {
-        if(i > -2 && i < 1 && j > 0 && j < 3)
+        if((i > -2 && i < 1 && j > 0 && j < 3) || (i > 19 && i < 22 && j > 0 && j < 3)
+            || (i > -2 && i < 1 && j > 11 && j < 14) || (i > 19 && i < 22 && j > 11 && j < 14))
         {
             
         }
@@ -278,35 +382,75 @@ for (var j = 1; j < 14; j++)
  }
  }
 
-for (var i = 1; i < 30; i++)
+
+
+
+
+for (var i = 1; i < 15; i++)
     {
-     this.boxFuerte2.create(12*32-32-32 + 32, 32 + i*32, 'wall3');
- this.boxFuerte2.create(12*32-32-32 -32, 32 + i*32, 'wall3');
+     this.boxFuerte2.create(12*32-32-32 + 32, 32 + i*64, 'wall3');
+ this.boxFuerte2.create(12*32-32-32 -32, 32 + i*64, 'wall3');
 }
-for (var i = 1; i < 30; i++)
+for (var i = 1; i < 15; i++)
     {
-     this.boxFuerte2.create(1920-64 + 32, 32 + i*32, 'wall3');
-       this.boxFuerte2.create(1920-64 + 32 + 64, 32 + i*32, 'wall3');
+     this.boxFuerte2.create(1920-64 + 32, 32 + i*64, 'wall3');
+       this.boxFuerte2.create(1920-64 + 32 + 64, 32 + i*64, 'wall3');
 }
 
-for (var i = -3; i < 49; i++)
+for (var i = -3; i < 25; i++)
     {
-     this.boxFuerte2.create(12*32 + 32*i, 32 + 32, 'wall3');
-      this.boxFuerte2.create(12*32 + 32*i, 32-32, 'wall3');
+     this.boxFuerte2.create(12*32 + 64*i, 32 + 32, 'wall3');
+      this.boxFuerte2.create(12*32 + 64*i, 32-32, 'wall3');
 }
-for (var i = -3; i < 49; i++)
+for (var i = -3; i < 25; i++)
     {
-    this.boxFuerte2.create(12*32 + 32*i, 896+ 32 + 32, 'wall3');
-     this.boxFuerte2.create(12*32 + 32*i, 896+ 32 + 32+64, 'wall3');
+    this.boxFuerte2.create(12*32 + 64*i, 896+ 32 + 32, 'wall3');
+    this.boxFuerte2.create(12*32 + 64*i, 896+ 32 + 32+64, 'wall3');
+ }
+
+
+for (var i = 2; i < 15; i++)
+    {
+     this.boxFuerteSprite.create(12*32-32-32 + 32,  i*64, 'wall2');
 }
+for (var i = 2; i < 15; i++)
+    {
+     this.boxFuerteSprite.create(1920-64 + 32, i*64, 'wall2');
+}
+
+for (var i = 0; i < 25; i++)
+    {
+     this.boxFuerteSprite.create(11*32 + 64*i, 32 + 32, 'wall2');
+ }
+for (var i = 0; i < 25; i++)
+    {
+    this.boxFuerteSprite.create(11*32 + 64*i, 896+ 32 + 32, 'wall2');
+}
+
 
   this.killsInt = this.enemigos.getLength();
-   this.kills = this.add.text(92+32, 196+96, this.killsInt, { fontFamily: '"Arial Black"' });
+   this.killsInt2 = 0;
+   this.killsInt3 = 0;
+   this.killsInt4 = 0;
+
+   this.kills = this.add.text(92+32, 306+96, this.killsInt, { fontFamily: '"Arial Black"' });
 this.kills.setFontSize(64);
 
+ this.killsJ2 = this.add.text(92+32, 456+96, this.killsInt2, { fontFamily: '"Arial Black"' });
+this.killsJ2.setFontSize(64);
+
+this.killsJ3 = this.add.text(92+32, 606+96, this.killsInt3, { fontFamily: '"Arial Black"' });
+this.killsJ3.setFontSize(64);
+
+this.killsJ4= this.add.text(92+32, 756+96, this.killsInt4, { fontFamily: '"Arial Black"' });
+this.killsJ4.setFontSize(64);
 
    this.physics.add.collider(this.myShip, this.box);
 
+ this.physics.add.collider(this.myShip2, this.box);
+
+ this.physics.add.collider(this.myShip3, this.box);
+this.physics.add.collider(this.myShip4, this.box);
 
 
    function pisoMovPasar()
@@ -314,31 +458,378 @@ this.kills.setFontSize(64);
     this.resbalar = 1;
 
    }
+
+   function pisoMovPasar2()
+   {
+    this.resbalar2 = 1;
+
+   }
+
+   function pisoMovPasar3()
+   {
+    this.resbalar3 = 1;
+
+   }
+   function pisoMovPasar4()
+   {
+    this.resbalar4 = 1;
+
+   }
    this.physics.add.overlap(this.myShip, this.pisomov, pisoMovPasar, function(col1,col2){
 
    },this);
-
-
-this.physics.add.collider(this.myShip, this.explosionUp,bajarvidas, function(col1,col2){
+    this.physics.add.overlap(this.myShip2, this.pisomov, pisoMovPasar2, function(col1,col2){
 
    },this);
-   
-   this.physics.add.collider(this.myShip, this.explosionDown, bajarvidas,function(col1,col2){
-   },this);
-   
-   this.physics.add.collider(this.myShip, this.explosionLeft,bajarvidas, function(col1,col2){
-   },this);
-   
+     this.physics.add.overlap(this.myShip3, this.pisomov, pisoMovPasar3, function(col1,col2){
 
-   this.physics.add.collider(this.myShip, this.explosionRight,bajarvidas, function(col1,col2){
+   },this);
+      this.physics.add.overlap(this.myShip4, this.pisomov, pisoMovPasar4, function(col1,col2){
+
+   },this);
+
+
+this.physics.add.overlap(this.myShip, this.explosionUp,bajarvidas, function(col1,col2){
+   },this);
+this.physics.add.overlap(this.myShip, this.explosionUp2,bajarvidas, function(col1,col2){
+   },this);
+this.physics.add.overlap(this.myShip, this.explosionUp3,bajarvidas, function(col1,col2){
+   },this);
+this.physics.add.overlap(this.myShip, this.explosionUp4,bajarvidas, function(col1,col2){
+   },this);
+
+//puntuacion
+this.physics.add.collider(this.myShip, this.explosionUp2,aumentarScore2, function(col1,col2){
+   },this);
+this.physics.add.collider(this.myShip, this.explosionUp3,aumentarScore3, function(col1,col2){
+   },this);
+this.physics.add.collider(this.myShip, this.explosionUp4,aumentarScore4, function(col1,col2){
+   },this);
+
+   
+   this.physics.add.overlap(this.myShip, this.explosionDown, bajarvidas,function(col1,col2){
+   },this);
+    this.physics.add.overlap(this.myShip, this.explosionDown2, bajarvidas,function(col1,col2){
+   },this);
+     this.physics.add.overlap(this.myShip, this.explosionDown3, bajarvidas,function(col1,col2){
+   },this);
+      this.physics.add.overlap(this.myShip, this.explosionDown4, bajarvidas,function(col1,col2){
+   },this);
+
+      //puntuacion
+        this.physics.add.collider(this.myShip, this.explosionDown2, aumentarScore2,function(col1,col2){
+   },this);
+     this.physics.add.collider(this.myShip, this.explosionDown3, aumentarScore3,function(col1,col2){
+   },this);
+      this.physics.add.collider(this.myShip, this.explosionDown4, aumentarScore4,function(col1,col2){
+   },this);
+
+   
+   this.physics.add.overlap(this.myShip, this.explosionLeft,bajarvidas, function(col1,col2){
+   },this);
+    this.physics.add.overlap(this.myShip, this.explosionLeft2,bajarvidas, function(col1,col2){
+   },this);
+     this.physics.add.overlap(this.myShip, this.explosionLeft3,bajarvidas, function(col1,col2){
+   },this);
+      this.physics.add.overlap(this.myShip, this.explosionLeft4,bajarvidas, function(col1,col2){
    },this);
    
+  //puntuacion
+     this.physics.add.collider(this.myShip, this.explosionLeft2,aumentarScore2, function(col1,col2){
+   },this);
+     this.physics.add.collider(this.myShip, this.explosionLeft3,aumentarScore3, function(col1,col2){
+   },this);
+      this.physics.add.collider(this.myShip, this.explosionLeft4,aumentarScore4, function(col1,col2){
+   },this);
+
+   this.physics.add.overlap(this.myShip, this.explosionRight,bajarvidas, function(col1,col2){
+   },this);
+    this.physics.add.overlap(this.myShip, this.explosionRight2,bajarvidas, function(col1,col2){
+   },this);
+     this.physics.add.overlap(this.myShip, this.explosionRight3,bajarvidas, function(col1,col2){
+   },this);
+      this.physics.add.overlap(this.myShip, this.explosionRight4,bajarvidas, function(col1,col2){
+   },this);
+   
+   //puntuacion
+
+     this.physics.add.collider(this.myShip, this.explosionRight2,aumentarScore2, function(col1,col2){
+   },this);
+     this.physics.add.collider(this.myShip, this.explosionRight3,aumentarScore3, function(col1,col2){
+   },this);
+      this.physics.add.collider(this.myShip, this.explosionRight4,aumentarScore4, function(col1,col2){
+   },this);
+
    this.physics.add.collider(this.myShip,this.wallkill);
-
    this.physics.add.overlap(this.myShip,this.wallkill,bajarvidas, function(col1,col2){
 
    },this);
    
+
+   //jugador2
+
+this.physics.add.overlap(this.myShip2, this.explosionUp,bajarvidas2, function(col1,col2){
+   },this);
+this.physics.add.overlap(this.myShip2, this.explosionUp2,bajarvidas2, function(col1,col2){
+   },this);
+this.physics.add.overlap(this.myShip2, this.explosionUp3,bajarvidas2, function(col1,col2){
+   },this);
+this.physics.add.overlap(this.myShip2, this.explosionUp4,bajarvidas2, function(col1,col2){
+   },this);
+
+//puntuacion
+
+
+this.physics.add.collider(this.myShip2, this.explosionUp,aumentarScore1, function(col1,col2){
+   },this);
+this.physics.add.collider(this.myShip2, this.explosionUp3,aumentarScore3, function(col1,col2){
+   },this);
+this.physics.add.collider(this.myShip2, this.explosionUp4,aumentarScore4, function(col1,col2){
+   },this);
+
+   
+   this.physics.add.overlap(this.myShip2, this.explosionDown, bajarvidas2,function(col1,col2){
+   },this);
+    this.physics.add.overlap(this.myShip2, this.explosionDown2, bajarvidas2,function(col1,col2){
+   },this);
+     this.physics.add.overlap(this.myShip2, this.explosionDown3, bajarvidas2,function(col1,col2){
+   },this);
+      this.physics.add.overlap(this.myShip2, this.explosionDown4, bajarvidas2,function(col1,col2){
+   },this);
+
+      //puntuacion
+
+   this.physics.add.collider(this.myShip2, this.explosionDown, aumentarScore1,function(col1,col2){
+   },this);
+     this.physics.add.collider(this.myShip2, this.explosionDown3, aumentarScore3,function(col1,col2){
+   },this);
+      this.physics.add.collider(this.myShip2, this.explosionDown4, aumentarScore4,function(col1,col2){
+   },this);
+
+   
+   this.physics.add.overlap(this.myShip2, this.explosionLeft,bajarvidas2, function(col1,col2){
+   },this);
+    this.physics.add.overlap(this.myShip2, this.explosionLeft2,bajarvidas2, function(col1,col2){
+   },this);
+     this.physics.add.overlap(this.myShip2, this.explosionLeft3,bajarvidas2, function(col1,col2){
+   },this);
+      this.physics.add.overlap(this.myShip2, this.explosionLeft4,bajarvidas2, function(col1,col2){
+   },this);
+   
+
+   //puntacion
+
+
+   this.physics.add.collider(this.myShip2, this.explosionLeft,aumentarScore1, function(col1,col2){
+   },this);
+     this.physics.add.collider(this.myShip2, this.explosionLeft3,aumentarScore3, function(col1,col2){
+   },this);
+      this.physics.add.collider(this.myShip2, this.explosionLeft4,aumentarScore4, function(col1,col2){
+   },this);
+   
+  
+   this.physics.add.overlap(this.myShip2, this.explosionRight,bajarvidas2, function(col1,col2){
+   },this);
+    this.physics.add.overlap(this.myShip2, this.explosionRight2,bajarvidas2, function(col1,col2){
+   },this);
+     this.physics.add.overlap(this.myShip2, this.explosionRight3,bajarvidas2, function(col1,col2){
+   },this);
+      this.physics.add.overlap(this.myShip2, this.explosionRight4,bajarvidas2, function(col1,col2){
+   },this);
+
+      //puntuacion
+
+
+   this.physics.add.collider(this.myShip2, this.explosionRight,aumentarScore1, function(col1,col2){
+   },this);
+     this.physics.add.collider(this.myShip2, this.explosionRight3,aumentarScore3, function(col1,col2){
+   },this);
+      this.physics.add.collider(this.myShip2, this.explosionRight4,aumentarScore4, function(col1,col2){
+   },this);
+
+   
+   
+   this.physics.add.collider(this.myShip2,this.wallkill);
+
+   this.physics.add.overlap(this.myShip2,this.wallkill,bajarvidas2, function(col1,col2){
+
+   },this);
+   
+    //jugador3
+
+
+this.physics.add.overlap(this.myShip3, this.explosionUp,bajarvidas3, function(col1,col2){
+   },this);
+this.physics.add.overlap(this.myShip3, this.explosionUp2,bajarvidas3, function(col1,col2){
+   },this);
+this.physics.add.overlap(this.myShip3, this.explosionUp3,bajarvidas3, function(col1,col2){
+   },this);
+this.physics.add.overlap(this.myShip3, this.explosionUp4,bajarvidas3, function(col1,col2){
+   },this);
+
+//puntacion
+
+
+this.physics.add.collider(this.myShip3, this.explosionUp,aumentarScore1, function(col1,col2){
+   },this);
+this.physics.add.collider(this.myShip3, this.explosionUp2,aumentarScore2, function(col1,col2){
+   },this);
+this.physics.add.collider(this.myShip3, this.explosionUp4,aumentarScore4, function(col1,col2){
+   },this);
+
+   
+   this.physics.add.overlap(this.myShip3, this.explosionDown, bajarvidas3,function(col1,col2){
+   },this);
+    this.physics.add.overlap(this.myShip3, this.explosionDown2, bajarvidas3,function(col1,col2){
+   },this);
+     this.physics.add.overlap(this.myShip3, this.explosionDown3, bajarvidas3,function(col1,col2){
+   },this);
+      this.physics.add.overlap(this.myShip3, this.explosionDown4, bajarvidas3,function(col1,col2){
+   },this);
+
+      //Puntacion
+
+
+   this.physics.add.collider(this.myShip3, this.explosionDown, aumentarScore1,function(col1,col2){
+   },this);
+    this.physics.add.collider(this.myShip3, this.explosionDown2, aumentarScore2,function(col1,col2){
+   },this);
+      this.physics.add.collider(this.myShip3, this.explosionDown4, aumentarScore4,function(col1,col2){
+   },this);
+
+   
+   this.physics.add.overlap(this.myShip3, this.explosionLeft,bajarvidas3, function(col1,col2){
+   },this);
+    this.physics.add.overlap(this.myShip3, this.explosionLeft2,bajarvidas3, function(col1,col2){
+   },this);
+     this.physics.add.overlap(this.myShip3, this.explosionLeft3,bajarvidas3, function(col1,col2){
+   },this);
+      this.physics.add.overlap(this.myShip3, this.explosionLeft4,bajarvidas3, function(col1,col2){
+   },this);
+   
+   //puntacion
+ 
+   this.physics.add.collider(this.myShip3, this.explosionLeft,aumentarScore1, function(col1,col2){
+   },this);
+    this.physics.add.collider(this.myShip3, this.explosionLeft2,aumentarScore2, function(col1,col2){
+   },this);
+      this.physics.add.collider(this.myShip3, this.explosionLeft4,aumentarScore4, function(col1,col2){
+   },this);
+   
+
+
+   this.physics.add.overlap(this.myShip3, this.explosionRight,bajarvidas3, function(col1,col2){
+   },this);
+    this.physics.add.overlap(this.myShip3, this.explosionRight2,bajarvidas3, function(col1,col2){
+   },this);
+     this.physics.add.overlap(this.myShip3, this.explosionRight3,bajarvidas3, function(col1,col2){
+   },this);
+      this.physics.add.overlap(this.myShip3, this.explosionRight4,bajarvidas3, function(col1,col2){
+   },this);
+
+      //puntacion
+
+
+   this.physics.add.collider(this.myShip3, this.explosionRight,aumentarScore1, function(col1,col2){
+   },this);
+    this.physics.add.collider(this.myShip3, this.explosionRight2,aumentarScore2, function(col1,col2){
+   },this);
+      this.physics.add.collider(this.myShip3, this.explosionRight4,aumentarScore4, function(col1,col2){
+   },this);
+
+
+    //jugador4
+
+
+this.physics.add.overlap(this.myShip4, this.explosionUp,bajarvidas4, function(col1,col2){
+   },this);
+this.physics.add.overlap(this.myShip4, this.explosionUp2,bajarvidas4, function(col1,col2){
+   },this);
+this.physics.add.overlap(this.myShip4, this.explosionUp3,bajarvidas4, function(col1,col2){
+   },this);
+this.physics.add.overlap(this.myShip4, this.explosionUp4,bajarvidas4, function(col1,col2){
+   },this);
+
+//puntuacion
+
+
+
+this.physics.add.collider(this.myShip4, this.explosionUp,aumentarScore1, function(col1,col2){
+   },this);
+this.physics.add.collider(this.myShip4, this.explosionUp2,aumentarScore2, function(col1,col2){
+   },this);
+this.physics.add.collider(this.myShip4, this.explosionUp3,aumentarScore3, function(col1,col2){
+   },this);
+
+   
+   this.physics.add.overlap(this.myShip4, this.explosionDown, bajarvidas4,function(col1,col2){
+   },this);
+    this.physics.add.overlap(this.myShip4, this.explosionDown2, bajarvidas4,function(col1,col2){
+   },this);
+     this.physics.add.overlap(this.myShip4, this.explosionDown3, bajarvidas4,function(col1,col2){
+   },this);
+      this.physics.add.overlap(this.myShip4, this.explosionDown4, bajarvidas4,function(col1,col2){
+   },this);
+
+      //Puntuacion
+
+
+   this.physics.add.collider(this.myShip4, this.explosionDown, aumentarScore1,function(col1,col2){
+   },this);
+    this.physics.add.collider(this.myShip4, this.explosionDown2, aumentarScore2,function(col1,col2){
+   },this);
+     this.physics.add.collider(this.myShip4, this.explosionDown3, aumentarScore3,function(col1,col2){
+   },this);
+
+   
+   this.physics.add.overlap(this.myShip4, this.explosionLeft,bajarvidas4, function(col1,col2){
+   },this);
+    this.physics.add.overlap(this.myShip4, this.explosionLeft2,bajarvidas4, function(col1,col2){
+   },this);
+     this.physics.add.overlap(this.myShip4, this.explosionLeft3,bajarvidas4, function(col1,col2){
+   },this);
+      this.physics.add.overlap(this.myShip4, this.explosionLeft4,bajarvidas4, function(col1,col2){
+   },this);
+   
+   //Puntuacion
+
+
+   
+   this.physics.add.collider(this.myShip4, this.explosionLeft,aumentarScore1, function(col1,col2){
+   },this);
+    this.physics.add.collider(this.myShip4, this.explosionLeft2,aumentarScore2, function(col1,col2){
+   },this);
+     this.physics.add.collider(this.myShip4, this.explosionLeft3,aumentarScore3, function(col1,col2){
+   },this);
+  
+   
+
+
+   this.physics.add.overlap(this.myShip4, this.explosionRight,bajarvidas4, function(col1,col2){
+   },this);
+    this.physics.add.overlap(this.myShip4, this.explosionRight2,bajarvidas4, function(col1,col2){
+   },this);
+     this.physics.add.overlap(this.myShip4, this.explosionRight3,bajarvidas4, function(col1,col2){
+   },this);
+      this.physics.add.overlap(this.myShip4, this.explosionRight4,bajarvidas4, function(col1,col2){
+   },this);
+
+//puntuacion 
+
+
+
+   this.physics.add.collider(this.myShip4, this.explosionRight,aumentarScore1, function(col1,col2){
+   },this);
+    this.physics.add.collider(this.myShip4, this.explosionRight2,aumentarScore2, function(col1,col2){
+   },this);
+     this.physics.add.collider(this.myShip4, this.explosionRight3,aumentarScore3, function(col1,col2){
+   },this);
+ 
+
+
+
+
+
 
     this.physics.add.collider(this.enemigos,this.wallkill);
 
@@ -347,15 +838,50 @@ this.physics.add.collider(this.myShip, this.explosionUp,bajarvidas, function(col
    },this);
    
 this.physics.add.collider(this.myShip,this.bombasFull);
+this.physics.add.collider(this.myShip,this.bombasFull2);
+this.physics.add.collider(this.myShip,this.bombasFull3);
+this.physics.add.collider(this.myShip,this.bombasFull4);
+
+
+this.physics.add.collider(this.myShip2,this.bombasFull);
+this.physics.add.collider(this.myShip2,this.bombasFull2);
+this.physics.add.collider(this.myShip2,this.bombasFull3);
+this.physics.add.collider(this.myShip2,this.bombasFull4);
+
+
+this.physics.add.collider(this.myShip3,this.bombasFull);
+this.physics.add.collider(this.myShip3,this.bombasFull2);
+this.physics.add.collider(this.myShip3,this.bombasFull3);
+this.physics.add.collider(this.myShip3,this.bombasFull4);
+
+this.physics.add.collider(this.myShip4,this.bombasFull);
+this.physics.add.collider(this.myShip4,this.bombasFull2);
+this.physics.add.collider(this.myShip4,this.bombasFull3);
+this.physics.add.collider(this.myShip4,this.bombasFull4);
 
 this.physics.add.collider(this.enemigos,this.bombasFull);
+this.physics.add.collider(this.enemigos,this.bombasFull2);
+this.physics.add.collider(this.enemigos,this.bombasFull3);
+this.physics.add.collider(this.enemigos,this.bombasFull4);
 this.physics.add.collider(this.enemigos,this.pisor2);
 
    this.physics.add.collider(this.myShip, this.boxFuerte);
  this.physics.add.collider(this.myShip, this.boxFuerte2);
-
   this.physics.add.collider(this.myShip, this.pisor2);
 
+  this.physics.add.collider(this.myShip2, this.boxFuerte);
+ this.physics.add.collider(this.myShip2, this.boxFuerte2);
+  this.physics.add.collider(this.myShip2, this.pisor2);
+
+
+  this.physics.add.collider(this.myShip3, this.boxFuerte);
+ this.physics.add.collider(this.myShip3, this.boxFuerte2);
+  this.physics.add.collider(this.myShip3, this.pisor2);
+
+  this.physics.add.collider(this.myShip4, this.boxFuerte);
+ this.physics.add.collider(this.myShip4, this.boxFuerte2);
+  this.physics.add.collider(this.myShip4, this.pisor2);
+ 
  
    this.physics.add.collider(this.boxFuerte,this.powerups,function(col1,col2)
     {
@@ -380,12 +906,63 @@ this.physics.add.collider(this.enemigos,this.pisor2);
     col2.destroy();
    });
 
+   this.physics.add.collider(this.explosionUp2,this.box, function(col1,col2){
+    col1.destroy();
+    col2.destroy();
+   });
+     this.physics.add.collider(this.explosionDown2,this.box, function(col1,col2){
+    col1.destroy();
+    col2.destroy();
+   });
+   this.physics.add.collider(this.explosionLeft2,this.box, function(col1,col2){
+    col1.destroy();
+    col2.destroy();
+   });
+   this.physics.add.collider(this.explosionRight2,this.box, function(col1,col2){
+    col1.destroy();
+    col2.destroy();
+   });
+
+   this.physics.add.collider(this.explosionUp3,this.box, function(col1,col2){
+    col1.destroy();
+    col2.destroy();
+   });
+     this.physics.add.collider(this.explosionDown3,this.box, function(col1,col2){
+    col1.destroy();
+    col2.destroy();
+   });
+   this.physics.add.collider(this.explosionLeft3,this.box, function(col1,col2){
+    col1.destroy();
+    col2.destroy();
+   });
+   this.physics.add.collider(this.explosionRight3,this.box, function(col1,col2){
+    col1.destroy();
+    col2.destroy();
+   });
+
+   this.physics.add.collider(this.explosionUp4,this.box, function(col1,col2){
+    col1.destroy();
+    col2.destroy();
+   });
+     this.physics.add.collider(this.explosionDown4,this.box, function(col1,col2){
+    col1.destroy();
+    col2.destroy();
+   });
+   this.physics.add.collider(this.explosionLeft4,this.box, function(col1,col2){
+    col1.destroy();
+    col2.destroy();
+   });
+   this.physics.add.collider(this.explosionRight4,this.box, function(col1,col2){
+    col1.destroy();
+    col2.destroy();
+   });
+
 function crearpisor2()
 {
     this.pisor2.create(this.pisor2X, this.pisor2Y,'pisor2');
 }
 
-  
+  //colision rompible 1
    this.physics.add.collider(this.explosionUp,this.pisor1,crearpisor2, function(col1,col2){
       this.pisor2X = col2.x;
 this.pisor2Y = col2.y;
@@ -408,6 +985,80 @@ this.pisor2Y = col2.y;
 this.pisor2Y = col2.y;
     col2.destroy();
    },this);
+
+//colision rompible 2
+   this.physics.add.collider(this.explosionUp2,this.pisor1,crearpisor2, function(col1,col2){
+      this.pisor2X = col2.x;
+this.pisor2Y = col2.y;
+      col2.destroy();
+    
+   },this);
+
+     this.physics.add.collider(this.explosionDown2,this.pisor1,crearpisor2, function(col1,col2){
+          this.pisor2X = col2.x;
+this.pisor2Y = col2.y;
+    col2.destroy();
+  },this);
+   this.physics.add.collider(this.explosionLeft2,this.pisor1,crearpisor2, function(col1,col2){
+      this.pisor2X = col2.x;
+this.pisor2Y = col2.y;
+    col2.destroy();
+  },this);
+   this.physics.add.collider(this.explosionRight2,this.pisor1,crearpisor2, function(col1,col2){
+      this.pisor2X = col2.x;
+this.pisor2Y = col2.y;
+    col2.destroy();
+   },this);
+
+
+//colision rompible 3
+   this.physics.add.collider(this.explosionUp3,this.pisor1,crearpisor2, function(col1,col2){
+      this.pisor2X = col2.x;
+this.pisor2Y = col2.y;
+      col2.destroy();
+    
+   },this);
+
+     this.physics.add.collider(this.explosionDown3,this.pisor1,crearpisor2, function(col1,col2){
+          this.pisor2X = col2.x;
+this.pisor2Y = col2.y;
+    col2.destroy();
+  },this);
+   this.physics.add.collider(this.explosionLeft3,this.pisor1,crearpisor2, function(col1,col2){
+      this.pisor2X = col2.x;
+this.pisor2Y = col2.y;
+    col2.destroy();
+  },this);
+   this.physics.add.collider(this.explosionRight3,this.pisor1,crearpisor2, function(col1,col2){
+      this.pisor2X = col2.x;
+this.pisor2Y = col2.y;
+    col2.destroy();
+   },this);
+
+//colision rompible 4
+   this.physics.add.collider(this.explosionUp4,this.pisor1,crearpisor2, function(col1,col2){
+      this.pisor2X = col2.x;
+this.pisor2Y = col2.y;
+      col2.destroy();
+    
+   },this);
+
+     this.physics.add.collider(this.explosionDown4,this.pisor1,crearpisor2, function(col1,col2){
+          this.pisor2X = col2.x;
+this.pisor2Y = col2.y;
+    col2.destroy();
+  },this);
+   this.physics.add.collider(this.explosionLeft4,this.pisor1,crearpisor2, function(col1,col2){
+      this.pisor2X = col2.x;
+this.pisor2Y = col2.y;
+    col2.destroy();
+  },this);
+   this.physics.add.collider(this.explosionRight4,this.pisor1,crearpisor2, function(col1,col2){
+      this.pisor2X = col2.x;
+this.pisor2Y = col2.y;
+    col2.destroy();
+   },this);
+
 
 
 //COLISION CON ENEMIGOS
@@ -444,6 +1095,126 @@ this.physics.add.collider(this.enemigos,this.explosionRight, aumentarScore, func
 
    },this);
 
+//2
+
+this.physics.add.collider(this.enemigos,this.explosionUp2,aumentarScore, function(col1,col2){
+      col1.destroy();
+    
+   },this);
+
+this.physics.add.collider(this.enemigos,this.explosionDown2, aumentarScore, function(col1,col2){
+    col1.destroy();
+   
+   },this);
+
+
+this.physics.add.collider(this.enemigos,this.explosionLeft2, aumentarScore, function(col1,col2){
+    col1.destroy();
+
+   },this);
+
+this.physics.add.collider(this.enemigos,this.explosionRight2, aumentarScore, function(col1,col2){
+    col1.destroy();
+
+   },this);
+
+//3
+
+this.physics.add.collider(this.enemigos,this.explosionUp3,aumentarScore, function(col1,col2){
+      col1.destroy();
+    
+   },this);
+
+this.physics.add.collider(this.enemigos,this.explosionDown3, aumentarScore, function(col1,col2){
+    col1.destroy();
+   
+   },this);
+
+
+this.physics.add.collider(this.enemigos,this.explosionLeft3, aumentarScore, function(col1,col2){
+    col1.destroy();
+
+   },this);
+
+this.physics.add.collider(this.enemigos,this.explosionRight3, aumentarScore, function(col1,col2){
+    col1.destroy();
+
+   },this);
+
+
+//4
+
+this.physics.add.collider(this.enemigos,this.explosionUp4,aumentarScore, function(col1,col2){
+      col1.destroy();
+    
+   },this);
+
+this.physics.add.collider(this.enemigos,this.explosionDown4, aumentarScore, function(col1,col2){
+    col1.destroy();
+   
+   },this);
+
+
+this.physics.add.collider(this.enemigos,this.explosionLeft4, aumentarScore, function(col1,col2){
+    col1.destroy();
+
+   },this);
+
+this.physics.add.collider(this.enemigos,this.explosionRight4, aumentarScore, function(col1,col2){
+    col1.destroy();
+
+   },this);
+
+function bajarvidas2()
+{
+
+     if(this.vidasInt2 <= 0)
+   {
+     this.myShip2.x = 10000;
+   this.myShip2.y = 10000;
+   }
+   else
+   {
+    this.vidasInt2 = this.vidasInt2 - 1;
+    this.vidasJ2.setText(this.vidasInt2);    
+
+   this.myShip2.x = 1820;
+   this.myShip2.y = 130;
+    }
+}
+
+function bajarvidas3()
+{
+       if(this.vidasInt3 <= 0)
+   {
+         this.myShip3.x = 10000;
+   this.myShip3.y = 10000;
+}
+else
+{
+this.vidasInt3 = this.vidasInt3 - 1;
+    this.vidasJ3.setText(this.vidasInt3); 
+   this.myShip3.x = 420;
+   this.myShip3.y = 885;
+}
+}
+function bajarvidas4()
+{
+     if(this.vidasInt4 <= 0)
+   {
+      this.myShip4.x = 10000;
+   this.myShip4.y = 10000;
+}
+else
+{
+     this.vidasInt4 = this.vidasInt4 - 1;
+    this.vidasJ4.setText(this.vidasInt4);   
+   this.myShip4.x = 1820;
+   this.myShip4.y = 885;
+}
+
+}
+
 function bajarvidas()
 {
       this.caerparedX =-2;
@@ -460,7 +1231,7 @@ this.explosionUp.clear(this.scene);
 this.relojInt = 300;
     this.vidasInt = this.vidasInt - 1;
    
-   this.myShip.x = 430;
+   this.myShip.x = 420;
    this.myShip.y = 130;
 
     this.vidas.setText(this.vidasInt);
@@ -559,11 +1330,18 @@ for (var j = 1; j < 14; j++)
 }
 }
 this.physics.add.collider(this.enemigos,this.myShip, bajarvidas, function(col1,col2){
-    ///////////////////////
 
-
-   
    }, this);
+this.physics.add.collider(this.enemigos,this.myShip2, bajarvidas2, function(col1,col2){
+
+   }, this);
+this.physics.add.collider(this.enemigos,this.myShip3, bajarvidas3, function(col1,col2){
+
+   }, this);
+this.physics.add.collider(this.enemigos,this.myShip4, bajarvidas4, function(col1,col2){
+
+   }, this);
+
 
 
 this.physics.add.collider(this.explosionUp,this.minas, function(col1,col2){
@@ -583,6 +1361,69 @@ this.physics.add.collider(this.explosionUp,this.minas, function(col1,col2){
     
    });
 
+   //2
+
+
+this.physics.add.collider(this.explosionUp2,this.minas, function(col1,col2){
+    col2.destroy();
+    
+   });
+     this.physics.add.collider(this.explosionDown2,this.minas, function(col1,col2){
+    col2.destroy();
+   
+   });
+   this.physics.add.collider(this.explosionLeft2,this.minas, function(col1,col2){
+    col2.destroy();
+  
+   });
+   this.physics.add.collider(this.explosionRight2,this.minas, function(col1,col2){
+    col2.destroy();
+    
+   });
+
+    //3
+
+
+this.physics.add.collider(this.explosionUp3,this.minas, function(col1,col2){
+    col2.destroy();
+    
+   });
+     this.physics.add.collider(this.explosionDown3,this.minas, function(col1,col2){
+    col2.destroy();
+   
+   });
+   this.physics.add.collider(this.explosionLeft3,this.minas, function(col1,col2){
+    col2.destroy();
+  
+   });
+   this.physics.add.collider(this.explosionRight3,this.minas, function(col1,col2){
+    col2.destroy();
+    
+   });
+
+
+    //4
+
+
+this.physics.add.collider(this.explosionUp4,this.minas, function(col1,col2){
+    col2.destroy();
+    
+   });
+     this.physics.add.collider(this.explosionDown4,this.minas, function(col1,col2){
+    col2.destroy();
+   
+   });
+   this.physics.add.collider(this.explosionLeft4,this.minas, function(col1,col2){
+    col2.destroy();
+  
+   });
+   this.physics.add.collider(this.explosionRight4,this.minas, function(col1,col2){
+    col2.destroy();
+    
+   });
+
+
+//1
     this.physics.add.collider(this.explosionUp,this.boxFuerte, function(col1,col2){
     col1.destroy();
     
@@ -601,6 +1442,63 @@ this.physics.add.collider(this.explosionUp,this.minas, function(col1,col2){
    });
 
 
+//2
+    this.physics.add.collider(this.explosionUp2,this.boxFuerte, function(col1,col2){
+    col1.destroy();
+    
+   });
+     this.physics.add.collider(this.explosionDown2,this.boxFuerte, function(col1,col2){
+    col1.destroy();
+   
+   });
+   this.physics.add.collider(this.explosionLeft2,this.boxFuerte, function(col1,col2){
+    col1.destroy();
+  
+   });
+   this.physics.add.collider(this.explosionRight2,this.boxFuerte, function(col1,col2){
+    col1.destroy();
+    
+   });
+
+
+//3
+    this.physics.add.collider(this.explosionUp3,this.boxFuerte, function(col1,col2){
+    col1.destroy();
+    
+   });
+     this.physics.add.collider(this.explosionDown3,this.boxFuerte, function(col1,col2){
+    col1.destroy();
+   
+   });
+   this.physics.add.collider(this.explosionLeft3,this.boxFuerte, function(col1,col2){
+    col1.destroy();
+  
+   });
+   this.physics.add.collider(this.explosionRight3,this.boxFuerte, function(col1,col2){
+    col1.destroy();
+    
+   });
+
+
+//4
+    this.physics.add.collider(this.explosionUp4,this.boxFuerte, function(col1,col2){
+    col1.destroy();
+    
+   });
+     this.physics.add.collider(this.explosionDown4,this.boxFuerte, function(col1,col2){
+    col1.destroy();
+   
+   });
+   this.physics.add.collider(this.explosionLeft4,this.boxFuerte, function(col1,col2){
+    col1.destroy();
+  
+   });
+   this.physics.add.collider(this.explosionRight4,this.boxFuerte, function(col1,col2){
+    col1.destroy();
+    
+   });
+//1
+
  this.physics.add.collider(this.explosionUp,this.boxFuerte2, function(col1,col2){
     col1.destroy();
     
@@ -617,6 +1515,113 @@ this.physics.add.collider(this.explosionUp,this.minas, function(col1,col2){
     col1.destroy();
     
    });
+
+
+//2
+
+ this.physics.add.collider(this.explosionUp2,this.boxFuerte2, function(col1,col2){
+    col1.destroy();
+    
+   });
+     this.physics.add.collider(this.explosionDown2,this.boxFuerte2, function(col1,col2){
+    col1.destroy();
+   
+   });
+   this.physics.add.collider(this.explosionLeft2,this.boxFuerte2, function(col1,col2){
+    col1.destroy();
+  
+   });
+   this.physics.add.collider(this.explosionRight2,this.boxFuerte2, function(col1,col2){
+    col1.destroy();
+    
+   });
+
+
+//3
+
+ this.physics.add.collider(this.explosionUp3,this.boxFuerte2, function(col1,col2){
+    col1.destroy();
+    
+   });
+     this.physics.add.collider(this.explosionDown3,this.boxFuerte2, function(col1,col2){
+    col1.destroy();
+   
+   });
+   this.physics.add.collider(this.explosionLeft3,this.boxFuerte2, function(col1,col2){
+    col1.destroy();
+  
+   });
+   this.physics.add.collider(this.explosionRight3,this.boxFuerte2, function(col1,col2){
+    col1.destroy();
+    
+   });
+
+
+
+//4
+
+ this.physics.add.collider(this.explosionUp4,this.boxFuerte2, function(col1,col2){
+    col1.destroy();
+    
+   });
+     this.physics.add.collider(this.explosionDown4,this.boxFuerte2, function(col1,col2){
+    col1.destroy();
+   
+   });
+   this.physics.add.collider(this.explosionLeft4,this.boxFuerte2, function(col1,col2){
+    col1.destroy();
+  
+   });
+   this.physics.add.collider(this.explosionRight4,this.boxFuerte2, function(col1,col2){
+    col1.destroy();
+    
+   });
+
+
+ function aumentarScore1()
+{
+
+   // this.scoreInt = this.scoreInt + 500;
+    this.killsInt = this.killsInt +1;
+
+    //this.score.setText(this.scoreInt);
+    this.kills.setText(this.killsInt);
+  
+}
+
+
+ function aumentarScore2()
+{
+
+   // this.scoreInt = this.scoreInt + 500;
+    this.killsInt2 = this.killsInt2 +1;
+
+    //this.score.setText(this.scoreInt);
+    this.killsJ2.setText(this.killsInt2);
+  
+}
+
+ function aumentarScore3()
+{
+
+   // this.scoreInt = this.scoreInt + 500;
+    this.killsInt3 = this.killsInt3 +1;
+
+    //this.score.setText(this.scoreInt);
+    this.killsJ3.setText(this.killsInt3);
+  
+}
+
+ function aumentarScore4()
+{
+
+   // this.scoreInt = this.scoreInt + 500;
+    this.killsInt4 = this.killsInt4 +1;
+
+    //this.score.setText(this.scoreInt);
+    this.killsJ4.setText(this.killsInt4);
+  
+}
    function aumentarScore()
 {
 
@@ -737,17 +1742,80 @@ function aumentarllamas()
     this.llama = this.llama +1;  console.log("llama");
     this.score.setText(this.scoreInt);
 }
+function aumentarllamas2()
+{
+    this.scoreInt = this.scoreInt + 100;
+    this.llama2 = this.llama2 +1;  console.log("llama2");
+    this.score.setText(this.scoreInt);
+}
+function aumentarllamas3()
+{
+    this.scoreInt = this.scoreInt + 100;
+    this.llama3 = this.llama3 +1;  console.log("llama3");
+    this.score.setText(this.scoreInt);
+}
+function aumentarllamas4()
+{
+    this.scoreInt = this.scoreInt + 100;
+    this.llama4 = this.llama4 +1;  console.log("llama4");
+    this.score.setText(this.scoreInt);
+}
+
+
   function aumentarBombas()
 {
     this.scoreInt = this.scoreInt + 100;
     this.bombas = this.bombas +1;  console.log("bomba");
     this.score.setText(this.scoreInt);
 }
+ function aumentarBombas2()
+{
+    this.scoreInt = this.scoreInt + 100;
+    this.bombas2 = this.bombas2 +1;  console.log("bomba2");
+    this.score.setText(this.scoreInt);
+}
+ function aumentarBombas3()
+{
+    this.scoreInt = this.scoreInt + 100;
+    this.bombas3 = this.bombas3 +1;  console.log("bomba3");
+    this.score.setText(this.scoreInt);
+}
+ function aumentarBombas4()
+{
+    this.scoreInt = this.scoreInt + 100;
+    this.bombas4 = this.bombas4 +1;  console.log("bomba4");
+    this.score.setText(this.scoreInt);
+}
+
 function aumentarPatin()
 {
     this.scoreInt = this.scoreInt + 100;
     this.patin = this.patin +5;
     console.log("velocidad");
+    this.score.setText(this.scoreInt);
+}
+
+function aumentarPatin2()
+{
+    this.scoreInt = this.scoreInt + 100;
+    this.patin2 = this.patin2 +5;
+    console.log("velocidad2");
+    this.score.setText(this.scoreInt);
+}
+
+function aumentarPatin3()
+{
+    this.scoreInt = this.scoreInt + 100;
+    this.patin3 = this.patin3 +5;
+    console.log("velocidad3");
+    this.score.setText(this.scoreInt);
+}
+
+function aumentarPatin4()
+{
+    this.scoreInt = this.scoreInt + 100;
+    this.patin4 = this.patin4 +5;
+    console.log("velocidad4");
     this.score.setText(this.scoreInt);
 }
 
@@ -760,39 +1828,89 @@ function aumentarVida()
       this.score.setText(this.scoreInt);
 }
 
+function aumentarVida2()
+{
+     this.scoreInt = this.scoreInt + 500;
+    this.vidasInt2 = this.vidasInt2 + 1;
+    console.log("vida2");
+    this.vidasJ2.setText(this.vidasInt2);
+      this.score.setText(this.scoreInt);
+}
+
+function aumentarVida3()
+{
+     this.scoreInt = this.scoreInt + 500;
+    this.vidasInt3 = this.vidasInt3 + 1;
+    console.log("vida3");
+    this.vidasJ3.setText(this.vidasInt3);
+      this.score.setText(this.scoreInt);
+}
+
+function aumentarVida4()
+{
+     this.scoreInt = this.scoreInt + 500;
+    this.vidasInt4 = this.vidasInt4 + 1;
+    console.log("vida4");
+    this.vidasJ4.setText(this.vidasInt4);
+      this.score.setText(this.scoreInt);
+}
+
+
 
 
 this.physics.add.collider(this.myShip,this.powerupsBombas, aumentarBombas, function(col1,col2){
-  
-
-
-    col2.destroy();
-         
-    
+    col2.destroy();  
    },this);
+this.physics.add.collider(this.myShip2,this.powerupsBombas, aumentarBombas2, function(col1,col2){
+    col2.destroy();  
+   },this);
+this.physics.add.collider(this.myShip3,this.powerupsBombas, aumentarBombas3, function(col1,col2){
+    col2.destroy();  
+   },this);
+this.physics.add.collider(this.myShip4,this.powerupsBombas, aumentarBombas4, function(col1,col2){
+    col2.destroy();  
+   },this);
+
 
 
   this.physics.add.collider(this.myShip,this.powerupsLlamas, aumentarllamas, function(col1,col2){
-  
-
-
-    col2.destroy();
-         
-    
+    col2.destroy();  
+   },this);
+  this.physics.add.collider(this.myShip2,this.powerupsLlamas, aumentarllamas2, function(col1,col2){
+    col2.destroy();  
+   },this);
+this.physics.add.collider(this.myShip3,this.powerupsLlamas, aumentarllamas3, function(col1,col2){
+    col2.destroy();  
+   },this);
+this.physics.add.collider(this.myShip4,this.powerupsLlamas, aumentarllamas4, function(col1,col2){
+    col2.destroy();  
    },this);
 
 
+
  this.physics.add.collider(this.myShip,this.powerupsVidas, aumentarVida, function(col1,col2){
-   
-
-
+    col2.destroy();    
+   },this);
+ this.physics.add.collider(this.myShip2,this.powerupsVidas, aumentarVida2, function(col1,col2){
+    col2.destroy();    
+   },this);
+ this.physics.add.collider(this.myShip3,this.powerupsVidas, aumentarVida3, function(col1,col2){
+    col2.destroy();    
+   },this);
+ this.physics.add.collider(this.myShip4,this.powerupsVidas, aumentarVida4, function(col1,col2){
     col2.destroy();    
    },this);
 
   this.physics.add.collider(this.myShip,this.powerupsPatin, aumentarPatin, function(col1,col2){
-   
-
-
+    col2.destroy();    
+   },this);
+   this.physics.add.collider(this.myShip2,this.powerupsPatin, aumentarPatin2, function(col1,col2){
+    col2.destroy();    
+   },this);
+    this.physics.add.collider(this.myShip3,this.powerupsPatin, aumentarPatin3, function(col1,col2){
+    col2.destroy();    
+   },this);
+     this.physics.add.collider(this.myShip4,this.powerupsPatin, aumentarPatin4, function(col1,col2){
     col2.destroy();    
    },this);
          
@@ -805,25 +1923,56 @@ this.physics.add.collider(this.myShip,this.powerupsBombas, aumentarBombas, funct
    });
 
     this.physics.add.collider(this.myShip,this.minas, bajarvidas,function(col1,col2){
-   
-
-    col2.destroy();   
-    
+    col2.destroy();     
+   },this);
+     this.physics.add.collider(this.myShip2,this.minas, bajarvidas2,function(col1,col2){
+    col2.destroy();     
+   },this);
+      this.physics.add.collider(this.myShip3,this.minas, bajarvidas3,function(col1,col2){
+    col2.destroy();     
+   },this);
+       this.physics.add.collider(this.myShip4,this.minas, bajarvidas4,function(col1,col2){
+    col2.destroy();     
    },this);
 
 function actualizarEstado()
 {
       if(this.bombasFull.getLength()< this.bombas)
         {
-                     this.bombasFull.create(this.myShip.x, this.myShip.y, 'bomba');
-//this.bomba.visible = true;
-
-this.countExplosion = 100;
-                 }
-             
+         this.bombasFull.create(this.myShip.x, this.myShip.y, 'bomba');
+        this.countExplosion = 100;
+         }       
 }
-
+function actualizarEstado2()
+{
+      if(this.bombasFull2.getLength()< this.bombas2)
+        {
+         this.bombasFull2.create(this.myShip2.x, this.myShip2.y, 'bomba');
+        this.countExplosion2 = 100;
+         }       
+}
+function actualizarEstado3()
+{
+      if(this.bombasFull3.getLength()< this.bombas3)
+        {
+        this.bombasFull3.create(this.myShip3.x, this.myShip3.y, 'bomba');
+        this.countExplosion3 = 100;
+         }       
+}
+function actualizarEstado4()
+{
+      if(this.bombasFull4.getLength()< this.bombas4)
+        {
+                
+         this.bombasFull4.create(this.myShip4.x, this.myShip4.y, 'bomba');
+        this.countExplosion4 = 100;
+         }       
+}
    this.input.keyboard.on('keydown_X', actualizarEstado, this);
+   this.input.keyboard.on('keydown_C', actualizarEstado2, this);
+   this.input.keyboard.on('keydown_V', actualizarEstado3, this);
+   this.input.keyboard.on('keydown_B', actualizarEstado4, this);
+
 
 
 
@@ -867,7 +2016,7 @@ this.tick1 = this.tick1 +1;
 
     this.reloj.setText(this.relojInt);
 
-    if(this.relojInt < 60)
+    if(this.relojInt < 1)
 {
 
 
@@ -938,29 +2087,80 @@ if(this.caerparedX> 20)
  if(this.CrearObjeto == 1)
   {
 
-    // this.powerups.create(this.CrearX, this.CrearY, 'poderllama');
     this.CrearObjeto = 0;
   }
+
+
 if(this.limpiarLlama >0)
 {
     this.limpiarLlama = this.limpiarLlama-1;
 }
-//this.scoreInt = this.scoreInt + 30;
+if(this.limpiarLlama2 >0)
+{
+    this.limpiarLlama2 = this.limpiarLlama2-1;
+}
+if(this.limpiarLlama3 >0)
+{
+    this.limpiarLlama3 = this.limpiarLlama3-1;
+}
+if(this.limpiarLlama4 >0)
+{
+    this.limpiarLlama4 = this.limpiarLlama4-1;
+}
+
+
 if(this.limpiarLlama ==0)
 {
  this.explosionUp.clear(this.scene);
   this.explosionDown.clear(this.scene);
   this.explosionLeft.clear(this.scene);
  this.explosionRight.clear(this.scene);
- 
 }
+
+if(this.limpiarLlama2 ==0)
+{
+ this.explosionUp2.clear(this.scene);
+  this.explosionDown2.clear(this.scene);
+  this.explosionLeft2.clear(this.scene);
+ this.explosionRight2.clear(this.scene);
+}
+
+
+if(this.limpiarLlama3 ==0)
+{
+ this.explosionUp3.clear(this.scene);
+  this.explosionDown3.clear(this.scene);
+  this.explosionLeft3.clear(this.scene);
+ this.explosionRight3.clear(this.scene);
+}
+
+
+if(this.limpiarLlama4 ==0)
+{
+ this.explosionUp4.clear(this.scene);
+  this.explosionDown4.clear(this.scene);
+  this.explosionLeft4.clear(this.scene);
+ this.explosionRight4.clear(this.scene);
+}
+
 
 if(this.countExplosion >0)
 {
     this.countExplosion = this.countExplosion-1;
 }
-//console.log(this.bombasFull.getLength())
-//console.log(this.bombas);
+if(this.countExplosion2 >0)
+{
+    this.countExplosion2 = this.countExplosion2-1;
+}
+if(this.countExplosion3 >0)
+{
+    this.countExplosion3 = this.countExplosion3-1;
+}
+if(this.countExplosion4 >0)
+{
+    this.countExplosion4 = this.countExplosion4-1;
+}
+
 if(this.bombasFull.getLength()>0 && this.countExplosion ==0)
 {
      this.bomba = this.bombasFull.getFirst();
@@ -986,44 +2186,164 @@ if(this.bombasFull.getLength()>0 && this.countExplosion ==0)
 
 this.countBomb = 0;
 
-
-    //for (var i = 0; i <this.llama; i++)
-    //{
         this.explosionUp.create(this.bomba.x, this.bomba.y, 'explosion');
         this.explosionUp.setVelocityX(-20*this.llama);
-    // }
-      //for (var i = 0; i < this.llama; i++)
-    //{
+
         this.explosionDown.create(this.bomba.x, this.bomba.y, 'explosion');
            this.explosionDown.setVelocityX(20*this.llama);
-     //}
-     //for (var i = 0; i < this.llama; i++)
-    //{
+   
         this.explosionLeft.create(this.bomba.x, this.bomba.y, 'explosion');
          this.explosionLeft.setVelocityY(-20*this.llama);
-     //}
-      //for (var i = 0; i < this.llama; i++)
-   // {
+  
         this.explosionRight.create(this.bomba.x, this.bomba.y, 'explosion');
         this.explosionRight.setVelocityY(20*this.llama);
-     //}
+    
         this.limpiarLlama =50;
  }
 
 
+if(this.bombasFull2.getLength()>0 && this.countExplosion2 ==0)
+{
+     this.bomba2 = this.bombasFull2.getFirst();
+     this.bombasFull2.children.iterate(child => {
+        if (true) {
 
- if (this.colocarBomba ==1) { 
-     
-     
+             this.bomba2 = child;
+            //child.destroy(child, true);
+            return;
+            }
+          
+        })
 
-        }
+     this.bombasFull2.children.iterate(child => {
+        if (child.x == this.bomba2.x && child.y == this.bomba2.y) {
+
+             //this.bomba = child;
+            child.destroy(child, true);
+            return;
+            }
+           
+        })
+
+this.countBomb2 = 0;
+
+        this.explosionUp2.create(this.bomba2.x, this.bomba2.y, 'explosion');
+        this.explosionUp2.setVelocityX(-20*this.llama2);
+
+        this.explosionDown2.create(this.bomba2.x, this.bomba2.y, 'explosion');
+           this.explosionDown2.setVelocityX(20*this.llama2);
+   
+        this.explosionLeft2.create(this.bomba2.x, this.bomba2.y, 'explosion');
+         this.explosionLeft2.setVelocityY(-20*this.llama2);
+  
+        this.explosionRight2.create(this.bomba2.x, this.bomba2.y, 'explosion');
+        this.explosionRight2.setVelocityY(20*this.llama2);
+    
+        this.limpiarLlama2 =50;
+ }
+
+if(this.bombasFull3.getLength()>0 && this.countExplosion3 ==0)
+{
+     this.bomba3 = this.bombasFull3.getFirst();
+     this.bombasFull3.children.iterate(child => {
+        if (true) {
+
+             this.bomba3 = child;
+            //child.destroy(child, true);
+            return;
+            }
+          
+        })
+
+     this.bombasFull3.children.iterate(child => {
+        if (child.x == this.bomba3.x && child.y == this.bomba3.y) {
+
+             //this.bomba = child;
+            child.destroy(child, true);
+            return;
+            }
+           
+        })
+
+this.countBomb3 = 0;
+
+        this.explosionUp3.create(this.bomba3.x, this.bomba3.y, 'explosion');
+        this.explosionUp3.setVelocityX(-20*this.llama3);
+
+        this.explosionDown3.create(this.bomba3.x, this.bomba3.y, 'explosion');
+           this.explosionDown3.setVelocityX(20*this.llama3);
+   
+        this.explosionLeft3.create(this.bomba3.x, this.bomba3.y, 'explosion');
+         this.explosionLeft3.setVelocityY(-20*this.llama3);
+  
+        this.explosionRight3.create(this.bomba3.x, this.bomba3.y, 'explosion');
+        this.explosionRight3.setVelocityY(20*this.llama3);
+    
+        this.limpiarLlama3 =50;
+ }
+
+if(this.bombasFull4.getLength()>0 && this.countExplosion4 ==0)
+{
+     this.bomba4 = this.bombasFull4.getFirst();
+     this.bombasFull4.children.iterate(child => {
+        if (true) {
+
+             this.bomba4 = child;
+            //child.destroy(child, true);
+            return;
+            }
+          
+        })
+
+     this.bombasFull4.children.iterate(child => {
+        if (child.x == this.bomba4.x && child.y == this.bomba4.y) {
+
+             //this.bomba = child;
+            child.destroy(child, true);
+            return;
+            }
+           
+        })
+
+this.countBomb4 = 0;
+
+        this.explosionUp4.create(this.bomba4.x, this.bomba4.y, 'explosion');
+        this.explosionUp4.setVelocityX(-20*this.llama4);
+
+        this.explosionDown4.create(this.bomba4.x, this.bomba4.y, 'explosion');
+           this.explosionDown4.setVelocityX(20*this.llama4);
+   
+        this.explosionLeft4.create(this.bomba4.x, this.bomba4.y, 'explosion');
+         this.explosionLeft4.setVelocityY(-20*this.llama4);
+  
+        this.explosionRight4.create(this.bomba4.x, this.bomba4.y, 'explosion');
+        this.explosionRight4.setVelocityY(20*this.llama4);
+    
+        this.limpiarLlama4 =50;
+ }
 
 if(this.resbalar==0)
 {
  this.myShip.setVelocityX(0);
   this.myShip.setVelocityY(0);
 }
+if(this.resbalar2==0)
+{
+this.myShip2.setVelocityX(0);
+  this.myShip2.setVelocityY(0);
+}
 
+if(this.resbalar3==0)
+{
+  this.myShip3.setVelocityX(0);
+  this.myShip3.setVelocityY(0);
+}
+
+if(this.resbalar4==0)
+{
+  this.myShip4.setVelocityX(0);
+  this.myShip4.setVelocityY(0);
+}
 
     switch (this.cursors.isDown) {
       case "left":
@@ -1073,9 +2393,108 @@ if(this.resbalar==0)
         else{
            
         }
+
+//JUGADOR 2
+        if (this.leftjugador2.isDown) { 
+            this.myShip2.setVelocityX(-20*this.patin2);
+        }
+        else{
+             
+        }
+
+
+        if (this.rightjugador2.isDown) {
+            this.myShip2.setVelocityX(20*this.patin2);
+        }
+        else{
+           
+        }
+
+        if (this.upjugador2.isDown) {
+            this.myShip2.setVelocityY(-20*this.patin2);
+        }
+        else
+        {
+           
+        }
+
+          if (this.downjugador2.isDown) {
+            this.myShip2.setVelocityY(20*this.patin2);
+        }
+        else{
+           
+        }
+ 
+
+//JUGADOR 3
+
+if (this.leftjugador3.isDown) { 
+            this.myShip3.setVelocityX(-20*this.patin3);
+        }
+        else{
+             
+        }
+
+        if (this.rightjugador3.isDown) {
+            this.myShip3.setVelocityX(20*this.patin3);
+        }
+        else{
+           
+        }
+
+        if (this.upjugador3.isDown) {
+            this.myShip3.setVelocityY(-20*this.patin3);
+        }
+        else
+        {
+           
+        }
+
+          if (this.downjugador3.isDown) {
+            this.myShip3.setVelocityY(20*this.patin3);
+        }
+        else{
+           
+        }
+ 
+
+//JUGADOR 4
+
+
+if (this.leftjugador4.isDown) { 
+            this.myShip4.setVelocityX(-20*this.patin4);
+        }
+        else{
+             
+        }
+
+        if (this.rightjugador4.isDown) {
+            this.myShip4.setVelocityX(20*this.patin4);
+        }
+        else{
+           
+        }
+
+        if (this.upjugador4.isDown) {
+            this.myShip4.setVelocityY(-20*this.patin4);
+        }
+        else
+        {
+           
+        }
+
+          if (this.downjugador4.isDown) {
+            this.myShip4.setVelocityY(20*this.patin4);
+        }
+        else{
+           
+        }
  
 
 this.resbalar = 0;
+this.resbalar2 = 0;
+this.resbalar3 = 0;
+this.resbalar4 = 0;
 }
 function gameOver ()
 {
