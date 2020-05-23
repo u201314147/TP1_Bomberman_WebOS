@@ -107,6 +107,7 @@ this.load.image('pisor1', 'fq0sHZS/pisor1.png');
 this.load.image('pisor2', 'Mhy1S9p/pisor2.png');
  this.load.image('pisomov', 'cNQkDtg/pisomov.png');
 
+ this.load.image('podervida', 'bFFHbrq/podervida.png');
 }
 
 function create()
@@ -365,10 +366,7 @@ for (var j = 1; j < 14; j++)
 
      if(i > 0 && i < 20 && j > 2 && j < 12)
         {
-    if(this.enemigos.getLength()<3+this.nivelInt)
-    {
-     this.enemigos.create(480+ i*32*2,  64 + j*32*2, 'enemigo');
-    }
+    
 }
     }
 
@@ -1305,10 +1303,7 @@ for (var j = 1; j < 14; j++)
 
      if(i > 0 && i < 20 && j > 2 && j < 12)
         {
-    if(this.enemigos.getLength()<3+this.nivelInt)
-    {
-     this.enemigos.create(480+ i*32*2,  64 + j*32*2, 'enemigo');
-    }
+    
 }
     }
 

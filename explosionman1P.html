@@ -106,6 +106,8 @@ this.load.image('wallkill','QrNLy82/wallkill.png')
 this.load.image('pisor1', 'fq0sHZS/pisor1.png');
 this.load.image('pisor2', 'Mhy1S9p/pisor2.png');
  this.load.image('pisomov', 'cNQkDtg/pisomov.png');
+ 
+ this.load.image('podervida', 'bFFHbrq/podervida.png');
 
 }
 
@@ -143,37 +145,13 @@ this.relojInt = 300;
 this.jugador1.setFontSize(32);
 
 
-    this.jugador2 = this.add.text(32+32, 366+96, 'Jugador2', { fontFamily: '"Arial Black"' });
-this.jugador2.setFontSize(32);
-
-    this.jugador3 = this.add.text(32+32, 516+96, 'Jugador3', { fontFamily: '"Arial Black"' });
-this.jugador3.setFontSize(32);
-
-    this.jugador4 = this.add.text(32+32, 666+96, 'Jugador4', { fontFamily: '"Arial Black"' });
-this.jugador4.setFontSize(32);
 
 
      this.vida = this.physics.add.sprite(92, 336+48, 'vida');
 
        this.kill = this.physics.add.sprite(92, 336+96, 'kills');
 
-       //jugador 2
-
-          this.vida = this.physics.add.sprite(92, 486+48, 'vida');
-
-       this.kill = this.physics.add.sprite(92, 486+96, 'kills');
-
-          //jugador 3
-
-          this.vida = this.physics.add.sprite(92, 636+48, 'vida');
-
-       this.kill = this.physics.add.sprite(92, 636+96, 'kills');
-
-            //jugador 4
-
-          this.vida = this.physics.add.sprite(92, 786+48, 'vida');
-
-       this.kill = this.physics.add.sprite(92, 786+96, 'kills');
+       
 
      this.minas = this.physics.add.group();
 
@@ -189,14 +167,6 @@ this.nivel.setFontSize(64);
 this.vidas = this.add.text(120, 345, this.vidasInt, { fontFamily: '"Arial Black"' });
 this.vidas.setFontSize(64);
 
-this.vidasJ2 = this.add.text(120, 495, this.vidasInt2, { fontFamily: '"Arial Black"' });
-this.vidasJ2.setFontSize(64);
-
-this.vidasJ3 = this.add.text(120, 645, this.vidasInt3, { fontFamily: '"Arial Black"' });
-this.vidasJ3.setFontSize(64);
-
-this.vidasJ4 = this.add.text(120, 795, this.vidasInt4, { fontFamily: '"Arial Black"' });
-this.vidasJ4.setFontSize(64);
 
 
      this.cursors = this.input.keyboard.createCursorKeys();
@@ -223,11 +193,11 @@ this.vidasJ4.setFontSize(64);
       // this.myShip = new Ship(this, 400, 500);
         this.myShip = this.physics.add.sprite(420, 130, 'ship');
 
-   this.myShip2 = this.physics.add.sprite(1820, 130, 'ship');
+   this.myShip2 = this.physics.add.sprite(4000, 4000, 'ship');
 
-      this.myShip3 = this.physics.add.sprite(420, 885, 'ship');
+      this.myShip3 = this.physics.add.sprite(4000, 4000, 'ship');
 
-         this.myShip4 = this.physics.add.sprite(1820, 885, 'ship');
+         this.myShip4 = this.physics.add.sprite(4000, 4000, 'ship');
 
 this.txt = this.add.text(64, 196, 'Puntaje', { fontFamily: '"Arial Black"' });
 this.txt.setFontSize(32);
@@ -441,14 +411,6 @@ for (var i = 0; i < 25; i++)
    this.kills = this.add.text(92+32, 306+96, this.killsInt, { fontFamily: '"Arial Black"' });
 this.kills.setFontSize(64);
 
- this.killsJ2 = this.add.text(92+32, 456+96, this.killsInt2, { fontFamily: '"Arial Black"' });
-this.killsJ2.setFontSize(64);
-
-this.killsJ3 = this.add.text(92+32, 606+96, this.killsInt3, { fontFamily: '"Arial Black"' });
-this.killsJ3.setFontSize(64);
-
-this.killsJ4= this.add.text(92+32, 756+96, this.killsInt4, { fontFamily: '"Arial Black"' });
-this.killsJ4.setFontSize(64);
 
    this.physics.add.collider(this.myShip, this.box);
 
