@@ -25,13 +25,12 @@ class Scene1 extends Phaser.Scene {
         this.gamemodeData = data.gamemode;
         this.jugadoresData = data.jugadores;
         this.musicData = data.music;
-        this.designerData = data.designer;
     }
 
  preload ()
 {
     this.colocarBomba = 0;
-    this.designer = this.designerData;
+
     this.jugadoresTotal =  this.jugadoresData;
     this.cooldownP1 = 0;
     this.cooldownP2 = 0;
@@ -83,13 +82,11 @@ class Scene1 extends Phaser.Scene {
         this.brick = null;
         this.playerBulletLive = false;
         this.playerDirection = 'up';
-     
-
-     //    this.load.setBaseURL('http://labs.phaser.io');
-  //this.load.setBaseURL('https://i.ibb.co');
+         this.load.setBaseURL('http://labs.phaser.io');
+  this.load.setBaseURL('https://i.ibb.co');
 
 
-     this.load.image('bg', 'img/jugador.png');
+     /*this.load.image('bg', 'img/jugador.png');
   this.load.image('wall', 'img/wall.png');
    this.load.image('wall2', 'img/wall2.png');
 
@@ -123,21 +120,14 @@ this.load.image('pisor2', 'img/pisor2.png');
              this.load.image('menupause2', 'img/menupause2.png');
           this.load.image('menupause3', 'img/menupause3.png');
             this.load.image('votacionmenu', 'img/votacionmenu.png');
-
-                this.load.image('votacionmenu2', 'img/votacionmenu2P.png');
-
-                    this.load.image('votacionmenu3', 'img/votacionmenu3P.png');
-
-
              this.load.image('votacionmenuP1', 'img/votacionmenuP1.png');
                this.load.image('votacionmenuP2', 'img/votacionmenuP2.png');
                 this.load.image('votacionmenuP3', 'img/votacionmenuP3.png');
             this.load.image('votacionmenuP4', 'img/votacionmenuP4.png');
             
               this.load.image('poderguante', 'img/poderguante.png');
-               this.load.image('seleccion3', 'img/seleccioncuad.png');
- 
-/*
+            */
+
   this.load.image('wall', 'd5yWhk2/wall.png');
    this.load.image('wall2', 'WykRp6s/wall2.png');
    this.load.image('enemigo',  'Dttg5JP/enemigo.png');
@@ -172,18 +162,10 @@ this.load.image('pisor2', 'Mhy1S9p/pisor2.png');
             this.load.image('votacionmenuP4', 'jJG4gpC/votacionmenu-P4.png');
             
               this.load.image('poderguante', 'WFgXwvR/poderguante.png');
-
-
-*/
 }
 
 create()
 {
-    this.disminuirX = 0;
-    this.disminuirY = 0;
-    this.caerEnX = 1;
-    this.caerEnY = 0;
-    this.designer = this.designerData;
    this.gamemode = this.gamemodeData;
 
 this.menuseleccion = 1;
@@ -202,7 +184,7 @@ this.novotacionP2=0;
 this.novotacionP3=0;
 this.novotacionP4=0;
 this.pause = 0;
-     this.caerparedX =-1;
+     this.caerparedX =-2;
  this.caerparedY = 1;
 
 this.tick1 = 0;
@@ -225,7 +207,6 @@ this.relojInt = 300;
       this.countExplosion3 =0;
       this.countExplosion4 =0;
      
-
 //sprites de puntuacion
 
 //jugadores
@@ -458,8 +439,7 @@ this.enemigos = this.physics.add.group();
 */
 
 //Modo no aleatorio
-if(this.designer ==0)
-{
+
     for (var i = -1; i < 22; i++)
     {
 for (var j = 1; j < 14; j++)
@@ -528,7 +508,6 @@ for (var j = 1; j < 14; j++)
      }
  }
  }
-}
 
 
 
@@ -685,11 +664,11 @@ this.physics.add.overlap(this.myShip, this.explosionUp4,bajarvidas, function(col
    },this);
 
 //puntuacion
-this.physics.add.collider(this.myShip, this.explosionUp2,aumentarScore2, function(col1,col2){
+this.physics.add.overlap(this.myShip, this.explosionUp2,aumentarScore2, function(col1,col2){
    },this);
-this.physics.add.collider(this.myShip, this.explosionUp3,aumentarScore3, function(col1,col2){
+this.physics.add.overlap(this.myShip, this.explosionUp3,aumentarScore3, function(col1,col2){
    },this);
-this.physics.add.collider(this.myShip, this.explosionUp4,aumentarScore4, function(col1,col2){
+this.physics.add.overlap(this.myShip, this.explosionUp4,aumentarScore4, function(col1,col2){
    },this);
 
    
@@ -703,11 +682,11 @@ this.physics.add.collider(this.myShip, this.explosionUp4,aumentarScore4, functio
    },this);
 
       //puntuacion
-        this.physics.add.collider(this.myShip, this.explosionDown2, aumentarScore2,function(col1,col2){
+        this.physics.add.overlap(this.myShip, this.explosionDown2, aumentarScore2,function(col1,col2){
    },this);
-     this.physics.add.collider(this.myShip, this.explosionDown3, aumentarScore3,function(col1,col2){
+     this.physics.add.overlap(this.myShip, this.explosionDown3, aumentarScore3,function(col1,col2){
    },this);
-      this.physics.add.collider(this.myShip, this.explosionDown4, aumentarScore4,function(col1,col2){
+      this.physics.add.overlap(this.myShip, this.explosionDown4, aumentarScore4,function(col1,col2){
    },this);
 
    
@@ -721,11 +700,11 @@ this.physics.add.collider(this.myShip, this.explosionUp4,aumentarScore4, functio
    },this);
    
   //puntuacion
-     this.physics.add.collider(this.myShip, this.explosionLeft2,aumentarScore2, function(col1,col2){
+     this.physics.add.overlap(this.myShip, this.explosionLeft2,aumentarScore2, function(col1,col2){
    },this);
-     this.physics.add.collider(this.myShip, this.explosionLeft3,aumentarScore3, function(col1,col2){
+     this.physics.add.overlap(this.myShip, this.explosionLeft3,aumentarScore3, function(col1,col2){
    },this);
-      this.physics.add.collider(this.myShip, this.explosionLeft4,aumentarScore4, function(col1,col2){
+      this.physics.add.overlap(this.myShip, this.explosionLeft4,aumentarScore4, function(col1,col2){
    },this);
 
    this.physics.add.overlap(this.myShip, this.explosionRight,bajarvidas, function(col1,col2){
@@ -767,11 +746,11 @@ this.physics.add.overlap(this.myShip2, this.explosionUp4,bajarvidas2, function(c
 //puntuacion
 
 
-this.physics.add.collider(this.myShip2, this.explosionUp,aumentarScore1, function(col1,col2){
+this.physics.add.overlap(this.myShip2, this.explosionUp,aumentarScore1, function(col1,col2){
    },this);
-this.physics.add.collider(this.myShip2, this.explosionUp3,aumentarScore3, function(col1,col2){
+this.physics.add.overlap(this.myShip2, this.explosionUp3,aumentarScore3, function(col1,col2){
    },this);
-this.physics.add.collider(this.myShip2, this.explosionUp4,aumentarScore4, function(col1,col2){
+this.physics.add.overlap(this.myShip2, this.explosionUp4,aumentarScore4, function(col1,col2){
    },this);
 
    
@@ -807,11 +786,11 @@ this.physics.add.collider(this.myShip2, this.explosionUp4,aumentarScore4, functi
    //puntacion
 
 
-   this.physics.add.collider(this.myShip2, this.explosionLeft,aumentarScore1, function(col1,col2){
+   this.physics.add.overlap(this.myShip2, this.explosionLeft,aumentarScore1, function(col1,col2){
    },this);
-     this.physics.add.collider(this.myShip2, this.explosionLeft3,aumentarScore3, function(col1,col2){
+     this.physics.add.overlap(this.myShip2, this.explosionLeft3,aumentarScore3, function(col1,col2){
    },this);
-      this.physics.add.collider(this.myShip2, this.explosionLeft4,aumentarScore4, function(col1,col2){
+      this.physics.add.overlap(this.myShip2, this.explosionLeft4,aumentarScore4, function(col1,col2){
    },this);
    
   
@@ -827,11 +806,11 @@ this.physics.add.collider(this.myShip2, this.explosionUp4,aumentarScore4, functi
       //puntuacion
 
 
-   this.physics.add.collider(this.myShip2, this.explosionRight,aumentarScore1, function(col1,col2){
+   this.physics.add.overlap(this.myShip2, this.explosionRight,aumentarScore1, function(col1,col2){
    },this);
-     this.physics.add.collider(this.myShip2, this.explosionRight3,aumentarScore3, function(col1,col2){
+     this.physics.add.overlap(this.myShip2, this.explosionRight3,aumentarScore3, function(col1,col2){
    },this);
-      this.physics.add.collider(this.myShip2, this.explosionRight4,aumentarScore4, function(col1,col2){
+      this.physics.add.overlap(this.myShip2, this.explosionRight4,aumentarScore4, function(col1,col2){
    },this);
 
    
@@ -857,11 +836,11 @@ this.physics.add.overlap(this.myShip3, this.explosionUp4,bajarvidas3, function(c
 //puntacion
 
 
-this.physics.add.collider(this.myShip3, this.explosionUp,aumentarScore1, function(col1,col2){
+this.physics.add.overlap(this.myShip3, this.explosionUp,aumentarScore1, function(col1,col2){
    },this);
-this.physics.add.collider(this.myShip3, this.explosionUp2,aumentarScore2, function(col1,col2){
+this.physics.add.overlap(this.myShip3, this.explosionUp2,aumentarScore2, function(col1,col2){
    },this);
-this.physics.add.collider(this.myShip3, this.explosionUp4,aumentarScore4, function(col1,col2){
+this.physics.add.overlap(this.myShip3, this.explosionUp4,aumentarScore4, function(col1,col2){
    },this);
 
    
@@ -877,11 +856,11 @@ this.physics.add.collider(this.myShip3, this.explosionUp4,aumentarScore4, functi
       //Puntacion
 
 
-   this.physics.add.collider(this.myShip3, this.explosionDown, aumentarScore1,function(col1,col2){
+   this.physics.add.overlap(this.myShip3, this.explosionDown, aumentarScore1,function(col1,col2){
    },this);
-    this.physics.add.collider(this.myShip3, this.explosionDown2, aumentarScore2,function(col1,col2){
+    this.physics.add.overlap(this.myShip3, this.explosionDown2, aumentarScore2,function(col1,col2){
    },this);
-      this.physics.add.collider(this.myShip3, this.explosionDown4, aumentarScore4,function(col1,col2){
+      this.physics.add.overlap(this.myShip3, this.explosionDown4, aumentarScore4,function(col1,col2){
    },this);
 
    
@@ -896,11 +875,11 @@ this.physics.add.collider(this.myShip3, this.explosionUp4,aumentarScore4, functi
    
    //puntacion
  
-   this.physics.add.collider(this.myShip3, this.explosionLeft,aumentarScore1, function(col1,col2){
+   this.physics.add.overlap(this.myShip3, this.explosionLeft,aumentarScore1, function(col1,col2){
    },this);
-    this.physics.add.collider(this.myShip3, this.explosionLeft2,aumentarScore2, function(col1,col2){
+    this.physics.add.overlap(this.myShip3, this.explosionLeft2,aumentarScore2, function(col1,col2){
    },this);
-      this.physics.add.collider(this.myShip3, this.explosionLeft4,aumentarScore4, function(col1,col2){
+      this.physics.add.overlap(this.myShip3, this.explosionLeft4,aumentarScore4, function(col1,col2){
    },this);
    
 
@@ -917,11 +896,11 @@ this.physics.add.collider(this.myShip3, this.explosionUp4,aumentarScore4, functi
       //puntacion
 
 
-   this.physics.add.collider(this.myShip3, this.explosionRight,aumentarScore1, function(col1,col2){
+   this.physics.add.overlap(this.myShip3, this.explosionRight,aumentarScore1, function(col1,col2){
    },this);
-    this.physics.add.collider(this.myShip3, this.explosionRight2,aumentarScore2, function(col1,col2){
+    this.physics.add.overlap(this.myShip3, this.explosionRight2,aumentarScore2, function(col1,col2){
    },this);
-      this.physics.add.collider(this.myShip3, this.explosionRight4,aumentarScore4, function(col1,col2){
+      this.physics.add.overlap(this.myShip3, this.explosionRight4,aumentarScore4, function(col1,col2){
    },this);
 
  this.physics.add.collider(this.myShip3,this.wallkill);
@@ -947,11 +926,11 @@ this.physics.add.overlap(this.myShip4, this.explosionUp4,bajarvidas4, function(c
 
 
 
-this.physics.add.collider(this.myShip4, this.explosionUp,aumentarScore1, function(col1,col2){
+this.physics.add.overlap(this.myShip4, this.explosionUp,aumentarScore1, function(col1,col2){
    },this);
-this.physics.add.collider(this.myShip4, this.explosionUp2,aumentarScore2, function(col1,col2){
+this.physics.add.overlap(this.myShip4, this.explosionUp2,aumentarScore2, function(col1,col2){
    },this);
-this.physics.add.collider(this.myShip4, this.explosionUp3,aumentarScore3, function(col1,col2){
+this.physics.add.overlap(this.myShip4, this.explosionUp3,aumentarScore3, function(col1,col2){
    },this);
 
    
@@ -988,11 +967,11 @@ this.physics.add.collider(this.myShip4, this.explosionUp3,aumentarScore3, functi
 
 
    
-   this.physics.add.collider(this.myShip4, this.explosionLeft,aumentarScore1, function(col1,col2){
+   this.physics.add.overlap(this.myShip4, this.explosionLeft,aumentarScore1, function(col1,col2){
    },this);
-    this.physics.add.collider(this.myShip4, this.explosionLeft2,aumentarScore2, function(col1,col2){
+    this.physics.add.overlap(this.myShip4, this.explosionLeft2,aumentarScore2, function(col1,col2){
    },this);
-     this.physics.add.collider(this.myShip4, this.explosionLeft3,aumentarScore3, function(col1,col2){
+     this.physics.add.overlap(this.myShip4, this.explosionLeft3,aumentarScore3, function(col1,col2){
    },this);
   
    
@@ -1011,11 +990,11 @@ this.physics.add.collider(this.myShip4, this.explosionUp3,aumentarScore3, functi
 
 
 
-   this.physics.add.collider(this.myShip4, this.explosionRight,aumentarScore1, function(col1,col2){
+   this.physics.add.overlap(this.myShip4, this.explosionRight,aumentarScore1, function(col1,col2){
    },this);
-    this.physics.add.collider(this.myShip4, this.explosionRight2,aumentarScore2, function(col1,col2){
+    this.physics.add.overlap(this.myShip4, this.explosionRight2,aumentarScore2, function(col1,col2){
    },this);
-     this.physics.add.collider(this.myShip4, this.explosionRight3,aumentarScore3, function(col1,col2){
+     this.physics.add.overlap(this.myShip4, this.explosionRight3,aumentarScore3, function(col1,col2){
    },this);
  
 
@@ -1460,7 +1439,7 @@ function bajarvidas()
         if(this.gamemode==0)
         {
         //    this.relojInt = 300;
-      //this.caerparedX =-1;
+      //this.caerparedX =-2;
  //this.caerparedY = 1;
 // this.wallkill.clear(this.scene);
 
@@ -1752,7 +1731,6 @@ this.physics.add.collider(this.explosionUp4,this.minas, function(col1,col2){
 
  function aumentarScore1()
 {
-
 if(this.gamemode == 1 || this.gamemode == 2)
 {
    // this.scoreInt = this.scoreInt + 500;
@@ -1833,12 +1811,9 @@ if(this.cooldownP3tick==300)
 {
 
     this.scoreInt = this.scoreInt + 500;
-
-    if(this.gamemode ==0)
-    {
     this.killsInt = this.enemigos.getLength();
-   }
-   this.score.setText(this.scoreInt);
+
+    this.score.setText(this.scoreInt);
     this.kills.setText(this.killsInt);
     //this.score.setFontSize(this.scoreInt);
 
@@ -1846,14 +1821,9 @@ if(this.cooldownP3tick==300)
     if(this.enemigos.getLength() <=0)
     {
     
-  this.caerparedX =-1;
+  this.caerparedX =-2;
  this.caerparedY = 1;
-  this.disminuirX = 0;
-    this.disminuirY = 0;
-    this.caerEnX = 1;
-    this.caerEnY = 0;
 
-if(this.nivelInt <=99)
     this.nivelInt = this.nivelInt + 1;
 this.wallkill.clear(this.scene);
 this.relojInt = 300;
@@ -2392,7 +2362,7 @@ this.physics.add.collider(this.myShip4,this.powerupsLlamas, aumentarllamas4, fun
 
 function actualizarEstado()
 {
-    if(this.pause==0 && this.designer==0)
+    if(this.pause==0)
 {
 if( this.vidasInt >0)
 {
@@ -2409,7 +2379,7 @@ function actualizarEstado2()
 {
     if(this.jugadoresTotal >=2 && this.vidasInt2 >0)
 {
-    if(this.pause==0 && this.designer==0)
+    if(this.pause==0)
 {
       if(this.bombasFull2.getLength()< this.bombas2)
         {
@@ -2423,7 +2393,7 @@ function actualizarEstado3()
 {
     if(this.jugadoresTotal >=3  && this.vidasInt3 >0)
 {
-    if(this.pause==0 && this.designer==0)
+    if(this.pause==0)
 {
       if(this.bombasFull3.getLength()< this.bombas3)
         {
@@ -2437,7 +2407,7 @@ function actualizarEstado4()
 {
     if(this.jugadoresTotal >=4 && this.vidasInt4 >0)
 {
-    if(this.pause==0 && this.designer==0)
+    if(this.pause==0)
 {
       if(this.bombasFull4.getLength()< this.bombas4)
         {
@@ -2469,6 +2439,8 @@ this.input.keyboard.on('keydown_Z', cogerBomba, this);
 function activarPause()
 {
 
+
+
    if(this.pause==1)
    this.pause = 0;
     else   
@@ -2476,12 +2448,6 @@ function activarPause()
 
 if(this.pause ==0)
 {
-
-     this.seleccionoVotacion.setText("");
-     this.objetocolocarsprite.visible = false;
- this.seleccionadoSprite.visible = false;
-
-    this.designer =0;
      this.menureiniciar =0;
     this.menupausesprite.visible = false;
     this.menupausesprite2.visible = false;
@@ -2635,9 +2601,6 @@ function realizarAccionesMenu()
 {
      if(this.pause == 1)
  {
-  if(this.novotacionP1 ==0 && this.menureiniciar ==0)
-    this.seleccionoVotacion.setText("J1");
-
      if(this.menuseleccion==1)
     {
         
@@ -2655,19 +2618,7 @@ function realizarAccionesMenu()
     {
             this.novotacionP1 =1;
         this.menureiniciar =1;
-
-        if(this.jugadoresTotal!=1)
-        {
-        
-        if(this.jugadoresTotal==2)
-     this.menupspritereiniciar.setTexture('votacionmenu2');
-     if(this.jugadoresTotal==3)
-             this.menupspritereiniciar.setTexture('votacionmenu3');
-
          this.menupspritereiniciar.visible = true;
-        
-
-        }
 
 
 
@@ -2688,10 +2639,6 @@ function realizarAccionesMenu2()
 {
      if(this.pause == 1)
  {
-
-    if(this.novotacionP2 ==0 && this.menureiniciar ==0)
-    this.seleccionoVotacion.setText("J2");
-
      if(this.menuseleccion==1)
     {
       
@@ -2710,13 +2657,6 @@ function realizarAccionesMenu2()
           this.novotacionP2 =1;
 
         this.menureiniciar =1;
-
-   if(this.jugadoresTotal==2)
-     this.menupspritereiniciar.setTexture('votacionmenu2');
-     if(this.jugadoresTotal==3)
-             this.menupspritereiniciar.setTexture('votacionmenu3');
-         
-
          this.menupspritereiniciar.visible = true;
 
 
@@ -2738,9 +2678,6 @@ function realizarAccionesMenu3()
 {
      if(this.pause == 1)
  {
-  if(this.novotacionP3 ==0 && this.menureiniciar ==0)
-     this.seleccionoVotacion.setText("J3");
-
      if(this.menuseleccion==1)
     {
        
@@ -2759,13 +2696,6 @@ function realizarAccionesMenu3()
          this.novotacionP3 =1;
 
         this.menureiniciar =1;
-
-           if(this.jugadoresTotal==2)
-     this.menupspritereiniciar.setTexture('votacionmenu2');
-     if(this.jugadoresTotal==3)
-             this.menupspritereiniciar.setTexture('votacionmenu3');
-         
-
          this.menupspritereiniciar.visible = true;
 
       
@@ -2786,8 +2716,6 @@ function realizarAccionesMenu4()
 {
      if(this.pause == 1)
  {
-  if(this.novotacionP4 ==0 && this.menureiniciar ==0)
-     this.seleccionoVotacion.setText("J4");
      if(this.menuseleccion==1)
     {
        
@@ -2805,13 +2733,6 @@ function realizarAccionesMenu4()
     {
          this.novotacionP4 =1;
         this.menureiniciar =1;
-
-           if(this.jugadoresTotal==2)
-     this.menupspritereiniciar.setTexture('votacionmenu2');
-     if(this.jugadoresTotal==3)
-             this.menupspritereiniciar.setTexture('votacionmenu3');
-         
-
          this.menupspritereiniciar.visible = true;
 
       
@@ -2833,16 +2754,12 @@ function aceptarVotacionP1()
     if(this.menureiniciar ==1 && this.pause ==1)
     {
     this.aceptarP1 = 1;
-
-     if(this.jugadoresTotal!=1)
     this.menupspritereiniciarP1.visible = true;
    
     }
 }
 function aceptarVotacionP2()
 {
-    if(this.jugadoresTotal>=2)
-    {
     if(this.menureiniciar ==1 && this.pause ==1)
     {
         this.aceptarP2 = 1;
@@ -2851,11 +2768,8 @@ function aceptarVotacionP2()
 
     }
 }
-}
 function aceptarVotacionP3()
 {
-     if(this.jugadoresTotal>=3)
-    {
     if(this.menureiniciar ==1 && this.pause ==1)
     {
             this.aceptarP3 = 1;
@@ -2863,18 +2777,14 @@ function aceptarVotacionP3()
     this.menupspritereiniciarP3.visible = true;
     }
 }
-}
 function aceptarVotacionP4()
 {
-     if(this.jugadoresTotal>=4)
-    {
     if(this.menureiniciar ==1 && this.pause ==1)
     {
           this.aceptarP4 = 1;
 
     this.menupspritereiniciarP4.visible = true;
     }
-}
 }
 
 function activarEspera2()
@@ -2883,7 +2793,6 @@ function activarEspera2()
 
 if(this.jugadoresTotal >=2)
 {
-    this.menuseleccion=2;
  this.aceptarP2 = 1;
     this.menupspritereiniciarP2.visible = true;
 
@@ -2951,8 +2860,6 @@ this.explosionUp4.setVelocityX(0);
  }
 }
 
-
-
 }
 
 
@@ -2961,7 +2868,6 @@ function activarEspera3()
 
 if(this.jugadoresTotal >=3)
 {
-     this.menuseleccion=2;
      this.aceptarP3 = 1;
     this.menupspritereiniciarP3.visible = true;
 
@@ -3036,7 +2942,6 @@ if(this.jugadoresTotal >=4)
 {
 
      this.aceptarP4 = 1;
-      this.menuseleccion=2;
     this.menupspritereiniciarP4.visible = true;
 
     this.pause = 1;
@@ -3103,17 +3008,13 @@ this.explosionUp4.setVelocityX(0);
 }
 
 //simular desconexion mando 2
-  this.input.keyboard.on('keydown_E', activarPause, this);
-    this.input.keyboard.on('keydown_E', activarEspera2, this);
+  this.input.keyboard.on('keydown_E', activarEspera2, this);
 //simular desconexion mando 3
-    this.input.keyboard.on('keydown_Y', activarPause, this);
-     this.input.keyboard.on('keydown_Y', activarEspera3, this);
+    this.input.keyboard.on('keydown_Y', activarEspera3, this);
   //simular desconexion mando 4
-    this.input.keyboard.on('keydown_O', activarPause, this);
-     this.input.keyboard.on('keydown_O', activarEspera4, this);
+    this.input.keyboard.on('keydown_O', activarEspera4, this);
 
-
-this.input.keyboard.on('keydown_ENTER', activarPause, this);
+this.input.keyboard.on('keydown_Q', activarPause, this);
 this.input.keyboard.on('keydown_R', activarPause, this);
 this.input.keyboard.on('keydown_U', activarPause, this);
 this.input.keyboard.on('keydown_P', activarPause, this);
@@ -3185,241 +3086,8 @@ function crearmapa()
     
  }
 
-this.seleccionoVotacion = this.add.text(1920/2+190, 1080/2-136, 'J1', { fontFamily: '"Arial Black"',  color: '#000000' });
-this.seleccionoVotacion.setText("");
+
 //moverazar();
-
-//Designer
-
-
-     // this.objetocolocarspriteStart = this.physics.add.sprite(416 , 128, 'ship');
-  
-this.objetocolocar=0;
-
- //this.objetocolocarsprite = this.physics.add.sprite(416, 128, 'wall');
-
- this.objetocolocarsprite = this.physics.add.sprite(416, 128, 'wall');
- this.seleccionadoSprite = this.physics.add.sprite(416, 128, 'seleccion3');
-
-
- this.objetocolocarsprite.visible = false
- this.seleccionadoSprite.visible =false;
-
-if(this.designer ==1)
-{
-     this.objetocolocarsprite.visible = true;
- this.seleccionadoSprite.visible =true;
-
-}
-
-function moverMenuArribaDes()
-{
-    if(this.designer==1)
-    {
-if(this.seleccionadoSprite.y -64 >= 128)
-this.seleccionadoSprite.y = this.seleccionadoSprite.y - 64;
-
-this.objetocolocarsprite.y = this.seleccionadoSprite.y ;
-}
-}
-
-function moverMenuAbajoDes()
-{
-    if(this.designer==1)
-    {
-    if(this.seleccionadoSprite.y +64 <= 908)
-this.seleccionadoSprite.y = this.seleccionadoSprite.y + 64;
-
-this.objetocolocarsprite.y = this.seleccionadoSprite.y ;
-        
-        }
-}
-function moverMenuIzqDes()
-{
-    if(this.designer==1)
-    {
-    if(this.seleccionadoSprite.x -64 >= 416)
-   this.seleccionadoSprite.x = this.seleccionadoSprite.x - 64;
-
-   this.objetocolocarsprite.x = this.seleccionadoSprite.x ;
-}
-}
-function moverMenuDerDes()
-{
-    if(this.designer==1)
-    {
-     if(this.seleccionadoSprite.x +64 <= 1840)
-    this.seleccionadoSprite.x = this.seleccionadoSprite.x + 64;
-
-      this.objetocolocarsprite.x = this.seleccionadoSprite.x ;
-  }
-}
-function seleccionarOpcionMin()
-{
-    if(this.designer==1)
-    {
-    if(this.objetocolocar>0)
-    this.objetocolocar = this.objetocolocar - 1;
-    else
-     this.objetocolocar = 0;
-}
-    //this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores });
-      
-}
-
-
-
-function seleccionarOpcionMax()
-{
-    if(this.designer==1)
-    {
-if(this.objetocolocar<=5)
-     this.objetocolocar = this.objetocolocar + 1;
-  else
-     this.objetocolocar = 5;
-}
-
-// this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores });
-      
-}
-
-function seleccionarOpcionSet()
-{
-    if(this.designer==1)
-    {
-    if(this.objetocolocar ==0)
-    {
-       
-        this.objetocolocarsprite.setTexture('wall');
-    }
-     if(this.objetocolocar ==1)
-    {
-        this.objetocolocarsprite.setTexture('enemigo');
-    }
-
-     if(this.objetocolocar ==2)
-    {
-        this.objetocolocarsprite.setTexture('pisomov');
-    }
-     if(this.objetocolocar ==3)
-    {
-        this.objetocolocarsprite.setTexture('pisor1');
-    }
-
- if(this.objetocolocar ==4)
-    {
-        this.objetocolocarsprite.setTexture('mina');
-    }
-    if(this.objetocolocar ==5)
-    {
-        this.objetocolocarsprite.setTexture('ship');
-    }
-      if(this.objetocolocar ==6)
-    {
-        this.objetocolocarsprite.setTexture('wall2');
-    }
-}
-// this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores });
-      
-}
-
-function seleccionarOpcionDes()
-{
-    if(this.designer==1)
-    {
-    if(this.objetocolocar ==0)
-    {
-
-          var item = Phaser.Math.Between(0,40);
-
-  if(item ==1)
-     {
-     this.powerupsLlamas.create(this.seleccionadoSprite.x , this.seleccionadoSprite.y,'poderllama');
-    }
-    if(item ==2)
-    {
-     this.powerupsPatin.create(this.seleccionadoSprite.x , this.seleccionadoSprite.y,'poderpatin');
-    }
-    if(item ==3)
-    {
-     this.powerupsBombas.create(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'poderbomba');
-    }
-     if(item ==36)
-    {
-     this.powerupsVidas.create(this.seleccionadoSprite.x , this.seleccionadoSprite.y,'podervida');
-    }
-     if(item ==38)
-    {
-     this.powerupsGuantes.create(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'poderguante');
-    }
-        this.box.create(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'wall');
-
-
-       //this.objetocolocarspriteNuevo = this.physics.add.sprite(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'wall');
-    }
-
-  if(this.objetocolocar ==1)
-    {
-
-        this.enemigos.create(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'enemigo');
-        //this.objetocolocarspriteNuevo = this.physics.add.sprite(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'enemigo');
-  }
-
-  if(this.objetocolocar ==2)
-    {
-       this.pisomov.create(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'pisomov');
-       // this.objetocolocarspriteNuevo = this.physics.add.sprite(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'pisomov');
-  }
-
-   if(this.objetocolocar ==3)
-    {
-       this.pisor1.create(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'pisor1');
-//        this.objetocolocarspriteNuevo = this.physics.add.sprite(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'pisor1');
-  }
-   if(this.objetocolocar ==4)
-    {
-         this.minas.create(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'mina');
-  //      this.objetocolocarspriteNuevo = this.physics.add.sprite(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'mina');
-  }
-   if(this.objetocolocar ==5)
-    {
-        this.myShip.x = this.seleccionadoSprite.x;
-        this.myShip.y = this.seleccionadoSprite.y;
-    }
-     if(this.objetocolocar ==6)
-    {
-        this.boxFuerte.create(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'wall2');
-    }
-}
-// this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores });
-      
-}
-    this.input.keyboard.on('keydown_UP', moverMenuArribaDes, this);
-    this.input.keyboard.on('keydown_DOWN', moverMenuAbajoDes, this);
-    this.input.keyboard.on('keydown_LEFT', moverMenuIzqDes, this);
-    this.input.keyboard.on('keydown_RIGHT', moverMenuDerDes, this);
- this.input.keyboard.on('keydown_X', seleccionarOpcionMax, this);
- this.input.keyboard.on('keydown_Z', seleccionarOpcionMin, this);
-  this.input.keyboard.on('keydown_X', seleccionarOpcionSet, this);
- this.input.keyboard.on('keydown_Z', seleccionarOpcionSet, this);
- this.input.keyboard.on('keydown_Q', seleccionarOpcionDes, this);
-
-
- //EXPERIMENTAL
-
-
-function aumentarNivel()
-{
-  //  console.log(this.nivelInt)
-
-    if(this.nivelInt <=99)
-    this.nivelInt = this.nivelInt+1;
-     this.nivel.setText(this.nivelInt)
-}
- this.input.keyboard.on('keydown_SPACE', aumentarNivel, this);
-
-
-
 
 
 
@@ -3427,15 +3095,8 @@ function aumentarNivel()
 
 update ()
 {
-    if(this.designer ==0)
-    {
-
-
    if(this.pause == 1)
    {
-
-
-
    if(this.jugadoresTotal ==1)
         {
          if(this.aceptarP1 == 1)
@@ -3469,17 +3130,11 @@ update ()
         }
         }
 }
-//PAUSE1
-
-
 //console.log(this.gamemode);
    if(this.pause == 0)
    {
 
-
-
  //REINICIO
-
 
 
 //console.log("gamemode "+ this.gamemode+ " v1: " + this.vidasInt + this.vidasInt2+ this.vidasInt3+ this.vidasInt4 )
@@ -3488,15 +3143,12 @@ update ()
 
 this.scene.restart();
 
-     this.caerparedX =-1;
+     this.caerparedX =-2;
  this.caerparedY = 1;
- this.disminuirX = 0;
-    this.disminuirY = 0;
-    this.caerEnX = 1;
-    this.caerEnY = 0;
 
 this.relojInt = 300;
-      
+      this.caerparedX =-2;
+ this.caerparedY = 1;
 
     this.scoreInt = 0;
     this.myShip.x = 430;
@@ -3622,7 +3274,7 @@ for (var j = 1; j < 14; j++)
 }
 
 //FIN REINICIO
- if(this.relojInt==1) //bajar vidas cuando el contador sea 0
+ if(this.relojInt==1)
  {
 
 if(this.gamemode == 1 || this.gamemode == 2 )
@@ -3630,7 +3282,7 @@ if(this.gamemode == 1 || this.gamemode == 2 )
     if(this.vidasInt>0)
     {
   this.vidasInt = 1;
-    this.vidas.setText(this.vidasInt); }
+    this.vidas.setText(this.vidasInt4); }
 }
 
  if(this.jugadoresTotal >=2 && (this.gamemode == 1 || this.gamemode == 2 ))
@@ -3639,7 +3291,7 @@ if(this.gamemode == 1 || this.gamemode == 2 )
     if(this.vidasInt2>0)
     {
  this.vidasInt2 = 1;
-    this.vidasJ2.setText(this.vidasInt2); 
+    this.vidasJ2.setText(this.vidasInt4); 
    } 
     }
 
@@ -3649,7 +3301,7 @@ if(this.gamemode == 1 || this.gamemode == 2 )
     if(this.vidasInt3>0)
     {
   this.vidasInt3 = 1;
-    this.vidasJ3.setText(this.vidasInt3);  
+    this.vidasJ3.setText(this.vidasInt4);  
     }
     }
     if(this.jugadoresTotal >=4 &&( this.gamemode == 1 || this.gamemode == 2))
@@ -3666,7 +3318,7 @@ if(this.gamemode == 1 || this.gamemode == 2 )
 
 
 
-if(this.gamemode == 1 ) //modo ultimo en pie
+if(this.gamemode == 1 ) //modo multijugador
 {
 if(this.jugadoresTotal ==2)
 {
@@ -3724,7 +3376,7 @@ if(this.vidasInt <= 0 && this.vidasInt4 <= 0 && this.vidasInt3 <=0)
 }
 }
 
-if(this.gamemode == 2 ) //modo por puntos
+if(this.gamemode == 2 ) //modo en equipo
 {
     if(this.vidasInt <=0 && this.vidasInt2<= 0 && this.vidasInt3 <=0 && this.vidasInt4<=0)
 {
@@ -3932,11 +3584,11 @@ this.tick1 = this.tick1 +1;
 
     this.reloj.setText(this.relojInt);
 
-
-
     if(this.relojInt < 1)
 {
 
+
+this.caerparedX = this.caerparedX +1;
 
          //   var i = Phaser.Math.Between(-1,22);
             
@@ -3947,59 +3599,16 @@ this.tick1 = this.tick1 +1;
             var j = this.caerparedY;
 
 
-if(this.caerEnX == 1)
-this.caerparedX = this.caerparedX +1;
-
-
-if(this.caerEnX == -1)
-this.caerparedX = this.caerparedX -1;
-
-
 
      this.wallkill.create(480+ i*32*2, 64 + j*32*2, 'wallkill');
 
 
-if(this.caerEnY == 1)
- this.caerparedY = this.caerparedY+1;
-
-
-if(this.caerEnY == -1)
- this.caerparedY = this.caerparedY-1;
-
-     this.wallkill.create(480+ i*32*2, 64 + j*32*2, 'wallkill');
-
-if(this.caerparedX> 20 - this.disminuirX)
+if(this.caerparedX> 20)
 {
-    this.caerEnX=0;
-    this.caerEnY=1;
-    //this.caerparedX = -2;
-  //  this.caerparedY = this.caerparedY+1;
+    this.caerparedX = -2;
+    this.caerparedY = this.caerparedY+1;
      // 
 }
-
-if(this.caerparedY> 12 - this.disminuirY)
-{
-     this.caerEnX=-1;
-    this.caerEnY=0;
-//    this.caerparedX = -2;
-}
-
-if(this.caerparedX< 0 + this.disminuirX && this.caerEnX ==-1)
-{
-    this.caerEnX=0;
-    this.caerEnY=-1;
-}
-
-
-if(this.caerparedY< 3 + this.disminuirY &&  this.caerEnY==-1)
-{
-    this.caerEnX=1;
-    this.caerEnY=0;
-
-this.disminuirX = this.disminuirX+1;
-this.disminuirY = this.disminuirY+1;
-}
-
 
 }
 
@@ -4016,16 +3625,16 @@ this.disminuirY = this.disminuirY+1;
             //child.destroy(child, true);
 
             if(random ==0)
-            child.setVelocityX(25*this.nivelInt +50);
+            child.setVelocityX(100*this.nivelInt);
 
             if(random ==1)
-            child.setVelocityX(-25*this.nivelInt -50);
+            child.setVelocityX(-100*this.nivelInt);
 
             if(random ==2)
-            child.setVelocityY(25*this.nivelInt +50);
+            child.setVelocityY(100*this.nivelInt);
 
             if(random ==3)
-            child.setVelocityY(-25*this.nivelInt-50);
+            child.setVelocityY(-100*this.nivelInt);
             
             if(random ==99)
             {
@@ -4459,7 +4068,6 @@ this.resbalar4 = 0;
 
 }
 }
-}
 gameOver ()
 {
     this.input.off('gameobjectup');
@@ -4484,21 +4092,21 @@ class SceneB extends Phaser.Scene {
     preload ()
     {
 
-         // this.load.setBaseURL('http://labs.phaser.io');
-  //this.load.setBaseURL('https://i.ibb.co');
+          this.load.setBaseURL('http://labs.phaser.io');
+  this.load.setBaseURL('https://i.ibb.co');
 
 
-                 this.load.image('fondo', 'img/menuOpciones.png');
+/*                  this.load.image('fondo', 'img/menuOpciones.png');
                   this.load.image('seleccion', 'img/seleccion.png');
                     this.load.image('seleccionpersonajes', 'img/seleccionpersonajes.png');
    this.load.image('seleccion2', 'img/seleccion2.png');
- 
+ */
 
-     /*              this.load.image('fondo', 'JxhB0fg/menu-Opciones.png');
+                   this.load.image('fondo', 'JxhB0fg/menu-Opciones.png');
                   this.load.image('seleccion', '1T5m6WT/seleccion.png');
                     this.load.image('seleccionpersonajes', 'wY6R1tB/seleccionpersonajes.png');
    this.load.image('seleccion2', 'DbLXQxS/seleccion2.png');
- */
+ 
 
     }
     create ()
@@ -4508,7 +4116,6 @@ class SceneB extends Phaser.Scene {
 this.gamemode = 0;
 this.jugadores = 1;
 this.music = 0;
-this.designer = 0;
         this.menufondo = this.physics.add.sprite(1920/2, 1080/2, 'fondo');
        
         this.seleccionInt =0; // Multijugador
@@ -4612,22 +4219,15 @@ function seleccionarOpcion()
     if(this.pantalla ==1)
     {
     if(this.seleccionInt ==0)
-    {
-            this.jugadores =1; 
         this.gamemode =0;
-    }
 
     if(this.seleccionInt ==1)
-    {
-         this.jugadores =2;
         this.gamemode =1;
-    }
 
     if(this.seleccionInt ==2)
-    { this.jugadores =2;
         this.gamemode =2;
-}
-     if(this.seleccionInt ==3 && this.gamemode== 0)
+
+     if(this.seleccionInt ==3)
         this.jugadores =1;
 
     if(this.seleccionInt ==4)
@@ -4665,7 +4265,7 @@ function seleccionarOpcion()
         else if(this.seleccionInt==10)
         {
          
-       this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores , designer: this.designer});
+       this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores });
         }
     }
 
@@ -4922,6 +4522,13 @@ this.load.image('pisor2', 'img/pisor2.png');
   
 this.objetocolocar=0;
 
+this.gamemode = 0;
+this.jugadores = 1;
+this.music = 0;
+
+        this.seleccionInt =0; // Multijugador
+
+this.pantalla=1;
 
 
 
@@ -5129,7 +4736,7 @@ var config = {
         forceSetTimeOut: false,
         deltaHistory: 30
     },
-      scene: [ SceneB, Scene1 , SceneC ],
+      scene: [ SceneB, SceneC, Scene1 ],
    physics: {
         default: 'arcade',
         arcade: {
