@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>GAME</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script type="text/javascript" src="../Logic/jquery-1.11.0.min.js"></script>
+  <link rel="stylesheet" href="../CSS/style.css" />
+  <script type="text/javascript">
+    var webSocket = {};
+    var obj;
+    var cursor = "";
+  </script>
+  <script src="../Phaser/phaser.min.js" charset="utf-8"></script>
+  <!--CONSTANTS-->
+  <script src="../Assets/constants/constants.js"></script>
+
+  <!--HELPERS-->
+  <script src="../Logic/States/Helpers/UpdateHelper.js"></script>
+  <script src="../Logic/States/Helpers/ActionsHelper.js"></script>
+  <script src="../Logic/States/Helpers/LoadHelper.js"></script>
+
+  <!--STATES-->
+  <script src="../Logic/States/Boot.js"></script>
+  <script src="../Logic/States/Preload.js"></script>
+  <script src="../Logic/States/InterLevel.js"></script>
+  <script src="../Logic/States/Levels/Level1.js"></script>
+  <script src="../Logic/States/Levels/Level2.js"></script>
+  <script src="../Logic/States/Levels/Level3.js"></script>
+  <script src="../Logic/States/Levels/Level4.js"></script>
+  <script src="../Logic/States/Levels/Level5.js"></script>
+  <script src="../Logic/States/EndLevelState.js"></script>
+
+  <!--PREFABS-->
+  <script src="../Logic/PreFabs/Tile.js"></script>
+  <script src="../Logic/PreFabs/Checkpoint.js"></script>
+  <script src="../Logic/PreFabs/Potion.js"></script>
+  <script src="../Logic/PreFabs/Saw.js"></script>
+  <script src="../Logic/PreFabs/Spike.js"></script>
+  <script src="../Logic/PreFabs/Lava.js"></script>
+  <script src="../Logic/PreFabs/Heart.js"></script>
+  <script src="../Logic/PreFabs/Weapon.js"></script>
+  <script src="../Logic/PreFabs/Bullet.js"></script>
+  <script src="../Logic/PreFabs/Stair.js"></script>
+  <script src="../Logic/PreFabs/Door.js"></script>
+  <script src="../Logic/PreFabs/Lever.js"></script>
+  <script src="../Logic/PreFabs/Boss.js"></script>
+  <script src="../Logic/PreFabs/Enemy1.js"></script>
+  <script src="../Logic/PreFabs/Bug.js"></script>
+  <script src="../Logic/States/Main.js"></script>
+  <script src="../Logic/connect.js"></script>
+</head>
+
+<body>
+  <video width="1" height="1" loop="true" muted>
+    <source src="../Assets/images/background.mp4" type="video/mp4">
+  </video>
+</body>
+
+</html>

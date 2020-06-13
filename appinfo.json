@@ -1,10 +1,10 @@
 {
-    "id": "com.upc.bomb",
-    "version": "1.0.12",
+    "id": "com.upc.aoe",
+    "version": "1.0.36",
     "vendor": "Universidad Peruana de Ciencias Aplicadas",
     "type": "web",
     "main": "index.html",
-    "title": "Bombman",
+    "title": "Explosion Man",
     "icon": "./Assets/icons/icono_tv.png",
     "largeIcon": "./Assets/icons/icono_tv_large.png"
 }
