@@ -45,10 +45,12 @@ class Scene1 extends Phaser.Scene {
         this.jugadoresData = data.jugadores;
         this.musicData = data.music;
         this.designerData = data.designer;
+        this.tematica = data.tematica
     }
 
  preload ()
 {
+  this.tematicaSeleccionada = this.tematica;
     this.colocarBomba = 0;
     this.designer = this.designerData;
     this.jugadoresTotal =  this.jugadoresData;
@@ -109,9 +111,6 @@ class Scene1 extends Phaser.Scene {
 
 
     this.load.image('bg', 'img/jugador.png');
-  this.load.image('wall', 'img/wall.png');
-   this.load.image('wall2', 'img/wall2.png');
-
    this.load.image('enemigo',  'img/enemigo.png');
    this.load.image('ship',  'img/jugador.png');
       this.load.image('ship2',  'img/jugador2.png');
@@ -128,8 +127,53 @@ class Scene1 extends Phaser.Scene {
  this.load.image('mina',  'img/mina.png');
 
 
+/* this.load.image('wall_skin01', 'img/skin01/wall.png');
+   this.load.image('wall2_skin01', 'img/skin01/wall2.png');
+    this.load.image('pisonegro_skin01', 'img/skin01/pisonegro.png');
+    this.load.image('wallkill_skin01','img/skin01/wallkill.png')
+
+     this.load.image('wall_skin02', 'img/skin02/wall.png');
+   this.load.image('wall2_skin02', 'img/skin02/wall2.png');
+    this.load.image('pisonegro_skin02', 'img/skin02/pisonegro.png');
+    this.load.image('wallkill_skin02','img/skin02/wallkill.png')
+
+     this.load.image('wall_skin03', 'img/skin03/wall.png');
+   this.load.image('wall2_skin03', 'img/skin03/wall2.png');
+    this.load.image('pisonegro_skin03', 'img/skin03/pisonegro.png');
+    this.load.image('wallkill_skin03','img/skin03/wallkill.png')
+*/
+
+  this.textures.remove('wall');
+    this.textures.remove('wall2');
+      this.textures.remove('pisonegro');
+        this.textures.remove('wallkill');
+if(this.tematicaSeleccionada ==1)
+{
+  this.load.image('wall', 'img/skin01/wall.png');
+   this.load.image('wall2', 'img/skin01/wall2.png');
+    this.load.image('pisonegro', 'img/skin01/pisonegro.png');
+    this.load.image('wallkill','img/skin01/wallkill.png')
+}
+
+
+if(this.tematicaSeleccionada ==2)
+{
+  this.load.image('wall', 'img/skin02/wall.png');
+   this.load.image('wall2', 'img/skin02/wall2.png');
+    this.load.image('pisonegro', 'img/skin02/pisonegro.png');
+    this.load.image('wallkill','img/skin02/wallkill.png')
+}
+
+if(this.tematicaSeleccionada ==3)
+{
+  this.load.image('wall', 'img/skin03/wall.png');
+   this.load.image('wall2', 'img/skin03/wall2.png');
+    this.load.image('pisonegro', 'img/skin03/pisonegro.png');
+    this.load.image('wallkill','img/skin03/wallkill.png')
+}
+
+
 this.load.image('wall3', 'img/wall3.png');
-this.load.image('wallkill','img/wallkill.png')
 this.load.image('pisor1', 'img/pisor1.png');
 this.load.image('pisor2', 'img/pisor2.png');
  this.load.image('pisomov', 'img/pisomov.png');
@@ -226,10 +270,10 @@ this.aceptarP2 = 0;
 this.aceptarP3 = 0;
 this.aceptarP4 = 0;
 
-this.guanteP1 =1;
-this.guanteP2 =1;
-this.guanteP3 =1;
-this.guanteP4 =1;
+this.guanteP1 =0;
+this.guanteP2 =0;
+this.guanteP3 =0;
+this.guanteP4 =0;
 
 this.novotacionP1=0;
 this.novotacionP2=0;
@@ -467,6 +511,8 @@ this.enemigos = this.physics.add.group();
 
  this.wallkill = this.physics.add.staticGroup();
 
+ this.pisonegro = this.physics.add.staticGroup();
+
 //random
   /*   for (var i = 0; i < 600; i++)
     {
@@ -501,6 +547,10 @@ if(this.designer ==0)
     {
 for (var j = 1; j < 14; j++)
     {
+
+  
+      this.pisonegro.create(480+ i*32*2,  64 + j*32*2, 'pisonegro');
+  
         if((i > -2 && i < 1 && j > 0 && j < 3) || (i > 19 && i < 22 && j > 0 && j < 3)
             || (i > -2 && i < 1 && j > 11 && j < 14) || (i > 19 && i < 22 && j > 11 && j < 14))
         {
@@ -509,6 +559,8 @@ for (var j = 1; j < 14; j++)
         else
         {
           var item = Phaser.Math.Between(0,40);
+
+
 
      if(item ==1)
      {
@@ -535,6 +587,8 @@ for (var j = 1; j < 14; j++)
      this.powerupsGuantes.create(480+ i*32*2,  64 + j*32*2, 'poderguante');
      this.box.create(480+ i*32*2, 64 + j*32*2, 'wall');
     }
+  
+
    if(item ==4)
      this.boxFuerte.create(480+ i*32*2,  64 + j*32*2, 'wall2');
    if(item > 5 && item <6+this.nivelInt){
@@ -2147,25 +2201,25 @@ if(this.jugadoresTotal >=4 && this.vidasInt4 >0)
 }
 function aumentarllamas()
 {
-    this.scoreInt = this.scoreInt + 100;
+    this.scoreInt = this.scoreInt + 150;
     this.llama = this.llama +1;  console.log("llama");
     this.score.setText(this.scoreInt);
 }
 function aumentarllamas2()
 {
-    this.scoreInt = this.scoreInt + 100;
+    this.scoreInt = this.scoreInt + 150;
     this.llama2 = this.llama2 +1;  console.log("llama2");
     this.score.setText(this.scoreInt);
 }
 function aumentarllamas3()
 {
-    this.scoreInt = this.scoreInt + 100;
+    this.scoreInt = this.scoreInt + 150;
     this.llama3 = this.llama3 +1;  console.log("llama3");
     this.score.setText(this.scoreInt);
 }
 function aumentarllamas4()
 {
-    this.scoreInt = this.scoreInt + 100;
+    this.scoreInt = this.scoreInt + 150;
     this.llama4 = this.llama4 +1;  console.log("llama4");
     this.score.setText(this.scoreInt);
 }
@@ -2201,7 +2255,7 @@ function aumentarllamas4()
 function agregarGuante1()
 {
    this.guanteP1 = 1;
-     this.scoreInt = this.scoreInt + 100;
+     this.scoreInt = this.scoreInt + 150;
       this.score.setText(this.scoreInt);
     console.log("guante");   
 }
@@ -2209,27 +2263,27 @@ function agregarGuante1()
 function agregarGuante2()
 {
    this.guanteP2 = 1;
-     this.scoreInt = this.scoreInt + 100;
+     this.scoreInt = this.scoreInt + 150;
       this.score.setText(this.scoreInt);
     console.log("guante");   
 }
 function agregarGuante3()
 {
    this.guanteP3 = 1;
-     this.scoreInt = this.scoreInt + 100;
+     this.scoreInt = this.scoreInt + 150;
       this.score.setText(this.scoreInt);
     console.log("guante");   
 }
 function agregarGuante4()
 {
    this.guanteP4 = 1;
-     this.scoreInt = this.scoreInt + 100;
+     this.scoreInt = this.scoreInt + 150;
       this.score.setText(this.scoreInt);
     console.log("guante");   
 }
 function aumentarPatin()
 {
-    this.scoreInt = this.scoreInt + 100;
+    this.scoreInt = this.scoreInt + 200;
     this.patin = this.patin +5;
     console.log("velocidad");
     this.score.setText(this.scoreInt);
@@ -2237,7 +2291,7 @@ function aumentarPatin()
 
 function aumentarPatin2()
 {
-    this.scoreInt = this.scoreInt + 100;
+    this.scoreInt = this.scoreInt + 200;
     this.patin2 = this.patin2 +5;
     console.log("velocidad2");
     this.score.setText(this.scoreInt);
@@ -2245,7 +2299,7 @@ function aumentarPatin2()
 
 function aumentarPatin3()
 {
-    this.scoreInt = this.scoreInt + 100;
+    this.scoreInt = this.scoreInt + 200;
     this.patin3 = this.patin3 +5;
     console.log("velocidad3");
     this.score.setText(this.scoreInt);
@@ -2253,7 +2307,7 @@ function aumentarPatin3()
 
 function aumentarPatin4()
 {
-    this.scoreInt = this.scoreInt + 100;
+    this.scoreInt = this.scoreInt + 200;
     this.patin4 = this.patin4 +5;
     console.log("velocidad4");
     this.score.setText(this.scoreInt);
@@ -2261,7 +2315,7 @@ function aumentarPatin4()
 
 function aumentarVida()
 {
-     this.scoreInt = this.scoreInt + 500;
+     this.scoreInt = this.scoreInt + 300;
     this.vidasInt = this.vidasInt + 1;
     console.log("vida");
     this.vidas.setText(this.vidasInt);
@@ -2270,7 +2324,7 @@ function aumentarVida()
 
 function aumentarVida2()
 {
-     this.scoreInt = this.scoreInt + 500;
+     this.scoreInt = this.scoreInt + 300;
     this.vidasInt2 = this.vidasInt2 + 1;
     console.log("vida2");
     this.vidasJ2.setText(this.vidasInt2);
@@ -2279,7 +2333,7 @@ function aumentarVida2()
 
 function aumentarVida3()
 {
-     this.scoreInt = this.scoreInt + 500;
+     this.scoreInt = this.scoreInt + 300;
     this.vidasInt3 = this.vidasInt3 + 1;
     console.log("vida3");
     this.vidasJ3.setText(this.vidasInt3);
@@ -2288,7 +2342,7 @@ function aumentarVida3()
 
 function aumentarVida4()
 {
-     this.scoreInt = this.scoreInt + 500;
+     this.scoreInt = this.scoreInt + 300;
     this.vidasInt4 = this.vidasInt4 + 1;
     console.log("vida4");
     this.vidasJ4.setText(this.vidasInt4);
@@ -2894,8 +2948,8 @@ function realizarAccionesMenu()
     }
     else if(this.menuseleccion==3)
     {
-
         this.scene.start('SceneB');
+
     }
  }
 
@@ -5434,9 +5488,9 @@ class SceneB extends Phaser.Scene {
 
 
                  this.load.image('fondo', 'img/menuOpciones.png');
-                  this.load.image('seleccion', 'img/seleccion.png');
+                  this.load.image('seleccion', 'img/seleccioncuad.png');
                     this.load.image('seleccionpersonajes', 'img/seleccionpersonajes.png');
-   this.load.image('seleccion2', 'img/seleccion2.png');
+   this.load.image('seleccion2', 'img/seleccioncuad2.png');
  
 
                  /*  this.load.image('fondo', 'JxhB0fg/menu-Opciones.png');
@@ -5450,6 +5504,7 @@ class SceneB extends Phaser.Scene {
     {
         // this.cursors = this.input.keyboard.createCursorKeys();
 this.personajeSeleccionadoP1 = 1;
+this.tematica = 1;
 this.gamemode = 0;
 this.jugadores = 1;
 this.music = 0;
@@ -5466,6 +5521,8 @@ this.pantalla=1;
  this.tipojuegoSprite = this.physics.add.sprite(413 +413/4, 336, 'seleccion2');
 this.cantidadParticipantesSprite = this.physics.add.sprite(413 +413/4, 336, 'seleccion2');
 this.musicapartidaSprite = this.physics.add.sprite(413 +413/4, 336, 'seleccion2');
+
+this.tematicaSprite = this.physics.add.sprite(413 +413/4, 336, 'seleccion2');
 
 this.personajeSelectSpriteP1 = this.physics.add.sprite(450 +413/4, 750, 'seleccion2');
 
@@ -5487,13 +5544,19 @@ function moverMenuArriba()
 {
     if(this.pantalla ==1)
     {
+  if(this.seleccionInt ==0 || this.seleccionInt ==1 || this.seleccionInt ==2)
+            this.seleccionInt = 20;
+
+
  if(this.seleccionInt ==3 || this.seleccionInt ==4 || this.seleccionInt ==5 || this.seleccionInt ==16)
             this.seleccionInt = 0;
+
  else if(this.seleccionInt ==6 || this.seleccionInt ==7)
             this.seleccionInt = 3;
          else if(this.seleccionInt ==8)
             this.seleccionInt = 6;
 }
+
   else if(this.pantalla ==2)
     {
  if(this.seleccionInt ==10)
@@ -5525,6 +5588,9 @@ function moverMenuAbajo()
 
 if(this.pantalla ==1)
     {
+if(this.seleccionInt ==20 || this.seleccionInt ==21 || this.seleccionInt ==22)
+            this.seleccionInt = 0;
+
     if(this.seleccionInt ==0 || this.seleccionInt ==1 || this.seleccionInt ==2)
             this.seleccionInt = 3;
 
@@ -5578,6 +5644,10 @@ function moverMenuIzq()
             this.seleccionInt = 5;
          else if(this.seleccionInt ==7)
             this.seleccionInt = 6;
+              else if(this.seleccionInt ==22)
+            this.seleccionInt = 21;
+            else if(this.seleccionInt ==21)
+            this.seleccionInt = 20;
      }  
 
      else if (this.pantalla ==2)
@@ -5623,6 +5693,10 @@ function moverMenuDer()
             this.seleccionInt = 16;
          else if(this.seleccionInt ==6)
             this.seleccionInt = 7;
+          else if(this.seleccionInt ==20)
+            this.seleccionInt = 21;
+            else if(this.seleccionInt ==21)
+            this.seleccionInt = 22;
     }
       else if (this.pantalla ==2)
      {
@@ -5655,6 +5729,20 @@ function seleccionarOpcion()
 {
     if(this.pantalla ==1)
     {
+
+    if(this.seleccionInt ==20)
+    {
+            this.tematica =1; 
+    }
+     if(this.seleccionInt ==21)
+    {
+            this.tematica =2; 
+    }
+    if(this.seleccionInt ==22)
+    {
+            this.tematica =3; 
+    }
+
     if(this.seleccionInt ==0)
     {
             this.jugadores =1; 
@@ -5711,7 +5799,7 @@ function seleccionarOpcion()
         }
         else if(this.seleccionInt==10)
         {
-       this.scene.start('Scene1', { personajeSelectP1:  this.personajeSeleccionadoP1, gamemode: this.gamemode, jugadores: this.jugadores , designer: this.designer});
+       this.scene.start('Scene1', { tematica:  this.tematica, personajeSelectP1:  this.personajeSeleccionadoP1, gamemode: this.gamemode, jugadores: this.jugadores , designer: this.designer});
         }
         
         if(this.seleccionInt==11)
@@ -5945,81 +6033,96 @@ update()
 
 if(this.gamemode == 0)
 {
-this.tipojuegoSprite.x = 413 +413/4;
-this.tipojuegoSprite.y = 336;
+this.tipojuegoSprite.x = 313 +413/4;
+this.tipojuegoSprite.y = 536;
 }
 if(this.gamemode == 1)
 {
-this.tipojuegoSprite.x = 413 +513;
-this.tipojuegoSprite.y = 336;
+this.tipojuegoSprite.x = 313 +513;
+this.tipojuegoSprite.y = 536;
 }
 
 if(this.gamemode == 2)
 {
-this.tipojuegoSprite.x = 413 +913;
-this.tipojuegoSprite.y = 336;
+this.tipojuegoSprite.x = 353 +913;
+this.tipojuegoSprite.y = 536;
 }
 
+if(this.tematica ==1)
+{
+this.tematicaSprite.x =  420 +413/4;
+this.tematicaSprite.y = 132 + 550;
+}
+if(this.tematica ==2)
+{
+  this.tematicaSprite.x = 880 +413/4;
+this.tematicaSprite.y = 132 + 550;
+}
+if(this.tematica ==3)
+{
+  this.tematicaSprite.x = 1320 +413/4; 
+this.tematicaSprite.y = 132 + 550; 
+}
 
 if(this.jugadores == 1)
 {
-this.cantidadParticipantesSprite.x = 413 +413/4;
-this.cantidadParticipantesSprite.y = 486;
+this.cantidadParticipantesSprite.x = 413;
+this.cantidadParticipantesSprite.y = 236;
 }
 if(this.jugadores == 2)
 {
-this.cantidadParticipantesSprite.x = 413 +513;
-this.cantidadParticipantesSprite.y = 486;
+this.cantidadParticipantesSprite.x = 533;
+this.cantidadParticipantesSprite.y = 236;
 }
 if(this.jugadores == 3)
 {
-this.cantidadParticipantesSprite.x = 413 +913;
-this.cantidadParticipantesSprite.y = 486;
+this.cantidadParticipantesSprite.x = 653;
+this.cantidadParticipantesSprite.y = 236;
 }
 if(this.jugadores == 4)
 {
-this.cantidadParticipantesSprite.x = 413 +1263;
-this.cantidadParticipantesSprite.y = 486;
+this.cantidadParticipantesSprite.x = 773;
+this.cantidadParticipantesSprite.y = 236;
 }
 if(this.music == 0)
 {
 
-this.musicapartidaSprite.x = 413 +413/4;
-this.musicapartidaSprite.y = 606;
+this.musicapartidaSprite.x = 1033 +413/4;
+this.musicapartidaSprite.y = 256;
 }
 
 if(this.music == 1)
 {
-this.musicapartidaSprite.x = 1213 +413/4;
-this.musicapartidaSprite.y = 606;
+this.musicapartidaSprite.x = 1253 +413/4;
+this.musicapartidaSprite.y = 256;
 }
 if(this.seleccionInt ==0)
 {
 
-this.seleccionadoSprite.x = 413 +413/4;
-this.seleccionadoSprite.y = 336;
+this.seleccionadoSprite.x = 313 +413/4;
+this.seleccionadoSprite.y = 536;
 
 }    
 
 if(this.seleccionInt ==3)
 {
 
-this.seleccionadoSprite.x = 413 +413/4;
-this.seleccionadoSprite.y = 486;
+this.seleccionadoSprite.x = 413;
+this.seleccionadoSprite.y = 236;;
 
 }
 if(this.seleccionInt ==4)
 {
 
-this.seleccionadoSprite.x = 413 +513;
-this.seleccionadoSprite.y = 486;
+this.seleccionadoSprite.x = 533;;
+this.seleccionadoSprite.y = 236;;
 
 }    
 if(this.seleccionInt ==5)
 {
 
-this.seleccionadoSprite.x = 413 +913;
-this.seleccionadoSprite.y = 486;
+this.seleccionadoSprite.x = 653;
+this.seleccionadoSprite.y = 236;
 
 }    
 
@@ -6027,39 +6130,39 @@ this.seleccionadoSprite.y = 486;
 if(this.seleccionInt ==16)
 {
 
-this.seleccionadoSprite.x = 413 +1263;
-this.seleccionadoSprite.y = 486;
+this.seleccionadoSprite.x = 773;
+this.seleccionadoSprite.y = 236;
 
 }
 
 if(this.seleccionInt ==1)
 {
 
-this.seleccionadoSprite.x = 413 +513;
-this.seleccionadoSprite.y = 336;
+this.seleccionadoSprite.x = 313 +513;
+this.seleccionadoSprite.y = 536;
 
 }  
 if(this.seleccionInt ==2)
 {
 
-this.seleccionadoSprite.x = 413 +913;
-this.seleccionadoSprite.y = 336;
+this.seleccionadoSprite.x = 353 +913;
+this.seleccionadoSprite.y = 536;
 
 }     
 
 if(this.seleccionInt ==6)
 {
 
-this.seleccionadoSprite.x = 413 +413/4;
-this.seleccionadoSprite.y = 606;
+this.seleccionadoSprite.x = 1033 +413/4;
+this.seleccionadoSprite.y = 256;
 
 }
 
 if(this.seleccionInt ==7)
 {
 
-this.seleccionadoSprite.x = 1213 +413/4;
-this.seleccionadoSprite.y = 606;
+this.seleccionadoSprite.x = 1253 +413/4;
+this.seleccionadoSprite.y = 256;
 
 }
 
@@ -6199,6 +6302,25 @@ if(this.seleccionInt ==19)
 
 }
 
+//SELECCION MAPAS
+
+if(this.seleccionInt ==20)
+{
+  this.seleccionadoSprite.x = 420 +413/4;
+  this.seleccionadoSprite.y = 132 + 550;
+
+}
+if(this.seleccionInt ==21)
+{
+  this.seleccionadoSprite.x = 880 +413/4;
+  this.seleccionadoSprite.y = 132 + 550;
+}
+
+if(this.seleccionInt ==22)
+{
+  this.seleccionadoSprite.x = 1320 +413/4;
+  this.seleccionadoSprite.y = 132 + 550;
+}
 
 }
 
