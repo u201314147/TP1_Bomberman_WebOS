@@ -7,8 +7,12 @@
   <title>GAME</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script type="text/javascript" src="../Logic/jquery-1.11.0.min.js"></script>
-     <script src="Phaser/phaser-arcade-physics.min.js"></script>
+     <script src="Phaser/phaser.min.js"></script>
   <link rel="stylesheet" href="../CSS/style.css" />
+<script type="text/javascript" src="qrcode.js"></script>
+<!--QR-->
+<link rel="stylesheet" type="text/css" href="style.css">
+
   <script type="text/javascript">
     var webSocket = {};
     var obj;
@@ -19,7 +23,48 @@
   <script src="../Logic/connect.js"></script>
 </head>
 
+
+
 <body> 
+
+   <div id="input-box" style="display: none">
+    
+<input id="text" type="text" value="192.168.0.6" style="width:80%" /><br />
+<div id="qrcode" style="width:100px; height:100px; margin-top:1px;"></div>
+
+<script type="text/javascript">
+var qrcode = new QRCode(document.getElementById("qrcode"), {
+  width : 280,
+  height : 200
+});
+
+function makeCode () {    
+  var elText = document.getElementById("text");
+  
+  if (!elText.value) {
+    alert("Input a text");
+    elText.focus();
+    return;
+  }
+  
+  qrcode.makeCode(elText.value);
+}
+
+makeCode();
+
+$("#text").
+  on("blur", function () {
+    makeCode();
+  }).
+  on("keydown", function (e) {
+    if (e.keyCode == 13) {
+      makeCode();
+    }
+  });
+</script>
+    
+  </div>
+
 <!--<input type="text" id="myText"/>-->
 <!--<textarea id="area51">SOME TEXT HERE</textarea>-->
     <script>
@@ -270,10 +315,10 @@ this.aceptarP2 = 0;
 this.aceptarP3 = 0;
 this.aceptarP4 = 0;
 
-this.guanteP1 =0;
-this.guanteP2 =0;
-this.guanteP3 =0;
-this.guanteP4 =0;
+this.guanteP1 =1;
+this.guanteP2 =1;
+this.guanteP3 =1;
+this.guanteP4 =1;
 
 this.novotacionP1=0;
 this.novotacionP2=0;
@@ -2604,7 +2649,7 @@ if( this.vidasInt >0)
           }
          this.bombasFull.create(posx, posy, 'bomba');
         
-        this.countExplosion = 50;
+        this.countExplosion = 100;
          }       
     
 }
@@ -2643,7 +2688,7 @@ function actualizarEstado2()
             
           }
          this.bombasFull2.create(posx, posy, 'bomba');
-        this.countExplosion2 = 50;
+        this.countExplosion2 = 100;
          }     
          }  
      }
@@ -2680,7 +2725,7 @@ function actualizarEstado3()
             
           }
         this.bombasFull3.create(posx, posy, 'bomba');
-        this.countExplosion3 = 50;
+        this.countExplosion3 = 100;
          }     
          }  
      }
@@ -2717,7 +2762,7 @@ function actualizarEstado4()
             
           }
          this.bombasFull4.create(posx, posy, 'bomba');
-        this.countExplosion4 = 50;
+        this.countExplosion4 = 100;
          }   
          }  
          }  
@@ -3757,6 +3802,59 @@ update()
  //JUGADOR 1 REBOTA BOMBA
  this.bombasFull.children.iterate(child => {
      
+      if(child.x < 350)
+      {
+        child.x = 1900;
+      }
+
+      if(child.x > 1900)
+      {
+        child.x = 350;
+      }
+
+
+      if(child.y < 100)
+      {
+        child.y = 1000;
+      }
+
+      if(child.y > 1000)
+      {
+        child.y = 100;
+      }
+
+
+        })
+
+
+
+  this.bombasFull.children.iterate(child => {
+     
+        this.boxFuerte2.children.iterate(child2 => {
+       
+          if((child.x < child2.x +62 ) && (child.x +62 > child2.x ) 
+            && (child.y +62 > child2.y ) && (child.y < child2.y +62))
+          {
+
+              if(this.bombasFullDirection =="ARRIBA")
+            child.y = child.y -5;
+
+             if(this.bombasFullDirection =="ABAJO")
+            child.y = child.y +5;
+
+           if(this.bombasFullDirection =="IZQ")
+            child.x = child.x -5;
+
+           if(this.bombasFullDirection =="DER")
+            child.x = child.x +5;
+          }
+        })
+
+        })
+
+
+ this.bombasFull.children.iterate(child => {
+     
         this.wallkill.children.iterate(child2 => {
        
           if((child.x < child2.x +62 ) && (child.x +62 > child2.x ) 
@@ -3831,6 +3929,57 @@ update()
 
 
  //JUGADOR 2 REBOTA BOMBA
+this.bombasFull2.children.iterate(child => {
+     
+      if(child.x < 350)
+      {
+        child.x = 1900;
+      }
+
+      if(child.x > 1900)
+      {
+        child.x = 350;
+      }
+
+
+      if(child.y < 100)
+      {
+        child.y = 1000;
+      }
+
+      if(child.y > 1000)
+      {
+        child.y = 100;
+      }
+
+
+        })
+
+  this.bombasFull2.children.iterate(child => {
+     
+        this.boxFuerte2.children.iterate(child2 => {
+       
+          if((child.x < child2.x +62 ) && (child.x +62 > child2.x ) 
+            && (child.y +62 > child2.y ) && (child.y < child2.y +62))
+          {
+
+              if(this.bombasFullDirection2 =="ARRIBA")
+            child.y = child.y -5;
+
+             if(this.bombasFullDirection2 =="ABAJO")
+            child.y = child.y +5;
+
+           if(this.bombasFullDirection2 =="IZQ")
+            child.x = child.x -5;
+
+           if(this.bombasFullDirection2 =="DER")
+            child.x = child.x +5;
+          }
+        })
+
+        })
+
+
  this.bombasFull2.children.iterate(child => {
      
         this.wallkill.children.iterate(child2 => {
@@ -3908,6 +4057,56 @@ update()
  //JUGADOR 3 REBOTA BOMBA
  this.bombasFull3.children.iterate(child => {
      
+      if(child.x < 350)
+      {
+        child.x = 1900;
+      }
+
+      if(child.x > 1900)
+      {
+        child.x = 350;
+      }
+
+
+      if(child.y < 100)
+      {
+        child.y = 1000;
+      }
+
+      if(child.y > 1000)
+      {
+        child.y = 100;
+      }
+
+
+        })
+  this.bombasFull3.children.iterate(child => {
+     
+        this.boxFuerte2.children.iterate(child2 => {
+       
+          if((child.x < child2.x +62 ) && (child.x +62 > child2.x ) 
+            && (child.y +62 > child2.y ) && (child.y < child2.y +62))
+          {
+
+              if(this.bombasFullDirection3 =="ARRIBA")
+            child.y = child.y -5;
+
+             if(this.bombasFullDirection3 =="ABAJO")
+            child.y = child.y +5;
+
+           if(this.bombasFullDirection3 =="IZQ")
+            child.x = child.x -5;
+
+           if(this.bombasFullDirection3 =="DER")
+            child.x = child.x +5;
+          }
+        })
+
+        })
+
+
+ this.bombasFull3.children.iterate(child => {
+     
         this.wallkill.children.iterate(child2 => {
        
           if((child.x < child2.x +62 ) && (child.x +62 > child2.x ) 
@@ -3981,6 +4180,56 @@ update()
 
 
  //JUGADOR 4 REBOTA PARED
+  this.bombasFull4.children.iterate(child => {
+     
+      if(child.x < 350)
+      {
+        child.x = 1900;
+      }
+
+      if(child.x > 1900)
+      {
+        child.x = 350;
+      }
+
+
+      if(child.y < 100)
+      {
+        child.y = 1000;
+      }
+
+      if(child.y > 1000)
+      {
+        child.y = 100;
+      }
+
+
+        })
+  this.bombasFull4.children.iterate(child => {
+     
+        this.boxFuerte2.children.iterate(child2 => {
+       
+          if((child.x < child2.x +62 ) && (child.x +62 > child2.x ) 
+            && (child.y +62 > child2.y ) && (child.y < child2.y +62))
+          {
+
+              if(this.bombasFullDirection4 =="ARRIBA")
+            child.y = child.y -5;
+
+             if(this.bombasFullDirection4 =="ABAJO")
+            child.y = child.y +5;
+
+           if(this.bombasFullDirection4 =="IZQ")
+            child.x = child.x -5;
+
+           if(this.bombasFullDirection4 =="DER")
+            child.x = child.x +5;
+          }
+        })
+
+        })
+
+
  this.bombasFull4.children.iterate(child => {
      
         this.wallkill.children.iterate(child2 => {
@@ -4721,16 +4970,16 @@ if(this.bombasFull.getLength()>0 && this.countExplosion ==0)
 
 this.countBomb = 0;
 
-        this.explosionUp.create(this.bomba.x, this.bomba.y, 'explosion');
+        this.explosionUp.create(this.bomba.x+32, this.bomba.y+32, 'explosion');
         this.explosionUp.setVelocityX(-20*this.llama);
 
-        this.explosionDown.create(this.bomba.x, this.bomba.y, 'explosion');
+        this.explosionDown.create(this.bomba.x+32, this.bomba.y+32, 'explosion');
            this.explosionDown.setVelocityX(20*this.llama);
    
-        this.explosionLeft.create(this.bomba.x, this.bomba.y, 'explosion');
+        this.explosionLeft.create(this.bomba.x+32, this.bomba.y+32, 'explosion');
          this.explosionLeft.setVelocityY(-20*this.llama);
   
-        this.explosionRight.create(this.bomba.x, this.bomba.y, 'explosion');
+        this.explosionRight.create(this.bomba.x+32, this.bomba.y+32, 'explosion');
         this.explosionRight.setVelocityY(20*this.llama);
     
         this.limpiarLlama =50;
@@ -4762,16 +5011,16 @@ if(this.bombasFull2.getLength()>0 && this.countExplosion2 ==0)
 
 this.countBomb2 = 0;
 
-        this.explosionUp2.create(this.bomba2.x, this.bomba2.y, 'explosion');
+        this.explosionUp2.create(this.bomba2.x+32, this.bomba2.y+32, 'explosion');
         this.explosionUp2.setVelocityX(-20*this.llama2);
 
-        this.explosionDown2.create(this.bomba2.x, this.bomba2.y, 'explosion');
+        this.explosionDown2.create(this.bomba2.x+32, this.bomba2.y+32, 'explosion');
            this.explosionDown2.setVelocityX(20*this.llama2);
    
-        this.explosionLeft2.create(this.bomba2.x, this.bomba2.y, 'explosion');
+        this.explosionLeft2.create(this.bomba2.x+32, this.bomba2.y+32, 'explosion');
          this.explosionLeft2.setVelocityY(-20*this.llama2);
   
-        this.explosionRight2.create(this.bomba2.x, this.bomba2.y, 'explosion');
+        this.explosionRight2.create(this.bomba2.x+32, this.bomba2.y+32, 'explosion');
         this.explosionRight2.setVelocityY(20*this.llama2);
     
         this.limpiarLlama2 =50;
@@ -4802,16 +5051,16 @@ if(this.bombasFull3.getLength()>0 && this.countExplosion3 ==0)
 
 this.countBomb3 = 0;
 
-        this.explosionUp3.create(this.bomba3.x, this.bomba3.y, 'explosion');
+        this.explosionUp3.create(this.bomba3.x+32, this.bomba3.y+32, 'explosion');
         this.explosionUp3.setVelocityX(-20*this.llama3);
 
-        this.explosionDown3.create(this.bomba3.x, this.bomba3.y, 'explosion');
+        this.explosionDown3.create(this.bomba3.x+32, this.bomba3.y+32, 'explosion');
            this.explosionDown3.setVelocityX(20*this.llama3);
    
-        this.explosionLeft3.create(this.bomba3.x, this.bomba3.y, 'explosion');
+        this.explosionLeft3.create(this.bomba3.x+32, this.bomba3.y+32, 'explosion');
          this.explosionLeft3.setVelocityY(-20*this.llama3);
   
-        this.explosionRight3.create(this.bomba3.x, this.bomba3.y, 'explosion');
+        this.explosionRight3.create(this.bomba3.x+32, this.bomba3.y+32, 'explosion');
         this.explosionRight3.setVelocityY(20*this.llama3);
     
         this.limpiarLlama3 =50;
@@ -4842,16 +5091,16 @@ if(this.bombasFull4.getLength()>0 && this.countExplosion4 ==0)
 
 this.countBomb4 = 0;
 
-        this.explosionUp4.create(this.bomba4.x, this.bomba4.y, 'explosion');
+        this.explosionUp4.create(this.bomba4.x+32, this.bomba4.y+32, 'explosion');
         this.explosionUp4.setVelocityX(-20*this.llama4);
 
-        this.explosionDown4.create(this.bomba4.x, this.bomba4.y, 'explosion');
+        this.explosionDown4.create(this.bomba4.x+32, this.bomba4.y+32, 'explosion');
            this.explosionDown4.setVelocityX(20*this.llama4);
    
-        this.explosionLeft4.create(this.bomba4.x, this.bomba4.y, 'explosion');
+        this.explosionLeft4.create(this.bomba4.x+32, this.bomba4.y+32, 'explosion');
          this.explosionLeft4.setVelocityY(-20*this.llama4);
   
-        this.explosionRight4.create(this.bomba4.x, this.bomba4.y, 'explosion');
+        this.explosionRight4.create(this.bomba4.x+32, this.bomba4.y+32, 'explosion');
         this.explosionRight4.setVelocityY(20*this.llama4);
     
         this.limpiarLlama4 =50;
@@ -5502,6 +5751,10 @@ class SceneB extends Phaser.Scene {
     }
     create ()
     {
+
+
+//var htmlString = '<input id="text" type="text" value="https://hogangnono.com" style="width:80%" /><br />';
+    //  var domElement = this.add.dom(0, 0).createFromHTML(htmlString); 
         // this.cursors = this.input.keyboard.createCursorKeys();
 this.personajeSeleccionadoP1 = 1;
 this.tematica = 1;
@@ -5539,6 +5792,55 @@ this.input.keyboard.on('keydown_UP', moverMenuArriba, this);
     this.input.keyboard.on('keydown_LEFT', moverMenuIzq, this);
    this.input.keyboard.on('keydown_RIGHT', moverMenuDer, this);
     this.input.keyboard.on('keydown_X', seleccionarOpcion, this);
+
+// scale the box
+    const scaleBox = scale => {
+      let box = document.getElementById('input-box')
+      if (box) {
+        box.style.transform = `scale(${scale})`
+        box.style.transformOrigin = 'top left'
+        box.style.top = `${this.game.canvas.offsetTop + this.scale.displaySize.height / 2 - (750 / 2) * scale}px`
+        box.style.left = `${this.game.canvas.offsetLeft + this.scale.displaySize.width / 2 - (200 / 2) * scale}px`
+      }
+    }
+
+    // initial scale
+    let scale = this.game.scale.displaySize.width / this.game.scale.gameSize.width
+    scaleBox(scale)
+
+    // on resize listener
+    this.scale.on('resize', (gameSize, baseSize, displaySize, resolution) => {
+      let scale = displaySize.width / gameSize.width
+      scaleBox(scale)
+    })
+
+    // stores all created phaser texts
+    let createdTexts = {}
+    
+    // creates a new phaser text
+    const createText = (name, i) => {
+      let text = createdTexts[name] || this.add.text(10, 100 + 20 * i, '')
+      createdTexts[name] = text
+      return text
+    }
+
+
+var element = document.getElementById('input-box')
+        if (element && element.style.display === 'none') {
+        //  element.style.display = 'block'
+        element.style.display = 'none'
+          for (let i = 0; i < element.children.length; i++) {
+            
+            // it is an input element
+            if (element.children[i].tagName === 'INPUT') {
+              let text = createText(element.children[i].name, i)
+              element.children[i].addEventListener('input', () => {
+                text.setText(element.children[i].value)
+              })
+            }
+          }
+        }
+ 
 
 function moverMenuArriba()
 {
@@ -5779,7 +6081,7 @@ function seleccionarOpcion()
         {
              this.seleccionInt =9;
             this.pantalla=2;
-
+               element.style.display = 'block'
             this.menufondopersonajes.visible = true;
              this.seleccionadoSprite2.visible = true;
 
@@ -5790,6 +6092,7 @@ function seleccionarOpcion()
     {
         if(this.seleccionInt==9)
         {
+            element.style.display = 'none'
             this.pantalla=1;
              this.seleccionInt =8;
             this.menufondopersonajes.visible = false;
@@ -5799,6 +6102,8 @@ function seleccionarOpcion()
         }
         else if(this.seleccionInt==10)
         {
+            element.style.display = 'none'
+
        this.scene.start('Scene1', { tematica:  this.tematica, personajeSelectP1:  this.personajeSeleccionadoP1, gamemode: this.gamemode, jugadores: this.jugadores , designer: this.designer});
         }
         
@@ -6593,6 +6898,10 @@ var config = {
     type: Phaser.arcade,
     width: 1920,
     height: 1080,
+      backgroundColor: '#222288',
+     dom: {
+        createContainer: true
+    },
      pixelArt: true,
       fps: {
         min: 10,
