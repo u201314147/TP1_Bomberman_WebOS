@@ -160,10 +160,114 @@ class Scene1 extends Phaser.Scene {
         this.playerDirection = 'up';
      
 
-      //   this.load.setBaseURL('http://labs.phaser.io');
- // this.load.setBaseURL('https://i.ibb.co');
+     //INTERNET
 
 
+
+    this.load.image('bg', 'https://i.ibb.co/tz3L9Bn/jugador.png');
+   this.load.image('enemigo',  'https://i.ibb.co/tsc83Qn/enemigo.png');
+   this.load.image('ship',  'https://i.ibb.co/tz3L9Bn/jugador.png');
+      this.load.image('ship2',  'https://i.ibb.co/HVtxqyJ/jugador2.png');
+         this.load.image('ship3',  'https://i.ibb.co/C7yH7ft/jugador3.png');
+            this.load.image('ship4',  'https://i.ibb.co/DCnJw89/jugador4.png');
+   this.load.image('vida',  'https://i.ibb.co/yNSBcGv/vida.png');
+      this.load.image('bomba',  'https://i.ibb.co/z6r3c26/bomba.png');
+   this.load.image('explosion',  'https://i.ibb.co/h9RPDzp/explosion.png');
+    this.load.image('poderllama',  'https://i.ibb.co/Ydmyns2/poderllama.png');
+      this.load.image('poderbomba',  'https://i.ibb.co/NrRZRG9/poderbomba.png');
+   this.load.image('poderpatin',  'https://i.ibb.co/BN3nm9T/poderpatin.png');
+    this.load.image('podervida',  'https://i.ibb.co/Y3MH7wd/podervida.png');
+  this.load.image('kills',  'https://i.ibb.co/QMPTk8P/kills.png');
+ this.load.image('mina',  'https://i.ibb.co/MNnYDYx/mina.png');
+
+
+  this.textures.remove('wall');
+    this.textures.remove('wall2');
+      this.textures.remove('pisonegro');
+        this.textures.remove('wallkill');
+
+if(this.tematicaSeleccionada ==1)
+{
+  this.load.image('wall', 'https://i.ibb.co/6vg0LPj/wall.png');
+   this.load.image('wall2', 'https://i.ibb.co/YfJQszs/wall2.png');
+    this.load.image('pisonegro', 'https://i.ibb.co/GWWBSCK/pisonegro.png');
+    this.load.image('wallkill','https://i.ibb.co/YfJQszs/wall2.png')
+}
+
+
+if(this.tematicaSeleccionada ==2)
+{
+  this.load.image('wall', 'https://i.ibb.co/MNXRJ39/wall.png');
+   this.load.image('wall2', 'https://i.ibb.co/gVSRNCC/wall2.png');
+    this.load.image('pisonegro', 'https://i.ibb.co/QcCvy2G/pisonegro.png');
+    this.load.image('wallkill','https://i.ibb.co/gVSRNCC/wall2.png')
+}
+
+if(this.tematicaSeleccionada ==3)
+{
+  this.load.image('wall', 'https://i.ibb.co/9pCcj1c/wall.png');
+   this.load.image('wall2', 'https://i.ibb.co/VSvdY4P/wall2.png');
+    this.load.image('pisonegro', 'https://i.ibb.co/ZdCCNp8/pisonegro.png');
+    this.load.image('wallkill','https://i.ibb.co/VSvdY4P/wall2.png')
+}
+
+
+this.load.image('wall3', 'https://i.ibb.co/9y4cTjD/wall3.png');
+
+this.load.image('wall4', 'https://i.ibb.co/89nHzQr/wall4.png');
+
+this.load.image('pisor1', 'https://i.ibb.co/XbNnWdy/pisor1.png');
+this.load.image('pisor2', 'https://i.ibb.co/BT4bwd5/pisor2.png');
+ this.load.image('pisomov', 'https://i.ibb.co/fYTm8Cz/pisomov.png');
+
+
+           this.load.image('menupause', 'https://i.ibb.co/YRqsf11/menupause.png');
+             this.load.image('menupause2', 'https://i.ibb.co/bHXM7y9/menupause2.png');
+          this.load.image('menupause3', 'https://i.ibb.co/p0cq1sK/menupause3.png');
+            this.load.image('votacionmenu', 'https://i.ibb.co/3Ycf03R/votacionmenu.png');
+
+                this.load.image('votacionmenu2', 'https://i.ibb.co/swGDZCC/votacionmenu2-P.png');
+
+                    this.load.image('votacionmenu3', 'https://i.ibb.co/BqSYKHW/votacionmenu3-P.png');
+
+
+             this.load.image('votacionmenuP1', 'https://i.ibb.co/GWbjLYv/votacionmenu-P1.png');
+               this.load.image('votacionmenuP2', 'https://i.ibb.co/1bM3QY9/votacionmenu-P2.png');
+                this.load.image('votacionmenuP3', 'https://i.ibb.co/ZBgRKcK/votacionmenu-P3.png');
+            this.load.image('votacionmenuP4', 'https://i.ibb.co/LrrqXDX/votacionmenu-P4.png');
+            
+              this.load.image('poderguante', 'https://i.ibb.co/tHyHrWz/poderguante.png');
+               this.load.image('seleccion3', 'https://i.ibb.co/RvhgWwR/seleccioncuad.png');
+ 
+
+
+ this.load.image('jugadorAzul',  'https://i.ibb.co/tz3L9Bn/jugador.png');
+      this.load.image('jugadorNaranja',  'https://i.ibb.co/HVtxqyJ/jugador2.png');
+         this.load.image('jugadorVerde',  'https://i.ibb.co/C7yH7ft/jugador3.png');
+            this.load.image('jugadorMorado',  'https://i.ibb.co/DCnJw89/jugador4.png');
+ this.load.image('jugadorCeleste',  'https://i.ibb.co/HzsjTX8/jugador-Celeste.png');
+  this.load.image('jugadorRojo',  'https://i.ibb.co/br9mb3n/jugador-Rojo.png');
+    this.load.image('jugadorGris',  'https://i.ibb.co/tM88Rfr/jugador-Gris.png');
+        this.load.image('jugadorAmarillo',  'https://i.ibb.co/YjwWzqW/jugador-Amarillo.png');
+                this.load.image('jugadorNegro',  'https://i.ibb.co/m07RktY/jugador-Negro.png');
+
+
+                this.load.audio('moon', 'https://sndup.net/3h3r/moon.mp3');
+      
+                   this.load.audio('explosion', 'https://sndup.net/4p97/explosion.mp3');
+
+                   this.load.audio('item', 'https://sndup.net/3tp6/item.mp3');
+                   this.load.audio('loselive', 'https://sndup.net/54z2/loselive.mp3');
+                    this.load.audio('matarbot', 'https://sndup.net/2nwb/matarbot.mp3');
+                    this.load.audio('wallFall', 'https://sndup.net/7j9h/wallFall.mp3');
+
+
+
+
+
+
+//LOCAL
+/*
     this.load.image('bg', 'img/jugador.png');
    this.load.image('enemigo',  'img/enemigo.png');
    this.load.image('ship',  'img/jugador.png');
@@ -180,22 +284,6 @@ class Scene1 extends Phaser.Scene {
   this.load.image('kills',  'img/kills.png');
  this.load.image('mina',  'img/mina.png');
 
-
-/* this.load.image('wall_skin01', 'img/skin01/wall.png');
-   this.load.image('wall2_skin01', 'img/skin01/wall2.png');
-    this.load.image('pisonegro_skin01', 'img/skin01/pisonegro.png');
-    this.load.image('wallkill_skin01','img/skin01/wallkill.png')
-
-     this.load.image('wall_skin02', 'img/skin02/wall.png');
-   this.load.image('wall2_skin02', 'img/skin02/wall2.png');
-    this.load.image('pisonegro_skin02', 'img/skin02/pisonegro.png');
-    this.load.image('wallkill_skin02','img/skin02/wallkill.png')
-
-     this.load.image('wall_skin03', 'img/skin03/wall.png');
-   this.load.image('wall2_skin03', 'img/skin03/wall2.png');
-    this.load.image('pisonegro_skin03', 'img/skin03/pisonegro.png');
-    this.load.image('wallkill_skin03','img/skin03/wallkill.png')
-*/
 
   this.textures.remove('wall');
     this.textures.remove('wall2');
@@ -228,14 +316,15 @@ if(this.tematicaSeleccionada ==3)
 
 
 this.load.image('wall3', 'img/wall3.png');
+
+this.load.image('wall4', 'img/wall4.png');
+
 this.load.image('pisor1', 'img/pisor1.png');
 this.load.image('pisor2', 'img/pisor2.png');
  this.load.image('pisomov', 'img/pisomov.png');
 
 
 
-           this.load.image('bg', 'img/jugador.png');
-           
            this.load.image('menupause', 'img/menupause.png');
              this.load.image('menupause2', 'img/menupause2.png');
           this.load.image('menupause3', 'img/menupause3.png');
@@ -266,6 +355,7 @@ this.load.image('pisor2', 'img/pisor2.png');
         this.load.image('jugadorAmarillo',  'img/jugadorAmarillo.png');
                 this.load.image('jugadorNegro',  'img/jugadorNegro.png');
 
+
                 this.load.audio('moon', 'snd/moon.mp3');
       
                    this.load.audio('explosion', 'snd/explosion.mp3');
@@ -274,42 +364,7 @@ this.load.image('pisor2', 'img/pisor2.png');
                    this.load.audio('loselive', 'snd/loselive.mp3');
                     this.load.audio('matarbot', 'snd/matarbot.mp3');
                     this.load.audio('wallFall', 'snd/wallFall.mp3');
-/*
-  this.load.image('wall', 'd5yWhk2/wall.png');
-   this.load.image('wall2', 'WykRp6s/wall2.png');
-   this.load.image('enemigo',  'Dttg5JP/enemigo.png');
-   this.load.image('ship',  'zHXszCm/jugador.png');
-    this.load.image('ship2',  'rx8gpR4/jugador2.png');
-         this.load.image('ship3',  'crwxgCm/jugador3.png');
-            this.load.image('ship4',  'zSp6CKm/jugador4.png');
-   this.load.image('vida',  'S0Dhc2Z/vida.png');
-      this.load.image('bomba',  'VJDn315/bomba.png');
-   this.load.image('explosion',  'qdWNxpn/explosion.png');
-    this.load.image('poderllama',  'XYxjxYy/poderllama.png');
-      this.load.image('poderbomba',  '7YWC3kM/poderbomba.png');
-   this.load.image('poderpatin',  'pXpHRBL/poderpatin.png');
-  this.load.image('kills',  'MVSVd2P/kills.png');
- this.load.image('mina',  '4WXR4mF/mina.png');
-this.load.image('wall3', 'YyVVxpW/wall3.png');
-this.load.image('wallkill','QrNLy82/wallkill.png')
-this.load.image('pisor1', '1s6rsTH/pisor1.png');
-this.load.image('pisor2', 'Mhy1S9p/pisor2.png');
- this.load.image('pisomov', '3FC2hVL/pisomov.png');
-
-
- this.load.image('podervida', 'bFFHbrq/podervida.png');
-
-  this.load.image('menupause', '4NvvMm4/menupause.png');
-    this.load.image('menupause2', 'nzQMWQ7/menupause2.png');
-          this.load.image('menupause3', 'xCkh003/menupause3.png');
-            this.load.image('votacionmenu', 'mGBKC5b/votacionmenu.png');
-             this.load.image('votacionmenuP1', 'Ybc90MG/votacionmenu-P1.png');
-               this.load.image('votacionmenuP2', 'fNx0yqf/votacionmenu-P2.png');
-                this.load.image('votacionmenuP3', '3Ryv5qw/votacionmenu-P3.png');
-            this.load.image('votacionmenuP4', 'jJG4gpC/votacionmenu-P4.png');
-            
-              this.load.image('poderguante', 'WFgXwvR/poderguante.png');*/
-
+*/
 
 
 }
@@ -719,24 +774,24 @@ for (var j = 1; j < 14; j++)
 
 for (var i = 1; i < 15; i++)
     {
-     this.boxFuerte2.create(12*32-32-32 + 32, 32 + i*64, 'wall3');
- this.boxFuerte2.create(12*32-32-32 -32, 32 + i*64, 'wall3');
+     this.boxFuerte2.create(12*32-32-32 + 32, 32 + i*64, 'wall4');
+ this.boxFuerte2.create(12*32-32-32 -32, 32 + i*64, 'wall4');
 }
 for (var i = 1; i < 15; i++)
     {
-     this.boxFuerte2.create(1920-64 + 32, 32 + i*64, 'wall3');
-       this.boxFuerte2.create(1920-64 + 32 + 64, 32 + i*64, 'wall3');
+     this.boxFuerte2.create(1920-64 + 32, 32 + i*64, 'wall4');
+       this.boxFuerte2.create(1920-64 + 32 + 64, 32 + i*64, 'wall4');
 }
 
 for (var i = -3; i < 25; i++)
     {
-     this.boxFuerte2.create(12*32 + 64*i, 32 + 32, 'wall3');
-      this.boxFuerte2.create(12*32 + 64*i, 32-32, 'wall3');
+     this.boxFuerte2.create(12*32 + 64*i, 32 + 32, 'wall4');
+      this.boxFuerte2.create(12*32 + 64*i, 32-32, 'wall4');
 }
 for (var i = -3; i < 25; i++)
     {
-    this.boxFuerte2.create(12*32 + 64*i, 896+ 32 + 32, 'wall3');
-    this.boxFuerte2.create(12*32 + 64*i, 896+ 32 + 32+64, 'wall3');
+    this.boxFuerte2.create(12*32 + 64*i, 896+ 32 + 32, 'wall4');
+    this.boxFuerte2.create(12*32 + 64*i, 896+ 32 + 32+64, 'wall4');
  }
 
 
@@ -2882,7 +2937,7 @@ var valoranterior = valoranterior + superString;
 
 localStorage.setItem(this.mapaNumero, valoranterior);
 
-
+//ARCHIVOLOCAL
 /*
 rows.forEach(function(rowArray) {
     let row = rowArray.join(",");
@@ -4005,10 +4060,19 @@ if(this.designerMode==0)
 this.menupausesprite.setDepth(1);
 this.menupausesprite2.setDepth(1);
 this.menupausesprite3.setDepth(1);
+
+
+var r = Phaser.Math.Between(0,90);
+var g = Phaser.Math.Between(0,90);
+var b = Phaser.Math.Between(0,90);
+ this.cameras.main.backgroundColor.setTo(r,g,b);
+
+
 }
 
 update()
 {
+
   //if(this.musicData==0)
   //{
    //  this.game.sound.stopAll();
@@ -6028,24 +6092,33 @@ class SceneB extends Phaser.Scene {
     preload ()
     {
 
-        //  this.load.setBaseURL('http://labs.phaser.io');
- // this.load.setBaseURL('https://i.ibb.co');
-  this.load.image('selectorRect1', 'img/selectorRect1.png');
- 
+//          this.load.setBaseURL('http://labs.phaser.io');
+  //this.load.setBaseURL('https://i.ibb.co');
 
+this.load.image('selectorRect1', 'https://i.ibb.co/tKmGdqY/selector-Rect1.png');
+                 this.load.image('fondo', 'https://i.ibb.co/H7vBT1T/menu-Opciones.png');
+                  this.load.image('seleccion', 'https://i.ibb.co/RvhgWwR/seleccioncuad.png');
+                    this.load.image('seleccionpersonajes', 'https://i.ibb.co/7p09ZRh/seleccionpersonajes.png');
+               this.load.image('seleccion2', 'https://i.ibb.co/WFCsJx3/seleccioncuad2.png');
+                 this.load.image('noready', 'https://i.ibb.co/1bcqr5j/sprite-No-Listo.png');
+                  this.load.image('ready', 'https://i.ibb.co/rMq8fcJ/sprite-Listo.png');
+
+//
+                    this.load.audio('theme', 'https://sndup.net/2p9z/select.mp3'); 
+                     this.load.audio('select', 'https://sndup.net/2p9z/select.mp3'); 
+                     
+
+/*
+            this.load.image('selectorRect1', 'img/selectorRect1.png');
                  this.load.image('fondo', 'img/menuOpciones.png');
                   this.load.image('seleccion', 'img/seleccioncuad.png');
                     this.load.image('seleccionpersonajes', 'img/seleccionpersonajes.png');
-   this.load.image('seleccion2', 'img/seleccioncuad2.png');
- 
+               this.load.image('seleccion2', 'img/seleccioncuad2.png');
                  this.load.image('noready', 'img/spriteNoListo.png');
                   this.load.image('ready', 'img/spriteListo.png');
                     this.load.audio('theme', 'snd/theme.mp3'); 
                      this.load.audio('select', 'snd/select.mp3'); 
-                 /*  this.load.image('fondo', 'JxhB0fg/menu-Opciones.png');
-                  this.load.image('seleccion', '1T5m6WT/seleccion.png');
-                    this.load.image('seleccionpersonajes', 'wY6R1tB/seleccionpersonajes.png');
-   this.load.image('seleccion2', 'DbLXQxS/seleccion2.png');*/
+               */
  
 
     }
@@ -6190,8 +6263,7 @@ function moverMenuArriba()
 
  if(this.seleccionInt == 25)
       {
- this.mapaNumeroEditado= this.mapaNumeroEditado + 1;
-      this.mapaNumeroEditadoString.setText(this.mapaNumeroEditado);
+            this.seleccionInt = 8;
       }
 
       else if(this.seleccionInt ==23 || this.seleccionInt ==24)
@@ -6215,54 +6287,7 @@ function moverMenuArriba()
 
   else if(this.pantalla ==2)
     {
- if(this.seleccionInt ==10)
-            this.seleccionInt = 9;
 
-
-          else if(this.seleccionInt ==19)
-            this.seleccionInt = 16;
-            else if(this.seleccionInt ==16)
-            this.seleccionInt = 13;
-
-
-          else if(this.seleccionInt ==18)
-            this.seleccionInt = 15;
-            else if(this.seleccionInt ==15)
-            this.seleccionInt = 12;
-
-
-          else if(this.seleccionInt ==17)
-            this.seleccionInt = 14;
-            else if(this.seleccionInt ==14)
-            this.seleccionInt = 11;
-
-        }
-}
-
-function moverMenuAbajo()
-{
-
-if(this.pantalla ==1)
-    {
-     if(this.seleccionInt ==25 || this.seleccionInt ==26)
-            this.seleccionInt = 23;
-
-           else if(this.seleccionInt ==23 || this.seleccionInt ==24)
-            this.seleccionInt = 20;
-
-else if(this.seleccionInt ==20 || this.seleccionInt ==21 || this.seleccionInt ==22)
-            this.seleccionInt = 0;
-
-    else if(this.seleccionInt ==0 || this.seleccionInt ==1 || this.seleccionInt ==2)
-            this.seleccionInt = 3;
-
-        else if(this.seleccionInt ==3 || this.seleccionInt ==4 || this.seleccionInt ==5 || this.seleccionInt ==16)
-            this.seleccionInt = 6;
-               else if(this.seleccionInt ==6 || this.seleccionInt ==7)
-            this.seleccionInt = 8;
-}
-  else if(this.pantalla ==2)
-    {
 
  if(this.seleccionInt ==9)
             this.seleccionInt = 10;
@@ -6283,6 +6308,59 @@ else if(this.seleccionInt ==20 || this.seleccionInt ==21 || this.seleccionInt ==
             this.seleccionInt = 14;
             else if(this.seleccionInt ==14)
             this.seleccionInt = 17;
+
+
+        }
+}
+
+function moverMenuAbajo()
+{
+
+if(this.pantalla ==1)
+    {
+       if(this.seleccionInt ==8)
+            this.seleccionInt = 25;
+
+     else if(this.seleccionInt ==25 || this.seleccionInt ==26)
+            this.seleccionInt = 23;
+
+           else if(this.seleccionInt ==23 || this.seleccionInt ==24)
+            this.seleccionInt = 20;
+
+else if(this.seleccionInt ==20 || this.seleccionInt ==21 || this.seleccionInt ==22)
+            this.seleccionInt = 0;
+
+    else if(this.seleccionInt ==0 || this.seleccionInt ==1 || this.seleccionInt ==2)
+            this.seleccionInt = 3;
+
+        else if(this.seleccionInt ==3 || this.seleccionInt ==4 || this.seleccionInt ==5 || this.seleccionInt ==16)
+            this.seleccionInt = 6;
+               else if(this.seleccionInt ==6 || this.seleccionInt ==7)
+            this.seleccionInt = 8;
+}
+  else if(this.pantalla ==2)
+    {
+
+ if(this.seleccionInt ==10)
+            this.seleccionInt = 9;
+
+
+          else if(this.seleccionInt ==19)
+            this.seleccionInt = 16;
+            else if(this.seleccionInt ==16)
+            this.seleccionInt = 13;
+
+
+          else if(this.seleccionInt ==18)
+            this.seleccionInt = 15;
+            else if(this.seleccionInt ==15)
+            this.seleccionInt = 12;
+
+
+          else if(this.seleccionInt ==17)
+            this.seleccionInt = 14;
+            else if(this.seleccionInt ==14)
+            this.seleccionInt = 11;
 
         }
         
@@ -6417,16 +6495,21 @@ if(this.seleccionInt ==26)
     }
 if(this.seleccionInt ==24)
     {
+
             this.designerMode = 0; 
     }
 
    if(this.seleccionInt ==25)
     {
+      this.mapaNumeroEditado= this.mapaNumeroEditado + 1;
+      this.mapaNumeroEditadoString.setText(this.mapaNumeroEditado);
+
       this.designer=1;
             this.mapaTipo = 2; 
     }
    if(this.seleccionInt ==23)
     {
+
             this.designer=0;
             this.mapaTipo = 1; 
     }
@@ -6646,7 +6729,8 @@ update()
 
  switch (cursor) {
       case "LEFT":
-          if(this.pantalla ==1)
+//ANDROID_LEFT
+if(this.pantalla ==1)
     {
          if(this.seleccionInt ==0)
             this.seleccionInt = 2;
@@ -6663,10 +6747,54 @@ update()
             this.seleccionInt = 5;
          else if(this.seleccionInt ==7)
             this.seleccionInt = 6;
+              else if(this.seleccionInt ==22)
+            this.seleccionInt = 21;
+            else if(this.seleccionInt ==21)
+            this.seleccionInt = 20;
+           else if(this.seleccionInt ==24)
+            this.seleccionInt = 23;
+          else if(this.seleccionInt ==26)
+            this.seleccionInt = 25;
+
+
+ else if(this.seleccionInt ==25)
+ {
+   if(this.mapaNumeroEditado>1)
+      this.mapaNumeroEditado= this.mapaNumeroEditado - 1;
+      this.mapaNumeroEditadoString.setText(this.mapaNumeroEditado);
+    }
      }  
+
+     else if (this.pantalla ==2)
+     {
+           if(this.seleccionInt ==10)
+            this.seleccionInt = 13;
+           else if(this.seleccionInt ==13)
+            this.seleccionInt = 12;
+           else if(this.seleccionInt ==12)
+            this.seleccionInt = 11;
+
+           else if(this.seleccionInt ==14)
+            this.seleccionInt = 13;
+           else if(this.seleccionInt ==15)
+            this.seleccionInt = 14;
+           else if(this.seleccionInt ==16)
+            this.seleccionInt = 15;
+
+
+           else if(this.seleccionInt ==17)
+            this.seleccionInt = 16;
+           else if(this.seleccionInt ==18)
+            this.seleccionInt = 17;
+           else if(this.seleccionInt ==19)
+            this.seleccionInt = 18;
+     }
+
          break;
       case "RIGHT":
-           if(this.pantalla ==1)
+ //ANDROID_RIGHT        
+
+ if(this.pantalla ==1)
     {
          if(this.seleccionInt ==0)
             this.seleccionInt = 1;
@@ -6682,28 +6810,63 @@ update()
             this.seleccionInt = 16;
          else if(this.seleccionInt ==6)
             this.seleccionInt = 7;
+          else if(this.seleccionInt ==20)
+            this.seleccionInt = 21;
+            else if(this.seleccionInt ==21)
+            this.seleccionInt = 22;
+          else if(this.seleccionInt ==23)
+            this.seleccionInt = 24;
+            else if(this.seleccionInt ==25)
+            this.seleccionInt = 26;
+
+
     }
+      else if (this.pantalla ==2)
+     {
+         if(this.seleccionInt ==13)
+            this.seleccionInt = 10; //EMPEZAR
+          else if(this.seleccionInt ==12)
+            this.seleccionInt = 13;
+           else if(this.seleccionInt ==11)
+            this.seleccionInt = 12;
+
+
+           else if(this.seleccionInt ==14)
+            this.seleccionInt = 15;
+           else if(this.seleccionInt ==15)
+            this.seleccionInt = 16;
+           else if(this.seleccionInt ==16)
+            this.seleccionInt = 10;
+
+
+           else if(this.seleccionInt ==17)
+            this.seleccionInt = 18;
+           else if(this.seleccionInt ==18)
+            this.seleccionInt = 19;
+           else if(this.seleccionInt ==19)
+            this.seleccionInt = 10;
+     }
+       
+
          break;
       case "UP":
-         if(this.pantalla ==1)
+ //ANDROID_UP   
+
+if(this.pantalla ==1)
     {
- if(this.seleccionInt ==3 || this.seleccionInt ==4 || this.seleccionInt ==5 || this.seleccionInt ==16)
+       if(this.seleccionInt ==8)
+            this.seleccionInt = 25;
+
+     else if(this.seleccionInt ==25 || this.seleccionInt ==26)
+            this.seleccionInt = 23;
+
+           else if(this.seleccionInt ==23 || this.seleccionInt ==24)
+            this.seleccionInt = 20;
+
+else if(this.seleccionInt ==20 || this.seleccionInt ==21 || this.seleccionInt ==22)
             this.seleccionInt = 0;
- else if(this.seleccionInt ==6 || this.seleccionInt ==7)
-            this.seleccionInt = 3;
-         else if(this.seleccionInt ==8)
-            this.seleccionInt = 6;
-}
-  else if(this.pantalla ==2)
-    {
- if(this.seleccionInt ==10)
-            this.seleccionInt = 9;
-        }
-          break;
-      case "DOWN":
-          if(this.pantalla ==1)
-    {
-    if(this.seleccionInt ==0 || this.seleccionInt ==1 || this.seleccionInt ==2)
+
+    else if(this.seleccionInt ==0 || this.seleccionInt ==1 || this.seleccionInt ==2)
             this.seleccionInt = 3;
 
         else if(this.seleccionInt ==3 || this.seleccionInt ==4 || this.seleccionInt ==5 || this.seleccionInt ==16)
@@ -6714,13 +6877,131 @@ update()
   else if(this.pantalla ==2)
     {
 
+ if(this.seleccionInt ==10)
+            this.seleccionInt = 9;
+
+
+          else if(this.seleccionInt ==19)
+            this.seleccionInt = 16;
+            else if(this.seleccionInt ==16)
+            this.seleccionInt = 13;
+
+
+          else if(this.seleccionInt ==18)
+            this.seleccionInt = 15;
+            else if(this.seleccionInt ==15)
+            this.seleccionInt = 12;
+
+
+          else if(this.seleccionInt ==17)
+            this.seleccionInt = 14;
+            else if(this.seleccionInt ==14)
+            this.seleccionInt = 11;
+
+        }    
+          break;
+      case "DOWN":
+ //ANDROID_DOWN
+if(this.pantalla ==1)
+    {
+
+ if(this.seleccionInt == 25)
+      {
+            this.seleccionInt = 8;
+      }
+
+      else if(this.seleccionInt ==23 || this.seleccionInt ==24)
+            this.seleccionInt = 25;
+
+       else if(this.seleccionInt ==20 ||this.seleccionInt ==21 || this.seleccionInt ==22 )
+            this.seleccionInt = 23;
+
+  else if(this.seleccionInt ==0 || this.seleccionInt ==1 || this.seleccionInt ==2)
+            this.seleccionInt = 20;
+
+
+ else if(this.seleccionInt ==3 || this.seleccionInt ==4 || this.seleccionInt ==5 || this.seleccionInt ==16)
+            this.seleccionInt = 0;
+
+ else if(this.seleccionInt ==6 || this.seleccionInt ==7)
+            this.seleccionInt = 3;
+         else if(this.seleccionInt ==8)
+            this.seleccionInt = 6;
+}
+
+  else if(this.pantalla ==2)
+    {
+
+
  if(this.seleccionInt ==9)
             this.seleccionInt = 10;
+
+          else if(this.seleccionInt ==13)
+            this.seleccionInt = 16;
+            else if(this.seleccionInt ==16)
+            this.seleccionInt = 19;
+
+
+          else if(this.seleccionInt ==12)
+            this.seleccionInt = 15;
+            else if(this.seleccionInt ==15)
+            this.seleccionInt = 18;
+
+
+          else if(this.seleccionInt ==11)
+            this.seleccionInt = 14;
+            else if(this.seleccionInt ==14)
+            this.seleccionInt = 17;
+
+
         }
+
           break;
       case "X":
- if(this.pantalla ==1)
+//ANDROID_X
+
+this.sound.play('select');
+    if(this.pantalla ==1)
     {
+
+if(this.seleccionInt ==26)
+    {
+            this.designerMode = 1; 
+    }
+if(this.seleccionInt ==24)
+    {
+
+            this.designerMode = 0; 
+    }
+
+   if(this.seleccionInt ==25)
+    {
+      this.mapaNumeroEditado= this.mapaNumeroEditado + 1;
+      this.mapaNumeroEditadoString.setText(this.mapaNumeroEditado);
+
+      this.designer=1;
+            this.mapaTipo = 2; 
+    }
+   if(this.seleccionInt ==23)
+    {
+
+            this.designer=0;
+            this.mapaTipo = 1; 
+    }
+
+    if(this.seleccionInt ==20)
+    {
+            this.tematica =1; 
+    }
+     if(this.seleccionInt ==21)
+    {
+            this.tematica =2; 
+    }
+    if(this.seleccionInt ==22)
+    {
+            this.tematica =3; 
+    }
+
     if(this.seleccionInt ==0)
     {
             this.jugadores =1; 
@@ -6757,27 +7038,119 @@ update()
         {
              this.seleccionInt =9;
             this.pantalla=2;
-
+               element.style.display = 'block'
             this.menufondopersonajes.visible = true;
              this.seleccionadoSprite2.visible = true;
+
+             this.personajeSelectSpriteP1.visible = true;
+
+this.readySprite1.visible = true;
+this.readySprite2.visible = true;
+this.readySprite3.visible = true;
+this.readySprite4.visible = true;
+
+this.nombreJ1text.visible = true;
+this.nombreJ2text.visible = true;
+this.nombreJ3text.visible = true;
+this.nombreJ4text.visible = true;
         }
     }
     else if(this.pantalla ==2)
     {
         if(this.seleccionInt==9)
         {
+            element.style.display = 'none'
             this.pantalla=1;
              this.seleccionInt =8;
+this.nombreJ1text.visible = false;
+this.nombreJ2text.visible = false;
+this.nombreJ3text.visible = false;
+this.nombreJ4text.visible = false;
+
             this.menufondopersonajes.visible = false;
              this.seleccionadoSprite2.visible = false;
+              this.personajeSelectSpriteP1.visible = false;
+
+              this.readySprite1.visible = false;
+this.readySprite2.visible = false;
+this.readySprite3.visible = false;
+this.readySprite4.visible = false;
         //    this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores });
         }
         else if(this.seleccionInt==10)
         {
-        //TV 
-       this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores , designer: this.designer, nombredata: this.nombreJ1, nombredata2: this.nombreJ2, nombredata3: this.nombreJ3, nombredata4: this.nombreJ4});
+            element.style.display = 'none'
+
+       this.scene.start('Scene1', { tematica:  this.tematica, personajeSelectP1:  this.personajeSeleccionadoP1, gamemode: this.gamemode, jugadores: this.jugadores , designer: this.designer, nombredata: this.nombreJ1, nombredata2: this.nombreJ2, nombredata3: this.nombreJ3, nombredata4: this.nombreJ4, mapaNumero: this.mapaNumeroEditado, mapaTipo: this.mapaTipo, designerMode: this.designerMode, music: this.music});
+        }
+        
+        if(this.seleccionInt==11)
+        {
+           
+             this.personajeSeleccionadoP1 = 1;
+           
+        
+        }
+         if(this.seleccionInt==12)
+        {
+           
+             this.personajeSeleccionadoP1 = 2;
+           
+        
+        }
+         if(this.seleccionInt==13)
+        {
+           
+             this.personajeSeleccionadoP1 = 3;
+           
+        
+        }
+         if(this.seleccionInt==14)
+        {
+           
+             this.personajeSeleccionadoP1 = 4;
+           
+        
+        }
+         if(this.seleccionInt==15)
+        {
+           
+             this.personajeSeleccionadoP1 = 5;
+           
+        
+        }
+         if(this.seleccionInt==16)
+        {
+           
+             this.personajeSeleccionadoP1 = 6;
+           
+        
+        }
+
+          if(this.seleccionInt==17)
+        {
+           
+             this.personajeSeleccionadoP1 = 7;
+           
+        
+        }
+          if(this.seleccionInt==18)
+        {
+           
+             this.personajeSeleccionadoP1 = 8;
+           
+        
+        }
+          if(this.seleccionInt==19)
+        {
+           
+             this.personajeSeleccionadoP1 = 9;
+           
+        
         }
     }
+
+
       break;
 }
 
@@ -7122,266 +7495,6 @@ if(this.seleccionInt ==26)
 }
 
 
-/*
-class SceneC extends Phaser.Scene {
-
-    constructor ()
-    {
-        super('SceneC');
-    }
-
-    preload ()
-    {
-
-         // this.load.setBaseURL('http://labs.phaser.io');
-  //this.load.setBaseURL('https://i.ibb.co');
-
-
-                 this.load.image('fondo', 'img/menuOpciones.png');
-                  this.load.image('seleccion', 'img/seleccion.png');
-                    this.load.image('seleccionpersonajes', 'img/seleccionpersonajes.png');
-   this.load.image('seleccion2', 'img/seleccion2.png');
-   this.load.image('seleccion3', 'img/seleccioncuad.png');
-   this.load.image('wall2', 'img/wall2.png');
-
-
-
-
- this.load.image('wall', 'img/wall.png');
-
-   this.load.image('enemigo',  'img/enemigo.png');
-   this.load.image('ship',  'img/jugador.png');
-      this.load.image('ship2',  'img/jugador2.png');
-         this.load.image('ship3',  'img/jugador3.png');
-            this.load.image('ship4',  'img/jugador4.png');
-   this.load.image('vida',  'img/vida.png');
-      this.load.image('bomba',  'img/bomba.png');
-   this.load.image('explosion',  'img/explosion.png');
-    this.load.image('poderllama',  'img/poderllama.png');
-      this.load.image('poderbomba',  'img/poderbomba.png');
-   this.load.image('poderpatin',  'img/poderpatin.png');
-    this.load.image('podervida',  'img/podervida.png');
-  this.load.image('kills',  'img/kills.png');
- this.load.image('mina',  'img/mina.png');
-
-
-this.load.image('wall3', 'img/wall3.png');
-this.load.image('wallkill','img/wallkill.png')
-this.load.image('pisor1', 'img/pisor1.png');
-this.load.image('pisor2', 'img/pisor2.png');
- this.load.image('pisomov', 'img/pisomov.png');
-
- /*this.load.image('wall2', 'WykRp6s/wall2.png');
-
-                   this.load.image('fondo', 'JxhB0fg/menu-Opciones.png');
-                  this.load.image('seleccion', '1T5m6WT/seleccion.png');
-                    this.load.image('seleccionpersonajes', 'wY6R1tB/seleccionpersonajes.png');
-   this.load.image('seleccion2', 'DbLXQxS/seleccion2.png');
- */
-
-    /*}
-    create ()
-    {
-        // this.cursors = this.input.keyboard.createCursorKeys();
-
-      this.objetocolocarspriteStart = this.physics.add.sprite(416 , 128, 'ship');
-  
-this.objetocolocar=0;
-
-
-
-
- this.objetocolocarsprite = this.physics.add.sprite(416, 128, 'wall');
-
- this.seleccionadoSprite = this.physics.add.sprite(416, 128, 'seleccion3');
-
-
-function moverMenuArriba()
-{
-if(this.seleccionadoSprite.y -64 >= 128)
-this.seleccionadoSprite.y = this.seleccionadoSprite.y - 64;
-
-this.objetocolocarsprite.y = this.seleccionadoSprite.y ;
-}
-
-function moverMenuAbajo()
-{
-    if(this.seleccionadoSprite.y +64 <= 908)
-this.seleccionadoSprite.y = this.seleccionadoSprite.y + 64;
-
-this.objetocolocarsprite.y = this.seleccionadoSprite.y ;
-        
-}
-function moverMenuIzq()
-{
-    if(this.seleccionadoSprite.x -64 >= 416)
-   this.seleccionadoSprite.x = this.seleccionadoSprite.x - 64;
-
-   this.objetocolocarsprite.x = this.seleccionadoSprite.x ;
-}
-function moverMenuDer()
-{
-     if(this.seleccionadoSprite.x +64 <= 1840)
-    this.seleccionadoSprite.x = this.seleccionadoSprite.x + 64;
-
-      this.objetocolocarsprite.x = this.seleccionadoSprite.x ;
-}
-function seleccionarOpcionMin()
-{
-    if(this.objetocolocar>0)
-    this.objetocolocar = this.objetocolocar - 1;
-    else
-     this.objetocolocar = 0;
-
-    //this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores });
-      
-}
-
-
-
-function seleccionarOpcionMax()
-{
-if(this.objetocolocar<=5)
-     this.objetocolocar = this.objetocolocar + 1;
-  else
-     this.objetocolocar = 5;
-
-
-// this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores });
-      
-}
-
-function seleccionarOpcionSet()
-{
-    
-    if(this.objetocolocar ==0)
-    {
-       
-        this.objetocolocarsprite.setTexture('wall');
-    }
-     if(this.objetocolocar ==1)
-    {
-        this.objetocolocarsprite.setTexture('enemigo');
-    }
-
-     if(this.objetocolocar ==2)
-    {
-        this.objetocolocarsprite.setTexture('pisomov');
-    }
-     if(this.objetocolocar ==3)
-    {
-        this.objetocolocarsprite.setTexture('pisor1');
-    }
-
- if(this.objetocolocar ==4)
-    {
-        this.objetocolocarsprite.setTexture('mina');
-    }
-    if(this.objetocolocar ==5)
-    {
-        this.objetocolocarsprite.setTexture('ship');
-    }
-
-// this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores });
-      
-}
-
-function seleccionarOpcion()
-{
-    if(this.objetocolocar ==0)
-    {
-       
-       this.objetocolocarspriteNuevo = this.physics.add.sprite(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'wall');
-    }
-
-  if(this.objetocolocar ==1)
-    {
-        this.objetocolocarspriteNuevo = this.physics.add.sprite(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'enemigo');
-  }
-
-  if(this.objetocolocar ==2)
-    {
-        this.objetocolocarspriteNuevo = this.physics.add.sprite(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'pisomov');
-  }
-
-   if(this.objetocolocar ==3)
-    {
-        this.objetocolocarspriteNuevo = this.physics.add.sprite(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'pisor1');
-  }
-   if(this.objetocolocar ==4)
-    {
-        this.objetocolocarspriteNuevo = this.physics.add.sprite(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'mina');
-  }
-   if(this.objetocolocar ==5)
-    {
-        this.objetocolocarspriteStart.x = this.seleccionadoSprite.x;
-        this.objetocolocarspriteStart.y = this.seleccionadoSprite.y;
-    }
-// this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores });
-      
-}
-    this.input.keyboard.on('keydown_UP', moverMenuArriba, this);
-    this.input.keyboard.on('keydown_DOWN', moverMenuAbajo, this);
-    this.input.keyboard.on('keydown_LEFT', moverMenuIzq, this);
-    this.input.keyboard.on('keydown_RIGHT', moverMenuDer, this);
- this.input.keyboard.on('keydown_X', seleccionarOpcionMax, this);
- this.input.keyboard.on('keydown_Z', seleccionarOpcionMin, this);
-  this.input.keyboard.on('keydown_X', seleccionarOpcionSet, this);
- this.input.keyboard.on('keydown_Z', seleccionarOpcionSet, this);
- this.input.keyboard.on('keydown_Q', seleccionarOpcion, this);
-
-
-
-   this.boxFuerteSprite = this.physics.add.staticGroup();
-
-for (var i = 2; i < 15; i++)
-    {
-     this.boxFuerteSprite.create(12*32-32-32 + 32,  i*64, 'wall2');
-}
-for (var i = 2; i < 15; i++)
-    {
-     this.boxFuerteSprite.create(1920-64 + 32, i*64, 'wall2');
-}
-
-for (var i = 0; i < 25; i++)
-    {
-     this.boxFuerteSprite.create(11*32 + 64*i, 32 + 32, 'wall2');
- }
-for (var i = 0; i < 25; i++)
-    {
-    this.boxFuerteSprite.create(11*32 + 64*i, 896+ 32 + 32, 'wall2');
-}
-
-
-      //  this.lights.enable();
-
-        /*let atlasTexture = this.textures.get('megaset');
-
-        let frames = atlasTexture.getFrameNames();
-
-        Phaser.Utils.Array.Shuffle(frames);
-
-        for (let i = 0; i < frames.length; i++)
-        {
-            let x = Phaser.Math.Between(100, 700);
-            let y = Phaser.Math.Between(100, 500);
-
-            this.add.image(x, y, 'megaset', frames[i]).setPipeline('Light2D');
-        }
-
-        this.add.image(120, 160, 'megaset', 'contra2');*/
-    /*}
-
-
-update()
-{
-
-
-}
-
-}*/
-
-
   var SCREEN_WIDTH = 1920;
 var SCREEN_HEIGHT = 1080;
 var config = {
@@ -7393,7 +7506,7 @@ var config = {
 
     width: 1920,
     height: 1080,
-     // backgroundColor: '#222288',
+     backgroundColor: '#222288',
      dom: {
         createContainer: true
     },
