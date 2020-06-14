@@ -29,7 +29,7 @@
 
    <div id="input-box" style="display: none">
     
-<input id="text" type="text" value="192.168.0.6" style="width:80%" /><br />
+<input id="text" type="text" value="192.168.0.4" style="width:80%" /><br />
 <div id="qrcode" style="width:100px; height:100px; margin-top:1px;"></div>
 
 <script type="text/javascript">
@@ -90,11 +90,21 @@ class Scene1 extends Phaser.Scene {
         this.jugadoresData = data.jugadores;
         this.musicData = data.music;
         this.designerData = data.designer;
-        this.tematica = data.tematica
+        this.tematica = data.tematica;
+        this.nombreJ1 = data.nombredata;
+        this.nombreJ2 = data.nombredata2;
+        this.nombreJ3 = data.nombredata3;
+        this.nombreJ4 = data.nombredata4;
+
+        console.log(data.nombredata);
+         console.log(data.nombredata2);
+          console.log(data.nombredata3);
+           console.log(data.nombredata4);
     }
 
  preload ()
 {
+
   this.tematicaSeleccionada = this.tematica;
     this.colocarBomba = 0;
     this.designer = this.designerData;
@@ -246,6 +256,7 @@ this.load.image('pisor2', 'img/pisor2.png');
                this.load.image('seleccion3', 'img/seleccioncuad.png');
  
 
+
  this.load.image('jugadorAzul',  'img/jugador.png');
       this.load.image('jugadorNaranja',  'img/jugador2.png');
          this.load.image('jugadorVerde',  'img/jugador3.png');
@@ -255,6 +266,10 @@ this.load.image('pisor2', 'img/pisor2.png');
     this.load.image('jugadorGris',  'img/jugadorGris.png');
         this.load.image('jugadorAmarillo',  'img/jugadorAmarillo.png');
                 this.load.image('jugadorNegro',  'img/jugadorNegro.png');
+
+                this.load.audio('moon', 'snd/moon.mp3');
+      
+                   this.load.audio('explosion', 'snd/explosion.mp3');
 /*
   this.load.image('wall', 'd5yWhk2/wall.png');
    this.load.image('wall2', 'WykRp6s/wall2.png');
@@ -297,7 +312,7 @@ this.load.image('pisor2', 'Mhy1S9p/pisor2.png');
 
 create()
 {
-
+this.sound.play('moon');
   this.bombasFullDirection= "NA";
    this.bombasFullDirection2= "NA";
     this.bombasFullDirection3= "NA";
@@ -354,13 +369,13 @@ this.relojInt = 300;
 //jugadores
 if(this.jugadoresTotal >=1)
 {
-    this.jugador1 = this.add.text(32+32, 216+96, 'Jugador1', { fontFamily: '"Arial Black"' });
+    this.jugador1 = this.add.text(32+32, 216+96, this.nombreJ1, { fontFamily: '"Arial Black"' });
 
 this.jugador1.setFontSize(32);
 }
 if(this.jugadoresTotal >=2)
 {
-    this.jugador2 = this.add.text(32+32, 366+96, 'Jugador2', { fontFamily: '"Arial Black"' });
+    this.jugador2 = this.add.text(32+32, 366+96, this.nombreJ2, { fontFamily: '"Arial Black"' });
 this.jugador2.setFontSize(32);
         this.vidasInt2 = 3;
 
@@ -368,14 +383,14 @@ this.jugador2.setFontSize(32);
 
 if(this.jugadoresTotal >=3)
 {
-    this.jugador3 = this.add.text(32+32, 516+96, 'Jugador3', { fontFamily: '"Arial Black"' });
+    this.jugador3 = this.add.text(32+32, 516+96, this.nombreJ3, { fontFamily: '"Arial Black"' });
 this.jugador3.setFontSize(32);
         this.vidasInt3 = 3;
 
 }
 if(this.jugadoresTotal >=4)
 {
-    this.jugador4 = this.add.text(32+32, 666+96, 'Jugador4', { fontFamily: '"Arial Black"' });
+    this.jugador4 = this.add.text(32+32, 666+96, this.nombreJ4, { fontFamily: '"Arial Black"' });
 this.jugador4.setFontSize(32);
         this.vidasInt4 = 3;
 
@@ -4947,6 +4962,7 @@ if(this.countExplosion4 >0)
 
 if(this.bombasFull.getLength()>0 && this.countExplosion ==0)
 {
+  this.sound.play('explosion');
      this.bomba = this.bombasFull.getFirst();
      this.bombasFull.children.iterate(child => {
         if (true) {
@@ -4988,6 +5004,7 @@ this.countBomb = 0;
 
 if(this.bombasFull2.getLength()>0 && this.countExplosion2 ==0)
 {
+   this.sound.play('explosion');
      this.bomba2 = this.bombasFull2.getFirst();
      this.bombasFull2.children.iterate(child => {
         if (true) {
@@ -5028,6 +5045,7 @@ this.countBomb2 = 0;
 
 if(this.bombasFull3.getLength()>0 && this.countExplosion3 ==0)
 {
+   this.sound.play('explosion');
      this.bomba3 = this.bombasFull3.getFirst();
      this.bombasFull3.children.iterate(child => {
         if (true) {
@@ -5068,6 +5086,7 @@ this.countBomb3 = 0;
 
 if(this.bombasFull4.getLength()>0 && this.countExplosion4 ==0)
 {
+   this.sound.play('explosion');
      this.bomba4 = this.bombasFull4.getFirst();
      this.bombasFull4.children.iterate(child => {
         if (true) {
@@ -5734,14 +5753,18 @@ class SceneB extends Phaser.Scene {
 
         //  this.load.setBaseURL('http://labs.phaser.io');
  // this.load.setBaseURL('https://i.ibb.co');
-
+  this.load.image('selectorRect1', 'img/selectorRect1.png');
+ 
 
                  this.load.image('fondo', 'img/menuOpciones.png');
                   this.load.image('seleccion', 'img/seleccioncuad.png');
                     this.load.image('seleccionpersonajes', 'img/seleccionpersonajes.png');
    this.load.image('seleccion2', 'img/seleccioncuad2.png');
  
-
+                 this.load.image('noready', 'img/spriteNoListo.png');
+                  this.load.image('ready', 'img/spriteListo.png');
+                    this.load.audio('theme', 'snd/theme.mp3'); 
+                     this.load.audio('select', 'snd/select.mp3'); 
                  /*  this.load.image('fondo', 'JxhB0fg/menu-Opciones.png');
                   this.load.image('seleccion', '1T5m6WT/seleccion.png');
                     this.load.image('seleccionpersonajes', 'wY6R1tB/seleccionpersonajes.png');
@@ -5752,10 +5775,16 @@ class SceneB extends Phaser.Scene {
     create ()
     {
 
-
+ // this.sound.play('theme');
 //var htmlString = '<input id="text" type="text" value="https://hogangnono.com" style="width:80%" /><br />';
     //  var domElement = this.add.dom(0, 0).createFromHTML(htmlString); 
         // this.cursors = this.input.keyboard.createCursorKeys();
+this.nombreJ1 = "Juan";
+this.nombreJ2 = "Marcos";
+this.nombreJ3 = "Luis";
+this.nombreJ4 = "Maria";
+
+
 this.personajeSeleccionadoP1 = 1;
 this.tematica = 1;
 this.gamemode = 0;
@@ -5768,6 +5797,10 @@ this.designer = 0;
 
 this.pantalla=1;
 
+this.ready1 = 0;
+this.ready2 = 0;
+this.ready3 = 0;
+this.ready4 = 0;
 
  this.seleccionadoSprite = this.physics.add.sprite(413 +413/4, 336, 'seleccion');
 
@@ -5777,7 +5810,9 @@ this.musicapartidaSprite = this.physics.add.sprite(413 +413/4, 336, 'seleccion2'
 
 this.tematicaSprite = this.physics.add.sprite(413 +413/4, 336, 'seleccion2');
 
-this.personajeSelectSpriteP1 = this.physics.add.sprite(450 +413/4, 750, 'seleccion2');
+this.personajeSelectSpriteP1 = this.physics.add.sprite(450 +413/4, 750, 'selectorRect1');
+
+
 
   this.personajeSelectSpriteP1.visible = false;
  this.personajeSelectSpriteP1.setDepth(1);
@@ -5786,6 +5821,27 @@ this.personajeSelectSpriteP1 = this.physics.add.sprite(450 +413/4, 750, 'selecci
       this.menufondopersonajes.visible = false;
  this.seleccionadoSprite2 = this.physics.add.sprite(413 +413/4, 336, 'seleccion');
   this.seleccionadoSprite2.visible = false;
+
+this.readySprite1 = this.physics.add.sprite(730 +413/4, 530, 'noready');
+this.readySprite2 = this.physics.add.sprite(1420 +413/4, 530, 'noready');
+this.readySprite3 = this.physics.add.sprite(730 +413/4, 640, 'noready');
+this.readySprite4 = this.physics.add.sprite(1420 +413/4, 640, 'noready');
+              
+this.readySprite1.visible = false;
+this.readySprite2.visible = false;
+this.readySprite3.visible = false;
+this.readySprite4.visible = false;
+
+
+this.nombreJ1text = this.add.text(414, 516, this.nombreJ1, { fontFamily: '"Arial Black"', fontSize: 24, fill: 'black',});
+this.nombreJ2text = this.add.text(1114, 516, this.nombreJ2, { fontFamily: '"Arial Black"', fontSize: 24, fill: 'black',});
+this.nombreJ3text = this.add.text(414, 626, this.nombreJ3, { fontFamily: '"Arial Black"', fontSize: 24, fill: 'black',});
+this.nombreJ4text = this.add.text(1114, 626, this.nombreJ4, { fontFamily: '"Arial Black"', fontSize: 24, fill: 'black',});
+
+this.nombreJ1text.visible = false;
+this.nombreJ2text.visible = false;
+this.nombreJ3text.visible = false;
+this.nombreJ4text.visible = false;
 
 this.input.keyboard.on('keydown_UP', moverMenuArriba, this);
   this.input.keyboard.on('keydown_DOWN', moverMenuAbajo, this);
@@ -6029,6 +6085,7 @@ function moverMenuDer()
 }
 function seleccionarOpcion()
 {
+  this.sound.play('select');
     if(this.pantalla ==1)
     {
 
@@ -6086,6 +6143,16 @@ function seleccionarOpcion()
              this.seleccionadoSprite2.visible = true;
 
              this.personajeSelectSpriteP1.visible = true;
+
+this.readySprite1.visible = true;
+this.readySprite2.visible = true;
+this.readySprite3.visible = true;
+this.readySprite4.visible = true;
+
+this.nombreJ1text.visible = true;
+this.nombreJ2text.visible = true;
+this.nombreJ3text.visible = true;
+this.nombreJ4text.visible = true;
         }
     }
     else if(this.pantalla ==2)
@@ -6095,16 +6162,26 @@ function seleccionarOpcion()
             element.style.display = 'none'
             this.pantalla=1;
              this.seleccionInt =8;
+this.nombreJ1text.visible = false;
+this.nombreJ2text.visible = false;
+this.nombreJ3text.visible = false;
+this.nombreJ4text.visible = false;
+
             this.menufondopersonajes.visible = false;
              this.seleccionadoSprite2.visible = false;
               this.personajeSelectSpriteP1.visible = false;
+
+              this.readySprite1.visible = false;
+this.readySprite2.visible = false;
+this.readySprite3.visible = false;
+this.readySprite4.visible = false;
         //    this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores });
         }
         else if(this.seleccionInt==10)
         {
             element.style.display = 'none'
 
-       this.scene.start('Scene1', { tematica:  this.tematica, personajeSelectP1:  this.personajeSeleccionadoP1, gamemode: this.gamemode, jugadores: this.jugadores , designer: this.designer});
+       this.scene.start('Scene1', { tematica:  this.tematica, personajeSelectP1:  this.personajeSeleccionadoP1, gamemode: this.gamemode, jugadores: this.jugadores , designer: this.designer, nombredata: this.nombreJ1, nombredata2: this.nombreJ2, nombredata3: this.nombreJ3, nombredata4: this.nombreJ4});
         }
         
         if(this.seleccionInt==11)
@@ -6193,6 +6270,32 @@ function seleccionarOpcion()
         }
 
         this.add.image(120, 160, 'megaset', 'contra2');*/
+
+function estadoListo1()
+{
+this.ready1 = 1;
+this.readySprite1.setTexture('ready');
+}
+
+function estadoListo2()
+{
+this.ready2 = 1;
+this.readySprite2.setTexture('ready');
+}
+function estadoListo3()
+{
+this.ready3 = 1;
+this.readySprite3.setTexture('ready');
+}
+function estadoListo4()
+{
+this.ready4 = 1;
+this.readySprite4.setTexture('ready');
+}
+this.input.keyboard.on('keydown_ENTER', estadoListo1, this);
+this.input.keyboard.on('keydown_R', estadoListo2, this);
+this.input.keyboard.on('keydown_U', estadoListo3, this);
+this.input.keyboard.on('keydown_P', estadoListo4, this);
     }
 
 
@@ -6330,7 +6433,7 @@ update()
         else if(this.seleccionInt==10)
         {
          
-       this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores , designer: this.designer});
+       this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores , designer: this.designer, nombredata: this.nombreJ1, nombredata2: this.nombreJ2, nombredata3: this.nombreJ3, nombredata4: this.nombreJ4});
         }
     }
       break;
@@ -6896,9 +6999,14 @@ update()
 var SCREEN_HEIGHT = 1080;
 var config = {
     type: Phaser.arcade,
+
+     audio: {
+        disableWebAudio: true
+    },
+
     width: 1920,
     height: 1080,
-      backgroundColor: '#222288',
+     // backgroundColor: '#222288',
      dom: {
         createContainer: true
     },
