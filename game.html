@@ -95,11 +95,10 @@ class Scene1 extends Phaser.Scene {
         this.nombreJ2 = data.nombredata2;
         this.nombreJ3 = data.nombredata3;
         this.nombreJ4 = data.nombredata4;
-
-        console.log(data.nombredata);
-         console.log(data.nombredata2);
-          console.log(data.nombredata3);
-           console.log(data.nombredata4);
+        this.mapaNumero = data.mapaNumero;
+        this.mapaTipo = data.mapaTipo;
+        this.designerMode = data.designerMode;
+       
     }
 
  preload ()
@@ -312,7 +311,23 @@ this.load.image('pisor2', 'Mhy1S9p/pisor2.png');
 
 create()
 {
-this.sound.play('moon');
+
+if(this.musicData==1)
+{
+  this.explosionsound = this.sound.add('explosion', {volume: 0.5});
+  this.moonsong = this.sound.add('moon', {volume: 0.5});
+}
+else
+{
+this.explosionsound = this.sound.add('explosion', {volume: 0.0});
+this.moonsong = this.sound.add('moon', {volume: 0.0});
+}
+
+  if(this.designer != 1)
+  {
+this.moonsong.play();
+}
+
   this.bombasFullDirection= "NA";
    this.bombasFullDirection2= "NA";
     this.bombasFullDirection3= "NA";
@@ -2799,12 +2814,54 @@ function cogerBomba()
 
 }
 this.input.keyboard.on('keydown_Z', cogerBomba, this);
+ const rows = [[0,0,99]];
 
 function activarPause()
 {
 
+
    if(this.pause==1)
+   {
+    if(this.designer==1)
+    {
+     // let csvContent = "data:text/csv;charset=utf-8,";
+      let superString ="";
+
+//solo guardar en phaser
+rows.forEach(function(rowArray) {
+    let row = rowArray.join(",");
+     superString += row + ";";
+});
+
+//superString = superString + '0,0,99';
+
+//var stringNameMapa = "mapa" + this.mapaNumeroEditado;
+var valoranterior = localStorage.getItem(this.mapaNumero);
+var valoranterior = valoranterior + superString;
+
+localStorage.setItem(this.mapaNumero, valoranterior);
+
+
+/*
+rows.forEach(function(rowArray) {
+    let row = rowArray.join(",");
+    csvContent += row + "\r\n";
+});
+
+var encodedUri = encodeURI(csvContent);
+var link = document.createElement("a");
+link.setAttribute("href", encodedUri);
+link.setAttribute("download", "my_data.csv");
+document.body.appendChild(link); // Required for FF
+
+link.click(); */
+
+    this.designer =0;
+    }
+
+   this.moonsong.play();
    this.pause = 0;
+    }
     else   
    this.pause = 1;  
 
@@ -2815,7 +2872,6 @@ if(this.pause ==0)
      this.objetocolocarsprite.visible = false;
  this.seleccionadoSprite.visible = false;
 
-    this.designer =0;
      this.menureiniciar =0;
     this.menupausesprite.visible = false;
     this.menupausesprite2.visible = false;
@@ -3008,6 +3064,7 @@ function realizarAccionesMenu()
     }
     else if(this.menuseleccion==3)
     {
+      this.game.sound.stopAll();
         this.scene.start('SceneB');
 
     }
@@ -3524,7 +3581,129 @@ this.seleccionoVotacion.setText("");
 //moverazar();
 
 //Designer
+if(this.designer==1)
+{
+ for (var i = -1; i < 22; i++)
+    {
+for (var j = 1; j < 14; j++)
+    {
 
+  
+      this.pisonegro.create(480+ i*32*2,  64 + j*32*2, 'pisonegro');
+    }
+  }
+}
+
+
+if(this.designer==1)
+{
+var value = localStorage.getItem(this.mapaNumero);
+
+if(value != null)
+{
+console.log(value);
+
+var elementos = value.split(';');
+    
+    var valorx = 0;
+ var valory = 0;
+ var valorobj = 99;
+
+
+for (var i = 0; i < elementos.length; i++) {
+ 
+console.log(i);
+
+console.log(elementos[i]);
+
+ var valores = elementos[i].split(',');
+
+if(valores != null)
+{
+  valorx = valores[0];
+  valory = valores[1];
+  valorobj = valores[2];
+}
+
+
+ if(valorobj ==0)
+    {
+           var item = Phaser.Math.Between(0,40);
+
+  if(item ==1)
+     {
+     this.powerupsLlamas.create(416+valorx*64, 128+valory*64,'poderllama');
+    }
+    if(item ==2)
+    {
+     this.powerupsPatin.create(416+valorx*64, 128+valory*64,'poderpatin');
+    }
+    if(item ==3)
+    {
+     this.powerupsBombas.create(416+valorx*64, 128+valory*64, 'poderbomba');
+    }
+     if(item ==36)
+    {
+     this.powerupsVidas.create(416+valorx*64, 128+valory*64,'podervida');
+    }
+     if(item ==38)
+    {
+     this.powerupsGuantes.create(416+valorx*64, 128+valory*64, 'poderguante');
+    }
+        this.box.create(416+valorx*64, 128+valory*64, 'wall');
+
+
+       //this.objetocolocarspriteNuevo = this.physics.add.sprite(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'wall');
+    }
+
+  if(valorobj ==1)
+    {
+
+        this.enemigos.create(416+valorx*64, 128+valory*64, 'enemigo');
+        //this.objetocolocarspriteNuevo = this.physics.add.sprite(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'enemigo');
+  }
+
+  if(valorobj ==2)
+    {
+       this.pisomov.create(416+valorx*64, 128+valory*64, 'pisomov');
+       // this.objetocolocarspriteNuevo = this.physics.add.sprite(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'pisomov');
+  }
+
+   if(valorobj ==3)
+    {
+       this.pisor1.create(416+valorx*64, 128+valory*64, 'pisor1');
+//        this.objetocolocarspriteNuevo = this.physics.add.sprite(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'pisor1');
+  }
+   if(valorobj ==4)
+    {
+         this.minas.create(416+valorx*64, 128+valory*64, 'mina');
+  //      this.objetocolocarspriteNuevo = this.physics.add.sprite(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'mina');
+  }
+   if(valorobj ==5)
+    {
+        this.myShip.x = 416+valorx*64;
+        this.myShip.y =  128+valory*64;
+    }
+     if(valorobj ==6)
+    {
+        this.boxFuerte.create(416+valorx*64, 128+valory*64, 'wall2');
+    }
+
+
+
+
+}
+
+   
+
+
+}
+}
+
+
+this.designerX = 0;
+this.designerY = 0;
+this.element = 0;
 
      // this.objetocolocarspriteStart = this.physics.add.sprite(416 , 128, 'ship');
   
@@ -3550,10 +3729,13 @@ function moverMenuArribaDes()
 {
     if(this.designer==1)
     {
+    
 if(this.seleccionadoSprite.y -64 >= 128)
 this.seleccionadoSprite.y = this.seleccionadoSprite.y - 64;
 
 this.objetocolocarsprite.y = this.seleccionadoSprite.y ;
+
+  this.designerY = this.designerY -1;
 }
 }
 
@@ -3561,11 +3743,13 @@ function moverMenuAbajoDes()
 {
     if(this.designer==1)
     {
+
     if(this.seleccionadoSprite.y +64 <= 908)
 this.seleccionadoSprite.y = this.seleccionadoSprite.y + 64;
 
 this.objetocolocarsprite.y = this.seleccionadoSprite.y ;
         
+          this.designerY = this.designerY +1;
         }
 }
 function moverMenuIzqDes()
@@ -3576,6 +3760,8 @@ function moverMenuIzqDes()
    this.seleccionadoSprite.x = this.seleccionadoSprite.x - 64;
 
    this.objetocolocarsprite.x = this.seleccionadoSprite.x ;
+
+   this.designerX = this.designerX -1;
 }
 }
 function moverMenuDerDes()
@@ -3586,6 +3772,7 @@ function moverMenuDerDes()
     this.seleccionadoSprite.x = this.seleccionadoSprite.x + 64;
 
       this.objetocolocarsprite.x = this.seleccionadoSprite.x ;
+      this.designerX = this.designerX +1;
   }
 }
 function seleccionarOpcionMin()
@@ -3661,10 +3848,11 @@ function seleccionarOpcionDes()
 {
     if(this.designer==1)
     {
+       rows.push([this.designerX, this.designerY, this.objetocolocar])
+
     if(this.objetocolocar ==0)
     {
-
-          var item = Phaser.Math.Between(0,40);
+           var item = Phaser.Math.Between(0,40);
 
   if(item ==1)
      {
@@ -3759,10 +3947,28 @@ this.myShip2.setDepth(1);
 this.myShip3.setDepth(1);
 this.myShip4.setDepth(1);
 this.enemigos.setDepth(1);
+
+
+if(this.designerMode==0)
+{
+  this.moonsong.play();
+   this.objetocolocarsprite.visible = false;
+ this.seleccionadoSprite.visible = false;
+  this.designer = 0;
+}
+
+
+this.menupausesprite.setDepth(1);
+this.menupausesprite2.setDepth(1);
+this.menupausesprite3.setDepth(1);
 }
 
 update()
 {
+  //if(this.musicData==0)
+  //{
+   //  this.game.sound.stopAll();
+ // }
     if(this.designer ==0)
     {
 
@@ -3776,6 +3982,7 @@ update()
         {
          if(this.aceptarP1 == 1)
          {
+           this.game.sound.stopAll();
        this.scene.restart();
         }
         }
@@ -3785,6 +3992,7 @@ update()
         {
          if(this.aceptarP1 == 1 && this.aceptarP2 == 1)
          {
+           this.game.sound.stopAll();
        this.scene.restart();
         }
         }
@@ -3793,6 +4001,7 @@ update()
         {
          if(this.aceptarP1 == 1 && this.aceptarP2 == 1 && this.aceptarP3 == 1)
          {
+           this.game.sound.stopAll();
        this.scene.restart();
         }
         }
@@ -3801,6 +4010,7 @@ update()
         {
          if(this.aceptarP1 == 1 && this.aceptarP2 == 1 && this.aceptarP3 == 1 && this.aceptarP4 == 1)
          {
+           this.game.sound.stopAll();
        this.scene.restart();
         }
         }
@@ -4325,7 +4535,7 @@ this.bombasFull2.children.iterate(child => {
 //console.log("gamemode "+ this.gamemode+ " v1: " + this.vidasInt + this.vidasInt2+ this.vidasInt3+ this.vidasInt4 )
     if(this.gamemode == 0 && this.vidasInt <=0 && this.vidasInt2 <=0 && this.vidasInt3 <=0 && this.vidasInt4 <=0 )
     {
-
+ this.game.sound.stopAll();
 this.scene.restart();
 
      this.caerparedX =-1;
@@ -4512,11 +4722,13 @@ if(this.jugadoresTotal ==2)
 {
    if(this.vidasInt <=0 )
 {
+   this.game.sound.stopAll();
     this.scene.restart();
 }
 
 if(this.vidasInt2 <=0 )
 {
+   this.game.sound.stopAll();
     this.scene.restart();
 }
 }
@@ -4525,16 +4737,18 @@ if(this.jugadoresTotal ==3)
 {
    if(this.vidasInt <=0 && this.vidasInt2 <=0)
 {
+   this.game.sound.stopAll();
     this.scene.restart();
 }
 
  if(this.vidasInt2 <=0 && this.vidasInt3 <=0)
-{
+{ this.game.sound.stopAll();
     this.scene.restart();
 }
 
  if(this.vidasInt <=0 && this.vidasInt3 <=0)
 {
+   this.game.sound.stopAll();
     this.scene.restart();
 }
 }
@@ -4543,22 +4757,26 @@ if(this.jugadoresTotal ==4)
 {
 if(this.vidasInt <= 0 && this.vidasInt2 <= 0 && this.vidasInt3 <=0)
 {
+   this.game.sound.stopAll();
     this.scene.restart();
 }
 
 if(this.vidasInt4 <= 0 && this.vidasInt2 <= 0 && this.vidasInt3 <=0)
 {
+   this.game.sound.stopAll();
     this.scene.restart();
 }
 
 
 if(this.vidasInt4 <= 0 && this.vidasInt2 <= 0 && this.vidasInt<=0)
 {
+   this.game.sound.stopAll();
     this.scene.restart();
 }
 
 if(this.vidasInt <= 0 && this.vidasInt4 <= 0 && this.vidasInt3 <=0)
 {
+   this.game.sound.stopAll();
     this.scene.restart();
 }
 }
@@ -4568,27 +4786,32 @@ if(this.gamemode == 2 ) //modo por puntos
 {
     if(this.vidasInt <=0 && this.vidasInt2<= 0 && this.vidasInt3 <=0 && this.vidasInt4<=0)
 {
+   this.game.sound.stopAll();
     this.scene.restart();
 }
 
 if(this.killsInt >= 3)
 {
+   this.game.sound.stopAll();
     this.scene.restart();
 }
 
 if(this.killsInt2 >= 3)
 {
+   this.game.sound.stopAll();
     this.scene.restart();
 }
 
 
 if(this.killsInt3 >= 3)
 {
+   this.game.sound.stopAll();
     this.scene.restart();
 }
 
 if(this.killsInt4 >= 3)
 {
+   this.game.sound.stopAll();
     this.scene.restart();
 }
 
@@ -4962,7 +5185,7 @@ if(this.countExplosion4 >0)
 
 if(this.bombasFull.getLength()>0 && this.countExplosion ==0)
 {
-  this.sound.play('explosion');
+  this.explosionsound.play();
      this.bomba = this.bombasFull.getFirst();
      this.bombasFull.children.iterate(child => {
         if (true) {
@@ -5004,7 +5227,7 @@ this.countBomb = 0;
 
 if(this.bombasFull2.getLength()>0 && this.countExplosion2 ==0)
 {
-   this.sound.play('explosion');
+   this.explosionsound.play();
      this.bomba2 = this.bombasFull2.getFirst();
      this.bombasFull2.children.iterate(child => {
         if (true) {
@@ -5045,7 +5268,7 @@ this.countBomb2 = 0;
 
 if(this.bombasFull3.getLength()>0 && this.countExplosion3 ==0)
 {
-   this.sound.play('explosion');
+   this.explosionsound.play();
      this.bomba3 = this.bombasFull3.getFirst();
      this.bombasFull3.children.iterate(child => {
         if (true) {
@@ -5086,7 +5309,7 @@ this.countBomb3 = 0;
 
 if(this.bombasFull4.getLength()>0 && this.countExplosion4 ==0)
 {
-   this.sound.play('explosion');
+   this.explosionsound.play();
      this.bomba4 = this.bombasFull4.getFirst();
      this.bombasFull4.children.iterate(child => {
         if (true) {
@@ -5774,7 +5997,9 @@ class SceneB extends Phaser.Scene {
     }
     create ()
     {
-
+this.designerMode = 0; 
+this.mapaTipo = 1;
+this.mapaNumeroEditado = 1;
  // this.sound.play('theme');
 //var htmlString = '<input id="text" type="text" value="https://hogangnono.com" style="width:80%" /><br />';
     //  var domElement = this.add.dom(0, 0).createFromHTML(htmlString); 
@@ -5789,7 +6014,7 @@ this.personajeSeleccionadoP1 = 1;
 this.tematica = 1;
 this.gamemode = 0;
 this.jugadores = 1;
-this.music = 0;
+this.music = 1;
 this.designer = 0;
         this.menufondo = this.physics.add.sprite(1920/2, 1080/2, 'fondo');
        
@@ -5807,6 +6032,10 @@ this.ready4 = 0;
  this.tipojuegoSprite = this.physics.add.sprite(413 +413/4, 336, 'seleccion2');
 this.cantidadParticipantesSprite = this.physics.add.sprite(413 +413/4, 336, 'seleccion2');
 this.musicapartidaSprite = this.physics.add.sprite(413 +413/4, 336, 'seleccion2');
+
+this.mapatipoSprite = this.physics.add.sprite(413 +413/4, 336, 'seleccion2');
+this.designerSprite = this.physics.add.sprite(413 +413/4, 336, 'seleccion2');
+
 
 this.tematicaSprite = this.physics.add.sprite(413 +413/4, 336, 'seleccion2');
 
@@ -5833,6 +6062,8 @@ this.readySprite3.visible = false;
 this.readySprite4.visible = false;
 
 
+this.mapaNumeroEditadoString = this.add.text(624, 886, this.mapaNumeroEditado, { fontFamily: '"Arial Black"', fontSize: 24, fill: 'black',});
+
 this.nombreJ1text = this.add.text(414, 516, this.nombreJ1, { fontFamily: '"Arial Black"', fontSize: 24, fill: 'black',});
 this.nombreJ2text = this.add.text(1114, 516, this.nombreJ2, { fontFamily: '"Arial Black"', fontSize: 24, fill: 'black',});
 this.nombreJ3text = this.add.text(414, 626, this.nombreJ3, { fontFamily: '"Arial Black"', fontSize: 24, fill: 'black',});
@@ -5843,8 +6074,8 @@ this.nombreJ2text.visible = false;
 this.nombreJ3text.visible = false;
 this.nombreJ4text.visible = false;
 
-this.input.keyboard.on('keydown_UP', moverMenuArriba, this);
-  this.input.keyboard.on('keydown_DOWN', moverMenuAbajo, this);
+this.input.keyboard.on('keydown_UP', moverMenuAbajo, this);
+  this.input.keyboard.on('keydown_DOWN', moverMenuArriba, this);
     this.input.keyboard.on('keydown_LEFT', moverMenuIzq, this);
    this.input.keyboard.on('keydown_RIGHT', moverMenuDer, this);
     this.input.keyboard.on('keydown_X', seleccionarOpcion, this);
@@ -5902,11 +6133,24 @@ function moverMenuArriba()
 {
     if(this.pantalla ==1)
     {
-  if(this.seleccionInt ==0 || this.seleccionInt ==1 || this.seleccionInt ==2)
+
+ if(this.seleccionInt == 25)
+      {
+ this.mapaNumeroEditado= this.mapaNumeroEditado + 1;
+      this.mapaNumeroEditadoString.setText(this.mapaNumeroEditado);
+      }
+
+      else if(this.seleccionInt ==23 || this.seleccionInt ==24)
+            this.seleccionInt = 25;
+
+       else if(this.seleccionInt ==20 ||this.seleccionInt ==21 || this.seleccionInt ==22 )
+            this.seleccionInt = 23;
+
+  else if(this.seleccionInt ==0 || this.seleccionInt ==1 || this.seleccionInt ==2)
             this.seleccionInt = 20;
 
 
- if(this.seleccionInt ==3 || this.seleccionInt ==4 || this.seleccionInt ==5 || this.seleccionInt ==16)
+ else if(this.seleccionInt ==3 || this.seleccionInt ==4 || this.seleccionInt ==5 || this.seleccionInt ==16)
             this.seleccionInt = 0;
 
  else if(this.seleccionInt ==6 || this.seleccionInt ==7)
@@ -5946,10 +6190,16 @@ function moverMenuAbajo()
 
 if(this.pantalla ==1)
     {
-if(this.seleccionInt ==20 || this.seleccionInt ==21 || this.seleccionInt ==22)
+     if(this.seleccionInt ==25 || this.seleccionInt ==26)
+            this.seleccionInt = 23;
+
+           else if(this.seleccionInt ==23 || this.seleccionInt ==24)
+            this.seleccionInt = 20;
+
+else if(this.seleccionInt ==20 || this.seleccionInt ==21 || this.seleccionInt ==22)
             this.seleccionInt = 0;
 
-    if(this.seleccionInt ==0 || this.seleccionInt ==1 || this.seleccionInt ==2)
+    else if(this.seleccionInt ==0 || this.seleccionInt ==1 || this.seleccionInt ==2)
             this.seleccionInt = 3;
 
         else if(this.seleccionInt ==3 || this.seleccionInt ==4 || this.seleccionInt ==5 || this.seleccionInt ==16)
@@ -6006,6 +6256,18 @@ function moverMenuIzq()
             this.seleccionInt = 21;
             else if(this.seleccionInt ==21)
             this.seleccionInt = 20;
+           else if(this.seleccionInt ==24)
+            this.seleccionInt = 23;
+          else if(this.seleccionInt ==26)
+            this.seleccionInt = 25;
+
+
+ else if(this.seleccionInt ==25)
+ {
+   if(this.mapaNumeroEditado>1)
+      this.mapaNumeroEditado= this.mapaNumeroEditado - 1;
+      this.mapaNumeroEditadoString.setText(this.mapaNumeroEditado);
+    }
      }  
 
      else if (this.pantalla ==2)
@@ -6055,6 +6317,12 @@ function moverMenuDer()
             this.seleccionInt = 21;
             else if(this.seleccionInt ==21)
             this.seleccionInt = 22;
+          else if(this.seleccionInt ==23)
+            this.seleccionInt = 24;
+            else if(this.seleccionInt ==25)
+            this.seleccionInt = 26;
+
+
     }
       else if (this.pantalla ==2)
      {
@@ -6088,6 +6356,26 @@ function seleccionarOpcion()
   this.sound.play('select');
     if(this.pantalla ==1)
     {
+
+if(this.seleccionInt ==26)
+    {
+            this.designerMode = 1; 
+    }
+if(this.seleccionInt ==24)
+    {
+            this.designerMode = 0; 
+    }
+
+   if(this.seleccionInt ==25)
+    {
+      this.designer=1;
+            this.mapaTipo = 2; 
+    }
+   if(this.seleccionInt ==23)
+    {
+            this.designer=0;
+            this.mapaTipo = 1; 
+    }
 
     if(this.seleccionInt ==20)
     {
@@ -6181,7 +6469,7 @@ this.readySprite4.visible = false;
         {
             element.style.display = 'none'
 
-       this.scene.start('Scene1', { tematica:  this.tematica, personajeSelectP1:  this.personajeSeleccionadoP1, gamemode: this.gamemode, jugadores: this.jugadores , designer: this.designer, nombredata: this.nombreJ1, nombredata2: this.nombreJ2, nombredata3: this.nombreJ3, nombredata4: this.nombreJ4});
+       this.scene.start('Scene1', { tematica:  this.tematica, personajeSelectP1:  this.personajeSeleccionadoP1, gamemode: this.gamemode, jugadores: this.jugadores , designer: this.designer, nombredata: this.nombreJ1, nombredata2: this.nombreJ2, nombredata3: this.nombreJ3, nombredata4: this.nombreJ4, mapaNumero: this.mapaNumeroEditado, mapaTipo: this.mapaTipo, designerMode: this.designerMode, music: this.music});
         }
         
         if(this.seleccionInt==11)
@@ -6432,7 +6720,7 @@ update()
         }
         else if(this.seleccionInt==10)
         {
-         
+        //TV 
        this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores , designer: this.designer, nombredata: this.nombreJ1, nombredata2: this.nombreJ2, nombredata3: this.nombreJ3, nombredata4: this.nombreJ4});
         }
     }
@@ -6728,6 +7016,51 @@ if(this.seleccionInt ==22)
 {
   this.seleccionadoSprite.x = 1320 +413/4;
   this.seleccionadoSprite.y = 132 + 550;
+}
+
+if(this.mapaTipo ==1)
+{
+  this.mapatipoSprite.x = 310 +413/4;
+  this.mapatipoSprite.y = 302 + 550;
+}
+if(this.seleccionInt ==23)
+{
+  this.seleccionadoSprite.x = 310 +413/4;
+  this.seleccionadoSprite.y = 302 + 550;
+
+}
+if(this.mapaTipo ==2)
+{
+  this.mapatipoSprite.x = 310 +413/4;
+  this.mapatipoSprite.y = 356 + 550;
+}
+if(this.seleccionInt ==24)
+{
+  this.seleccionadoSprite.x = 970 +413/4;
+  this.seleccionadoSprite.y = 302 + 550;
+
+}
+if(this.designerMode==0)
+{
+   this.designerSprite.x = 970 +413/4;
+  this.designerSprite.y = 302 + 550;
+}
+if(this.seleccionInt ==25)
+{
+  this.seleccionadoSprite.x = 310 +413/4;
+  this.seleccionadoSprite.y = 356 + 550;
+
+}
+if(this.designerMode==1)
+{
+  this.designerSprite.x = 970 +413/4;
+  this.designerSprite.y = 356 + 550;
+}
+if(this.seleccionInt ==26)
+{
+  this.seleccionadoSprite.x = 970 +413/4;
+  this.seleccionadoSprite.y = 356 + 550;
+
 }
 
 }
