@@ -269,6 +269,11 @@ this.load.image('pisor2', 'img/pisor2.png');
                 this.load.audio('moon', 'snd/moon.mp3');
       
                    this.load.audio('explosion', 'snd/explosion.mp3');
+
+                   this.load.audio('item', 'snd/item.mp3');
+                   this.load.audio('loselive', 'snd/loselive.mp3');
+                    this.load.audio('matarbot', 'snd/matarbot.mp3');
+                    this.load.audio('wallFall', 'snd/wallFall.mp3');
 /*
   this.load.image('wall', 'd5yWhk2/wall.png');
    this.load.image('wall2', 'WykRp6s/wall2.png');
@@ -316,11 +321,23 @@ if(this.musicData==1)
 {
   this.explosionsound = this.sound.add('explosion', {volume: 0.5});
   this.moonsong = this.sound.add('moon', {volume: 0.5});
+
+   this.itemsound = this.sound.add('item', {volume: 0.4});
+   this.loselivesound = this.sound.add('loselive', {volume: 0.5});
+   this.matarbotsound = this.sound.add('matarbot',{volume: 0.8});
+   this.wallfallsong = this.sound.add('wallFall', {volume: 0.5});
+
 }
 else
 {
 this.explosionsound = this.sound.add('explosion', {volume: 0.0});
 this.moonsong = this.sound.add('moon', {volume: 0.0});
+
+ this.itemsound = this.sound.add('item', {volume: 0.0});
+   this.loselivesound = this.sound.add('loselive', {volume: 0.0});
+   this.matarbotsound = this.sound.add('matarbot',{volume: 0.0});
+   this.wallfallsong = this.sound.add('wallFall', {volume: 0.0});
+
 }
 
   if(this.designer != 1)
@@ -1621,6 +1638,7 @@ this.physics.add.collider(this.enemigos,this.explosionRight4, aumentarScore, fun
 
 function bajarvidas2()
 {
+  this.loselivesound.play();
 if(this.cooldownP2 ==0)
     {
          this.cooldownP2 =1;
@@ -1650,6 +1668,7 @@ if(this.relojInt > 0)
 
 function bajarvidas3()
 {
+  this.loselivesound.play();
     if(this.cooldownP3 ==0)
     {
  this.cooldownP3 =1;
@@ -1678,6 +1697,7 @@ if(this.relojInt > 0)
 }
 function bajarvidas4()
 {
+  this.loselivesound.play();
     if(this.cooldownP4 ==0)
     {
 
@@ -1707,7 +1727,7 @@ else
 
 function bajarvidas()
 {
-
+this.loselivesound.play();
     if(this.cooldownP1 ==0)
     {
         this.cooldownP1 =1;
@@ -2087,7 +2107,7 @@ if(this.cooldownP3tick==300)
 }
    function aumentarScore()
 {
-
+this.matarbotsound.play();
     this.scoreInt = this.scoreInt + 500;
 
     if(this.gamemode ==0)
@@ -2101,7 +2121,8 @@ if(this.cooldownP3tick==300)
 
     if(this.enemigos.getLength() <=0)
     {
-    
+    this.game.sound.stopAll();
+    this.moonsong.play();
   this.caerparedX =-1;
  this.caerparedY = 1;
   this.disminuirX = 0;
@@ -2276,24 +2297,28 @@ if(this.jugadoresTotal >=4 && this.vidasInt4 >0)
 }
 function aumentarllamas()
 {
+    this.itemsound.play();
     this.scoreInt = this.scoreInt + 150;
     this.llama = this.llama +1;  console.log("llama");
     this.score.setText(this.scoreInt);
 }
 function aumentarllamas2()
 {
+  this.itemsound.play();
     this.scoreInt = this.scoreInt + 150;
     this.llama2 = this.llama2 +1;  console.log("llama2");
     this.score.setText(this.scoreInt);
 }
 function aumentarllamas3()
 {
+  this.itemsound.play();
     this.scoreInt = this.scoreInt + 150;
     this.llama3 = this.llama3 +1;  console.log("llama3");
     this.score.setText(this.scoreInt);
 }
 function aumentarllamas4()
 {
+  this.itemsound.play();
     this.scoreInt = this.scoreInt + 150;
     this.llama4 = this.llama4 +1;  console.log("llama4");
     this.score.setText(this.scoreInt);
@@ -2302,24 +2327,28 @@ function aumentarllamas4()
 
   function aumentarBombas()
 {
+  this.itemsound.play();
     this.scoreInt = this.scoreInt + 100;
     this.bombas = this.bombas +1;  console.log("bomba");
     this.score.setText(this.scoreInt);
 }
  function aumentarBombas2()
 {
+  this.itemsound.play();
     this.scoreInt = this.scoreInt + 100;
     this.bombas2 = this.bombas2 +1;  console.log("bomba2");
     this.score.setText(this.scoreInt);
 }
  function aumentarBombas3()
 {
+  this.itemsound.play();
     this.scoreInt = this.scoreInt + 100;
     this.bombas3 = this.bombas3 +1;  console.log("bomba3");
     this.score.setText(this.scoreInt);
 }
  function aumentarBombas4()
 {
+  this.itemsound.play();
     this.scoreInt = this.scoreInt + 100;
     this.bombas4 = this.bombas4 +1;  console.log("bomba4");
     this.score.setText(this.scoreInt);
@@ -2329,6 +2358,7 @@ function aumentarllamas4()
 
 function agregarGuante1()
 {
+  this.itemsound.play();
    this.guanteP1 = 1;
      this.scoreInt = this.scoreInt + 150;
       this.score.setText(this.scoreInt);
@@ -2337,6 +2367,7 @@ function agregarGuante1()
 
 function agregarGuante2()
 {
+  this.itemsound.play();
    this.guanteP2 = 1;
      this.scoreInt = this.scoreInt + 150;
       this.score.setText(this.scoreInt);
@@ -2344,6 +2375,7 @@ function agregarGuante2()
 }
 function agregarGuante3()
 {
+  this.itemsound.play();
    this.guanteP3 = 1;
      this.scoreInt = this.scoreInt + 150;
       this.score.setText(this.scoreInt);
@@ -2351,6 +2383,7 @@ function agregarGuante3()
 }
 function agregarGuante4()
 {
+  this.itemsound.play();
    this.guanteP4 = 1;
      this.scoreInt = this.scoreInt + 150;
       this.score.setText(this.scoreInt);
@@ -2358,6 +2391,7 @@ function agregarGuante4()
 }
 function aumentarPatin()
 {
+  this.itemsound.play();
     this.scoreInt = this.scoreInt + 200;
     this.patin = this.patin +5;
     console.log("velocidad");
@@ -2366,6 +2400,7 @@ function aumentarPatin()
 
 function aumentarPatin2()
 {
+  this.itemsound.play();
     this.scoreInt = this.scoreInt + 200;
     this.patin2 = this.patin2 +5;
     console.log("velocidad2");
@@ -2374,6 +2409,7 @@ function aumentarPatin2()
 
 function aumentarPatin3()
 {
+  this.itemsound.play();
     this.scoreInt = this.scoreInt + 200;
     this.patin3 = this.patin3 +5;
     console.log("velocidad3");
@@ -2382,6 +2418,7 @@ function aumentarPatin3()
 
 function aumentarPatin4()
 {
+  this.itemsound.play();
     this.scoreInt = this.scoreInt + 200;
     this.patin4 = this.patin4 +5;
     console.log("velocidad4");
@@ -2390,6 +2427,7 @@ function aumentarPatin4()
 
 function aumentarVida()
 {
+  this.itemsound.play();
      this.scoreInt = this.scoreInt + 300;
     this.vidasInt = this.vidasInt + 1;
     console.log("vida");
@@ -2399,6 +2437,7 @@ function aumentarVida()
 
 function aumentarVida2()
 {
+  this.itemsound.play();
      this.scoreInt = this.scoreInt + 300;
     this.vidasInt2 = this.vidasInt2 + 1;
     console.log("vida2");
@@ -2408,6 +2447,7 @@ function aumentarVida2()
 
 function aumentarVida3()
 {
+  this.itemsound.play();
      this.scoreInt = this.scoreInt + 300;
     this.vidasInt3 = this.vidasInt3 + 1;
     console.log("vida3");
@@ -2417,6 +2457,7 @@ function aumentarVida3()
 
 function aumentarVida4()
 {
+  this.itemsound.play();
      this.scoreInt = this.scoreInt + 300;
     this.vidasInt4 = this.vidasInt4 + 1;
     console.log("vida4");
@@ -2818,7 +2859,7 @@ this.input.keyboard.on('keydown_Z', cogerBomba, this);
 
 function activarPause()
 {
-
+this.sound.stopAll();
 
    if(this.pause==1)
    {
@@ -2858,8 +2899,11 @@ link.click(); */
 
     this.designer =0;
     }
-
+    this.sound.stopAll();
+    if(this.relojInt>1)
    this.moonsong.play();
+ else
+  this.wallfallsong.play();
    this.pause = 0;
     }
     else   
@@ -4674,7 +4718,8 @@ for (var j = 1; j < 14; j++)
 //FIN REINICIO
  if(this.relojInt==1) //bajar vidas cuando el contador sea 0
  {
-
+this.game.sound.stopAll();
+this.wallfallsong.play();
 if(this.gamemode == 1 || this.gamemode == 2 )
 {
     if(this.vidasInt>0)
@@ -5198,13 +5243,16 @@ if(this.bombasFull.getLength()>0 && this.countExplosion ==0)
         })
 
      this.bombasFull.children.iterate(child => {
+
+      if(child!=null)
+      {
         if (child.x == this.bomba.x && child.y == this.bomba.y) {
 
              //this.bomba = child;
             child.destroy(child, true);
             return;
             }
-           
+       }    
         })
 
 this.countBomb = 0;
@@ -5242,11 +5290,13 @@ if(this.bombasFull2.getLength()>0 && this.countExplosion2 ==0)
      this.bombasFull2.children.iterate(child => {
         if (child.x == this.bomba2.x && child.y == this.bomba2.y) {
 
+  if(child!=null)
+      {
              //this.bomba = child;
             child.destroy(child, true);
             return;
             }
-           
+           }
         })
 
 this.countBomb2 = 0;
@@ -5283,11 +5333,13 @@ if(this.bombasFull3.getLength()>0 && this.countExplosion3 ==0)
      this.bombasFull3.children.iterate(child => {
         if (child.x == this.bomba3.x && child.y == this.bomba3.y) {
 
+  if(child!=null)
+      {
              //this.bomba = child;
             child.destroy(child, true);
             return;
             }
-           
+           }
         })
 
 this.countBomb3 = 0;
@@ -5324,11 +5376,13 @@ if(this.bombasFull4.getLength()>0 && this.countExplosion4 ==0)
      this.bombasFull4.children.iterate(child => {
         if (child.x == this.bomba4.x && child.y == this.bomba4.y) {
 
+  if(child!=null)
+      {
              //this.bomba = child;
             child.destroy(child, true);
             return;
             }
-           
+           }
         })
 
 this.countBomb4 = 0;
