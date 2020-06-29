@@ -112,7 +112,8 @@ class Scene1 extends Phaser.Scene {
         this.mapaNumero = data.mapaNumero;
         this.mapaTipo = data.mapaTipo;
         this.designerMode = data.designerMode;
-       
+        this.dificultad = data.dificultad;
+      
     }
 
  preload ()
@@ -344,6 +345,10 @@ this.load.image('pisor2', 'img/pisor2.png');
            this.load.image('menupause', 'img/menupause.png');
              this.load.image('menupause2', 'img/menupause2.png');
           this.load.image('menupause3', 'img/menupause3.png');
+
+            this.load.image('menupause2end', 'img/menupause2end.png');
+          this.load.image('menupause3end', 'img/menupause3end.png');
+
             this.load.image('votacionmenu', 'img/votacionmenu.png');
 
                 this.load.image('votacionmenu2', 'img/votacionmenu2P.png');
@@ -392,6 +397,10 @@ create()
 {
   this.mensajeganar = 0;
 
+if(localStorage.getItem("mapasCreados") == null)
+localStorage.setItem("mapasCreados", 1);
+
+
 //MAPAS_PREDEFINIDOS
 localStorage.setItem(-1, "0,0,99;1,1,0;1,2,0;1,3,0;1,4,0;1,5,0;1,6,0;1,7,0;1,8,0;1,9,0;1,10,0;1,11,0;2,11,0;3,11,0;4,11,0;5,11,0;6,11,0;7,11,0;8,11,0;9,11,0;12,11,0;13,11,0;14,11,0;15,11,0;16,11,0;17,11,0;18,11,0;19,11,0;20,11,0;21,10,0;21,11,0;21,9,0;21,8,0;21,7,0;21,6,0;21,5,0;21,4,0;21,3,0;21,2,0;21,1,0;20,1,0;19,1,0;18,1,0;17,1,0;16,1,0;15,1,0;14,1,0;13,1,0;12,1,0;11,1,0;10,1,0;9,1,0;8,1,0;7,1,0;6,1,0;5,1,0;4,1,0;3,1,0;2,1,0;3,9,6;4,9,6;5,9,6;6,9,6;7,9,6;8,9,6;9,9,6;10,9,6;11,9,6;12,9,6;13,9,6;14,9,6;15,9,6;16,9,6;17,9,6;18,9,6;19,9,6;19,8,6;19,7,6;19,6,6;19,5,6;19,4,6;19,3,6;18,3,6;17,3,6;16,3,6;15,3,6;14,3,6;13,3,6;12,3,6;11,3,6;10,3,6;9,3,6;8,3,6;7,3,6;6,3,6;5,3,6;4,3,6;3,3,6;3,4,6;3,8,6;3,5,6;3,7,6;4,4,2;4,5,2;4,6,2;4,7,2;4,8,2;5,8,2;5,7,2;5,6,2;5,5,2;5,4,2;7,4,3;7,5,3;7,8,3;7,7,3;18,8,1;18,4,1;11,4,1;11,8,1;7,6,1;");
 
@@ -399,7 +408,7 @@ localStorage.setItem(-2, "0,0,99;1,3,0;1,2,0;1,1,0;2,1,0;3,1,0;3,2,0;3,3,0;1,5,0
 
 localStorage.setItem(-3, "0,0,99;1,4,0;0,4,0;2,4,0;3,4,0;4,2,0;4,0,0;4,1,0;4,3,0;18,0,0;18,1,0;18,2,0;18,3,0;19,4,0;20,4,0;21,4,0;22,4,0;22,8,0;21,8,0;20,8,0;19,8,0;18,9,0;18,10,0;18,11,0;18,12,0;4,12,0;4,11,0;4,10,0;4,9,0;3,8,0;2,8,0;1,8,0;0,8,0;0,5,6;1,5,6;2,5,6;3,5,6;5,3,6;5,2,6;5,1,6;5,0,6;17,0,6;17,1,6;17,2,6;17,3,6;19,5,6;20,5,6;21,5,6;22,7,6;21,7,6;20,7,6;19,7,6;22,5,6;17,9,6;17,10,6;17,11,6;17,12,6;5,12,6;5,11,6;5,10,6;5,9,6;3,7,6;2,7,6;1,7,6;0,7,6;4,8,2;4,7,2;5,7,2;5,8,2;5,4,2;4,4,2;4,5,2;5,5,2;17,4,2;18,4,2;18,5,2;17,5,2;17,7,2;17,8,2;18,7,2;18,8,2;7,1,6;7,3,6;7,5,6;7,7,6;7,9,6;7,11,6;9,11,6;9,9,6;9,7,6;9,5,6;9,3,6;9,1,6;11,1,6;11,3,6;11,5,6;11,7,6;11,9,6;11,11,6;13,11,6;13,9,6;13,7,6;13,5,6;13,3,6;13,1,6;15,1,6;15,3,6;15,5,6;15,7,6;15,9,6;15,11,6;10,4,1;10,6,1;12,6,1;12,4,1;12,8,1;10,8,1;11,10,1;7,6,0;7,4,0;7,2,0;8,1,0;10,1,0;12,1,0;14,1,0;15,2,0;15,4,0;15,6,0;15,8,0;15,10,0;14,11,0;12,11,0;10,11,0;8,11,0;7,10,0;7,8,0;");
 
-localStorage.setItem(-4, "0,0,99;0,12,0;0,11,0;0,10,0;0,9,0;0,8,0;0,7,0;0,6,0;0,5,0;0,4,0;0,4,0;0,3,0;0,2,0;0,1,0;1,1,0;2,1,0;3,1,0;4,1,0;5,1,0;6,1,0;7,1,0;8,1,0;9,1,0;10,1,0;11,1,0;12,1,0;13,1,0;14,1,0;15,1,0;16,1,0;17,1,0;18,1,0;19,1,0;20,1,0;21,1,0;21,2,0;21,3,0;21,4,0;21,5,0;21,6,0;21,7,0;21,8,0;21,9,0;21,10,0;21,11,0;20,11,0;19,11,0;18,11,0;17,11,0;16,11,0;15,11,0;14,11,0;13,11,0;12,11,0;11,11,0;10,11,0;9,11,0;8,11,0;7,11,0;6,11,0;5,11,0;4,11,0;3,11,0;2,11,0;2,10,0;2,9,0;2,8,0;2,7,0;2,6,0;2,5,0;2,4,0;2,3,0;3,3,0;4,3,0;5,3,0;6,3,0;7,3,0;8,3,0;9,3,0;10,3,0;11,3,0;12,3,0;13,3,0;14,3,0;15,3,0;16,3,0;17,3,0;18,3,0;19,3,0;19,4,0;19,5,0;19,6,0;19,7,0;19,8,0;19,9,0;18,9,0;17,9,0;16,9,0;15,9,0;14,9,0;13,9,0;12,9,0;11,9,0;10,9,0;9,9,0;8,9,0;7,9,0;6,9,0;5,9,0;4,9,0;4,8,0;4,7,0;4,6,0;4,5,0;1,0,2;2,0,2;3,0,2;4,0,2;5,0,2;6,0,2;7,0,2;8,0,2;9,0,2;10,0,2;11,0,2;12,0,2;13,0,2;14,0,2;15,0,2;16,0,2;17,0,2;18,0,2;19,0,2;20,0,2;21,0,2;23,0,2;23,1,2;23,2,2;23,3,2;23,4,2;23,5,2;23,6,2;23,7,2;23,8,2;23,9,2;23,10,2;23,11,2;23,12,2;22,12,2;21,12,2;20,12,2;19,12,2;18,12,2;17,12,2;16,12,2;15,12,2;14,12,2;13,12,2;12,12,2;11,12,2;10,12,2;9,12,2;8,12,2;7,12,2;6,12,2;5,12,2;4,12,2;3,12,2;2,12,2;2,11,2;2,10,2;2,9,2;2,8,2;2,7,2;2,6,2;2,5,2;2,4,2;2,3,2;2,2,2;3,2,2;4,2,2;5,2,2;6,2,2;7,2,2;8,2,2;9,2,2;10,2,2;11,2,2;12,2,2;13,2,2;14,2,2;15,2,2;16,2,2;17,2,2;18,2,2;19,2,2;20,2,2;21,2,2;21,3,2;21,4,2;21,5,2;21,6,2;21,7,2;21,8,2;21,9,2;21,10,2;20,10,2;19,10,2;18,10,2;17,10,2;16,10,2;15,10,2;14,10,2;13,10,2;12,10,2;11,10,2;10,10,2;9,10,2;8,10,2;7,10,2;6,10,2;5,10,2;4,10,2;4,9,2;4,8,2;4,7,2;4,6,2;4,5,2;4,4,2;5,4,2;7,7,6;7,5,6;9,5,6;9,7,6;11,7,6;11,5,6;13,5,6;13,7,6;15,7,6;15,5,6;17,5,6;17,7,6;19,4,3;19,5,3;19,6,3;19,7,3;19,8,3;7,6,1;9,6,1;11,6,1;13,6,1;15,6,1;17,6,1;11,8,1;13,8,1;13,4,1;11,4,1;");
+localStorage.setItem(-4, "0,0,99;0,7,0;1,8,0;2,9,0;3,10,0;4,11,0;5,12,0;0,5,6;1,5,6;2,5,6;3,5,6;4,5,6;5,5,6;6,5,6;7,5,6;7,7,6;6,7,6;5,7,6;4,7,6;4,8,6;7,8,6;7,9,6;7,10,6;7,11,6;9,12,6;9,11,6;9,10,6;9,9,6;9,8,6;9,7,6;2,1,6;3,1,6;4,1,6;5,1,6;6,1,6;7,1,6;7,2,6;7,3,6;6,3,6;9,5,6;9,4,6;9,3,6;9,2,6;9,1,6;11,1,6;11,2,6;11,3,6;11,4,6;11,5,6;13,5,6;14,5,6;15,5,6;16,5,6;17,5,6;18,5,6;19,5,6;20,5,6;21,5,6;22,5,6;14,3,6;13,3,6;13,2,6;13,1,6;14,1,6;15,1,6;16,1,6;17,1,6;18,1,6;19,1,6;20,1,6;11,7,6;11,8,6;11,9,6;11,10,6;11,11,6;11,12,6;13,11,6;13,10,6;13,9,6;13,8,6;13,7,6;14,7,6;15,7,6;16,7,6;16,8,6;15,12,0;16,11,0;17,10,0;18,9,0;19,8,0;20,7,0;16,2,0;17,3,0;18,4,0;20,2,0;19,3,0;2,2,0;3,3,0;4,4,0;5,3,0;9,6,1;11,6,1;10,1,1;10,3,1;10,5,1;10,7,1;10,9,1;10,11,1;10,6,1;8,6,2;7,6,2;6,6,2;5,6,2;4,6,2;12,6,2;13,6,2;14,6,2;15,6,2;16,6,2;7,-1,0;7,3,0;7,11,0;3,5,0;17,5,0;13,11,0;13,3,0;13,-1,0;6,7,4;5,7,4;14,7,4;15,7,4;14,1,4;6,1,4;");
 
 localStorage.setItem(-5, "0,0,99;2,1,0;2,3,0;2,5,0;2,8,0;2,10,0;4,10,0;4,8,0;4,5,0;4,3,0;4,1,0;6,10,0;6,8,0;6,5,0;6,3,0;6,1,0;8,1,0;8,3,0;8,5,0;8,8,0;8,10,0;10,10,0;10,8,0;10,5,0;10,3,0;10,1,0;1,5,6;1,8,6;3,5,6;3,8,6;5,8,6;5,5,6;7,5,6;7,8,6;9,8,6;9,5,6;10,6,6;10,7,6;1,1,6;1,3,6;3,3,6;3,1,6;5,1,6;5,3,6;7,3,6;7,1,6;9,1,6;9,3,6;9,10,6;7,10,6;3,10,6;5,10,6;1,10,6;0,12,3;2,12,3;4,12,3;6,12,3;10,2,3;1,2,3;1,4,3;10,4,3;10,9,3;1,9,3;1,6,3;1,7,3;12,7,6;12,6,6;12,5,6;12,4,6;12,3,6;12,2,6;12,1,6;12,0,6;12,12,6;12,11,6;12,10,6;12,9,6;14,7,6;14,8,6;14,9,6;13,5,6;14,5,6;15,5,6;16,5,6;16,6,6;16,7,6;16,8,6;16,9,6;16,10,6;16,11,6;14,11,6;15,11,6;14,3,6;14,2,6;14,1,6;15,1,6;16,1,6;16,3,6;17,3,6;18,3,6;18,2,6;18,1,6;18,0,6;18,4,6;18,5,6;18,6,6;18,7,6;18,8,6;18,9,6;18,10,6;20,10,6;20,9,6;20,8,6;20,7,6;20,6,6;20,5,6;20,4,6;20,3,6;21,3,6;22,5,6;22,7,6;21,9,6;21,11,6;20,11,6;22,1,6;21,1,6;20,1,6;19,12,6;18,12,6;22,1,1;13,1,1;19,11,1;14,11,1;9,7,1;9,8,1;9,3,1;9,10,1;14,5,1;");
 
@@ -912,9 +921,9 @@ if(this.jugadoresTotal >=4)
 
 
  //sprites de puntuacion
- this.ganadorText = this.add.text(768+32, 366+96, "", { fontFamily: '"Arial Black"', fontSize: 90, fill: 'black',});
+ this.ganadorText = this.add.text(773+32, 371+96, "", { fontFamily: '"Arial Black"', fontSize: 90, fill: 'white',});
 
- this.ganadorText2 = this.add.text(778+32, 376+96, "", { fontFamily: '"Arial Black"', fontSize: 90, fill: 'white',});
+ this.ganadorText2 = this.add.text(778+32, 376+96, "", { fontFamily: '"Arial Black"', fontSize: 90, fill: 'black',});
 
 this.mensajeFinPartidaSprite = this.physics.add.sprite(1088+32, 466+96, 'mensajeFinPartida');
 this.mensajeFinPartidaSprite.visible = false;
@@ -2180,8 +2189,10 @@ if(this.gamemode == 1 || this.gamemode == 2)
    // this.scoreInt = this.scoreInt + 500;
    // this.scoreInt = this.scoreInt + 500;
    if(this.cooldownP2tick==100)
+   {
+    if(this.killsInt =0)
     this.killsInt = this.killsInt +1;
-
+    }
  if(this.cooldownP3tick==100)
     this.killsInt = this.killsInt +1;
 
@@ -3032,24 +3043,22 @@ var valoranterior = valoranterior + superString;
 
 localStorage.setItem(this.mapaNumero, valoranterior);
 
-//ARCHIVOLOCAL
+
+
+//DESCARGAR ARCHIVOLOCAL CON MAPA COMENTADO SOLO USAR EN DEV
+
+
 let csvContent = "data:text/csv;charset=utf-8,";
      csvContent += valoranterior;
-/*rows.forEach(function(rowArray) {
-    let row = rowArray.join(",");
-//    csvContent += row + "\r\n";
-      csvContent += row + ";";
-});*/
-
 var encodedUri = encodeURI(csvContent);
 var link = document.createElement("a");
 link.setAttribute("href", encodedUri);
 link.setAttribute("download", "my_data.csv");
-document.body.appendChild(link); // Required for FF
+document.body.appendChild(link); 
 
 link.click(); 
 
-
+localStorage.setItem("mapasCreados", this.mapaNumero +1);
 
 //this.mapacargar = localStorage.getItem("N1");
 
@@ -3176,10 +3185,12 @@ if(this.pause == 1)
     else if(this.menuseleccion==2)
     {
 
+if(this.mensajeganar !=1)
+{
  this.menupausesprite.visible = true;
   this.menupausesprite2.visible = false;
   this.menuseleccion = 1;
- 
+ }
     }
     else if(this.menuseleccion==3)
     {
@@ -3213,9 +3224,12 @@ function moverMenuDer()
     }
     else if(this.menuseleccion==3)
     {
+      if(this.mensajeganar !=1)
+{
 this.menupausesprite.visible = true;
   this.menupausesprite3.visible = false;
   this.menuseleccion = 1;
+}
     }
 }
 }
@@ -3896,6 +3910,21 @@ if(valores != null)
     {
         this.boxFuerte.create(416+valorx*64, 128+valory*64, 'wall2');
     }
+    if(valorobj ==7)
+    {
+        this.myShip2.x = 416+valorx*64;
+        this.myShip2.y =  128+valory*64;
+    }
+    if(valorobj ==8)
+    {
+        this.myShip3.x = 416+valorx*64;
+        this.myShip3.y =  128+valory*64;
+    }
+    if(valorobj ==9)
+    {
+        this.myShip4.x = 416+valorx*64;
+        this.myShip4.y =  128+valory*64;
+    }
 
 
 
@@ -4002,10 +4031,10 @@ function seleccionarOpcionMax()
 {
     if(this.designer==1)
     {
-if(this.objetocolocar<=5)
+if(this.objetocolocar<=8)
      this.objetocolocar = this.objetocolocar + 1;
   else
-     this.objetocolocar = 5;
+     this.objetocolocar = 9;
 }
 
 // this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores });
@@ -4018,14 +4047,12 @@ function seleccionarOpcionSet()
     {
     if(this.objetocolocar ==0)
     {
-       
         this.objetocolocarsprite.setTexture('wall');
     }
      if(this.objetocolocar ==1)
     {
         this.objetocolocarsprite.setTexture('enemigo');
     }
-
      if(this.objetocolocar ==2)
     {
         this.objetocolocarsprite.setTexture('pisomov');
@@ -4046,6 +4073,18 @@ function seleccionarOpcionSet()
       if(this.objetocolocar ==6)
     {
         this.objetocolocarsprite.setTexture('wall2');
+    }
+    if(this.objetocolocar ==7)
+    {
+        this.objetocolocarsprite.setTexture('ship2');
+    }
+      if(this.objetocolocar ==8)
+    {
+        this.objetocolocarsprite.setTexture('ship3');
+    }
+      if(this.objetocolocar ==9)
+    {
+        this.objetocolocarsprite.setTexture('ship4');
     }
 }
 // this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores });
@@ -4116,9 +4155,25 @@ function seleccionarOpcionDes()
         this.myShip.x = this.seleccionadoSprite.x;
         this.myShip.y = this.seleccionadoSprite.y;
     }
+
      if(this.objetocolocar ==6)
     {
         this.boxFuerte.create(this.seleccionadoSprite.x , this.seleccionadoSprite.y, 'wall2');
+    }
+    if(this.objetocolocar ==7)
+    {
+        this.myShip2.x = this.seleccionadoSprite.x;
+        this.myShip2.y = this.seleccionadoSprite.y;
+    }
+    if(this.objetocolocar ==8)
+    {
+        this.myShip3.x = this.seleccionadoSprite.x;
+        this.myShip3.y = this.seleccionadoSprite.y;
+    }
+    if(this.objetocolocar ==9)
+    {
+        this.myShip4.x = this.seleccionadoSprite.x;
+        this.myShip4.y = this.seleccionadoSprite.y;
     }
 }
 // this.scene.start('Scene1', { gamemode: this.gamemode, jugadores: this.jugadores });
@@ -4191,8 +4246,8 @@ update()
 if(this.mensajeganar==1)
    {
 
- this.menupausesprite.x = 1920/2+200-50;
- this.menupausesprite.y = 1080/2 -50+200;
+this.menupausesprite2.setTexture('menupause2end');
+this.menupausesprite3.setTexture('menupause3end');
   this.menupausesprite2.x = 1920/2+200-50;
  this.menupausesprite2.y = 1080/2 -50+200;
   this.menupausesprite3.x = 1920/2+200-50;
@@ -4203,6 +4258,27 @@ this.mensajeFinPartidaSprite.visible = true;
   this.pause = 1;
 
    this.mensajeganartick--;
+
+ this.explosionUp.clear(this.scene);
+  this.explosionDown.clear(this.scene);
+  this.explosionLeft.clear(this.scene);
+ this.explosionRight.clear(this.scene);
+
+ this.explosionUp2.clear(this.scene);
+  this.explosionDown2.clear(this.scene);
+  this.explosionLeft2.clear(this.scene);
+ this.explosionRight2.clear(this.scene);
+
+ this.explosionUp3.clear(this.scene);
+  this.explosionDown3.clear(this.scene);
+  this.explosionLeft3.clear(this.scene);
+ this.explosionRight3.clear(this.scene);
+
+ this.explosionUp4.clear(this.scene);
+  this.explosionDown4.clear(this.scene);
+  this.explosionLeft4.clear(this.scene);
+ this.explosionRight4.clear(this.scene);
+
    /*if(this.mensajeganartick ==0)
    {
     this.game.sound.stopAll();
@@ -4779,7 +4855,9 @@ this.bombasFull2.children.iterate(child => {
 //console.log("gamemode "+ this.gamemode+ " v1: " + this.vidasInt + this.vidasInt2+ this.vidasInt3+ this.vidasInt4 )
     if(this.gamemode == 0 && this.vidasInt <=0 && this.vidasInt2 <=0 && this.vidasInt3 <=0 && this.vidasInt4 <=0 )
     {
-      this.menupausesprite.visible = true;
+      this.menuseleccion = 2;
+      this.menupausesprite2.visible = true;
+
  this.game.sound.stopAll();
 
  this.ganadorText.setText("PERDISTE!");
@@ -4983,8 +5061,8 @@ if(this.jugadoresTotal ==2)
    this.game.sound.stopAll();
  
  this.victorysong.play();
-
- this.menupausesprite.visible = true;
+this.menuseleccion = 2;
+      this.menupausesprite2.visible = true;
 //this.scene.pause();
 
 //    this.scene.restart();
@@ -5004,7 +5082,8 @@ if(this.vidasInt2 <=0 )
 
    this.game.sound.stopAll();
     this.victorysong.play();
-    this.menupausesprite.visible = true;
+    this.menuseleccion = 2;
+      this.menupausesprite2.visible = true;
    // this.scene.restart();
 }
 }
@@ -5023,7 +5102,8 @@ if(this.jugadoresTotal ==3)
 
    this.game.sound.stopAll();
     this.victorysong.play();
-    this.menupausesprite.visible = true;
+  this.menuseleccion = 2;
+      this.menupausesprite2.visible = true;
    // this.scene.restart();
 }
 
@@ -5039,7 +5119,8 @@ if(this.jugadoresTotal ==3)
 
   this.game.sound.stopAll();
    this.victorysong.play();
-   this.menupausesprite.visible = true;
+ this.menuseleccion = 2;
+      this.menupausesprite2.visible = true;
   //  this.scene.restart();
 }
 
@@ -5055,7 +5136,8 @@ if(this.jugadoresTotal ==3)
 
    this.game.sound.stopAll();
     this.victorysong.play();
-    this.menupausesprite.visible = true;
+    this.menuseleccion = 2;
+      this.menupausesprite2.visible = true;
    // this.scene.restart();
 }
 }
@@ -5073,7 +5155,8 @@ if(this.vidasInt <= 0 && this.vidasInt2 <= 0 && this.vidasInt3 <=0)
 
    this.game.sound.stopAll();
     this.victorysong.play();
-    this.menupausesprite.visible = true;
+  this.menuseleccion = 2;
+      this.menupausesprite2.visible = true;
   //  this.scene.restart();
 }
 
@@ -5087,7 +5170,8 @@ if(this.vidasInt4 <= 0 && this.vidasInt2 <= 0 && this.vidasInt3 <=0)
 
    this.game.sound.stopAll();
     this.victorysong.play();
-    this.menupausesprite.visible = true;
+  this.menuseleccion = 2;
+      this.menupausesprite2.visible = true;
    // this.scene.restart();
 }
 
@@ -5103,7 +5187,8 @@ if(this.vidasInt4 <= 0 && this.vidasInt2 <= 0 && this.vidasInt<=0)
 
   this.game.sound.stopAll();
     this.victorysong.play();
-    this.menupausesprite.visible = true;
+ this.menuseleccion = 2;
+      this.menupausesprite2.visible = true;
   //  this.scene.restart();
 }
 
@@ -5118,7 +5203,8 @@ if(this.vidasInt <= 0 && this.vidasInt4 <= 0 && this.vidasInt3 <=0)
 
    this.game.sound.stopAll();
     this.victorysong.play();
-    this.menupausesprite.visible = true;
+   this.menuseleccion = 2;
+      this.menupausesprite2.visible = true;
   //  this.scene.restart();
 }
 }
@@ -5138,7 +5224,8 @@ if(this.gamemode == 2 ) //modo por puntos
 
    this.game.sound.stopAll();
     this.victorysong.play();
-    this.menupausesprite.visible = true;
+  this.menuseleccion = 2;
+      this.menupausesprite2.visible = true;
   //  this.scene.restart();
 }
 
@@ -5156,7 +5243,8 @@ if(this.killsInt >= 3)
 
    this.game.sound.stopAll();
     this.victorysong.play();
-    this.menupausesprite.visible = true;
+  this.menuseleccion = 2;
+      this.menupausesprite2.visible = true;
  //   this.scene.restart();
 }
 
@@ -5171,7 +5259,8 @@ if(this.killsInt2 >= 3)
 
    this.game.sound.stopAll();
     this.victorysong.play();
-    this.menupausesprite.visible = true;
+   this.menuseleccion = 2;
+      this.menupausesprite2.visible = true;
   //  this.scene.restart();
 }
 
@@ -5186,6 +5275,8 @@ if(this.killsInt3 >= 3)
 
    this.game.sound.stopAll();
     this.victorysong.play();
+    this.menuseleccion = 2;
+      this.menupausesprite2.visible = true;
   //  this.scene.restart();
 }
 
@@ -5199,7 +5290,8 @@ if(this.killsInt4 >= 3)
 
    this.game.sound.stopAll();
     this.victorysong.play();
-    this.menupausesprite.visible = true;
+  this.menuseleccion = 2;
+      this.menupausesprite2.visible = true;
     
   //  this.scene.restart();
 }
@@ -5466,19 +5558,111 @@ this.disminuirY = this.disminuirY+1;
             var random = Phaser.Math.Between(0,100);
              //this.bomba = child;
             //child.destroy(child, true);
-
-            if(random ==0)
+           if(this.dificultad == 0)
+   {
+            if(random >0 && random < 1 && child.x <this.myShip.x)
             child.setVelocityX(25*this.nivelInt +50);
 
-            if(random ==1)
+            if(random >0 && random < 1 && child.x >this.myShip.x)
             child.setVelocityX(-25*this.nivelInt -50);
 
-            if(random ==2)
+           if(random >0 && random < 1 && child.y <this.myShip.y)
             child.setVelocityY(25*this.nivelInt +50);
 
-            if(random ==3)
+            if(random >0 && random < 1 && child.y >this.myShip.y)
             child.setVelocityY(-25*this.nivelInt-50);
+
             
+
+            if(random ==20)
+              {
+              
+              var random2 = Phaser.Math.Between(0,50);
+          //COLOCAR BOMBAS
+
+              if(random2==50)
+              {
+             if((child.x -50 < this.myShip.x +62 +50 ) && (child.x +62 +50 > this.myShip.x  -50) 
+            && (child.y +62 +50 > this.myShip.y -50) && (child.y -50< this.myShip.y +62 +50))
+          {
+
+                           var posx = 0;
+                       var posy = 0;
+     
+          for (var i = 0; i <= 50; i++) 
+          {
+
+            //416
+            //128
+            if(416 + i*64 <= child.x+16)
+              posx = 416 + i*64
+
+
+          }
+
+          for (var i = 0; i <= 50; i++) 
+          {
+
+            //416
+            //128
+            if(128 + i*64 <= child.y+16)
+              posy = 128 + i*64
+
+            
+          
+        
+    
+         }
+
+           this.bombasFull.create(posx, posy, 'bomba');
+          this.countExplosion = 100;
+      
+               
+           }
+
+           }
+         }
+            
+             if(random ==0)
+            child.setVelocityX(25*this.nivelInt +50);
+
+          if(random ==1)
+            child.setVelocityX(-25*this.nivelInt -50);
+
+           if(random ==2)
+            child.setVelocityY(25*this.nivelInt +50);
+
+             if(random ==3)
+            child.setVelocityY(-25*this.nivelInt-50);
+
+
+            //CORRER BOMBAS
+
+             this.bombasFull.children.iterate(child2 => {
+         
+             if((child.x -100 < child2.x +62 +100 ) && (child.x +62 +100 > child2.x -100) 
+            && (child.y +62 +100 > child2.y -100) && (child.y -100< child2.y +62 +100))
+          {
+
+    if(random >0 && random < 1 && child.x < child2.x)
+            child.setVelocityX(-25*this.nivelInt -50);
+
+            if(random >0 && random < 1 && child.x >child2.x)
+            child.setVelocityX(25*this.nivelInt +50);
+
+           if(random >0 && random < 1 && child.y <child2.y)
+            child.setVelocityY(-25*this.nivelInt -50);
+
+            if(random >0 && random < 1 && child.y >child2.y)
+            child.setVelocityY(25*this.nivelInt+50);
+
+           //this.bombasFull.create(child.x+32, child.y+32, 'bomba');
+          //this.countExplosion = 100;
+      }
+
+
+            })
+
             if(random ==99)
             {
                 random = Phaser.Math.Between(0,99);
@@ -5523,6 +5707,164 @@ this.disminuirY = this.disminuirY+1;
             return;
             }
            
+
+
+
+
+
+              if(this.dificultad == 1)
+              {
+            if(random >0 && random < 5 && child.x <this.myShip.x)
+            child.setVelocityX(25*this.nivelInt +50);
+
+            if(random >0 && random < 5 && child.x >this.myShip.x)
+            child.setVelocityX(-25*this.nivelInt -50);
+
+           if(random >0 && random < 5 && child.y <this.myShip.y)
+            child.setVelocityY(25*this.nivelInt +50);
+
+            if(random >0 && random < 5 && child.y >this.myShip.y)
+            child.setVelocityY(-25*this.nivelInt-50);
+
+            
+
+            if(random ==20)
+              {
+              
+              var random2 = Phaser.Math.Between(0,3);
+          //COLOCAR BOMBAS
+
+              if(random2==3)
+              {
+             if((child.x -50 < this.myShip.x +62 +50 ) && (child.x +62 +50 > this.myShip.x  -50) 
+            && (child.y +62 +50 > this.myShip.y -50) && (child.y -50< this.myShip.y +62 +50))
+          {
+
+                           var posx = 0;
+                       var posy = 0;
+     
+          for (var i = 0; i <= 50; i++) 
+          {
+
+            //416
+            //128
+            if(416 + i*64 <= child.x+16)
+              posx = 416 + i*64
+
+
+          }
+
+          for (var i = 0; i <= 50; i++) 
+          {
+
+            //416
+            //128
+            if(128 + i*64 <= child.y+16)
+              posy = 128 + i*64
+
+            
+          
+        
+    
+         }
+
+           this.bombasFull.create(posx, posy, 'bomba');
+          this.countExplosion = 100;
+      
+               
+           }
+
+           }
+         }
+            
+             if(random ==0)
+            child.setVelocityX(25*this.nivelInt +50);
+
+          if(random ==1)
+            child.setVelocityX(-25*this.nivelInt -50);
+
+           if(random ==2)
+            child.setVelocityY(25*this.nivelInt +50);
+
+             if(random ==3)
+            child.setVelocityY(-25*this.nivelInt-50);
+
+
+            //CORRER BOMBAS
+
+             this.bombasFull.children.iterate(child2 => {
+         
+             if((child.x -100 < child2.x +62 +100 ) && (child.x +62 +100 > child2.x -100) 
+            && (child.y +62 +100 > child2.y -100) && (child.y -100< child2.y +62 +100))
+          {
+
+    if(random >0 && random < 5 && child.x < child2.x)
+            child.setVelocityX(-25*this.nivelInt -50);
+
+            if(random >0 && random < 5 && child.x >child2.x)
+            child.setVelocityX(25*this.nivelInt +50);
+
+           if(random >0 && random < 5 && child.y <child2.y)
+            child.setVelocityY(-25*this.nivelInt -50);
+
+            if(random >0 && random < 5 && child.y >child2.y)
+            child.setVelocityY(25*this.nivelInt+50);
+
+           //this.bombasFull.create(child.x+32, child.y+32, 'bomba');
+          //this.countExplosion = 100;
+      }
+
+
+            })
+
+            if(random ==99)
+            {
+                random = Phaser.Math.Between(0,99);
+                {
+                    if(random ==99)
+                    {
+
+                      //MINAS
+                      var posx = 0;
+      var posy = 0;
+     
+          for (var i = 0; i <= 50; i++) 
+          {
+
+            //416
+            //128
+            if(416 + i*64 <= child.x+16)
+              posx = 416 + i*64
+
+
+          }
+
+          for (var i = 0; i <= 50; i++) 
+          {
+
+            //416
+            //128
+            if(128 + i*64 <= child.y+16)
+              posy = 128 + i*64
+
+            
+          
+        
+    
+         }       
+    
+                     this.minas.create(posx+32, posy+32, 'mina');
+                    }
+                 }
+            }
+
+            return;
+            }
+           
+
+
+
+           }
         )
 
  if(this.CrearObjeto == 1)
@@ -5776,30 +6118,56 @@ this.countBomb4 = 0;
         this.limpiarLlama4 =50;
  }
 
-if(this.resbalar==0)
+if(this.resbalar==1)
 {
- this.myShip.setVelocityX(0);
-  this.myShip.setVelocityY(0);
+ //this.myShip.setVelocityX(0);
+ // this.myShip.setVelocityY(0);
 }
-if(this.resbalar2==0)
+if(this.resbalar2==1)
 {
-this.myShip2.setVelocityX(0);
-  this.myShip2.setVelocityY(0);
-}
-
-if(this.resbalar3==0)
-{
-  this.myShip3.setVelocityX(0);
-  this.myShip3.setVelocityY(0);
+// this.myShip2.setVelocityX(0);
+//  this.myShip2.setVelocityY(0);
 }
 
-if(this.resbalar4==0)
+if(this.resbalar3==1)
 {
-  this.myShip4.setVelocityX(0);
-  this.myShip4.setVelocityY(0);
+ // this.myShip3.setVelocityX(0);
+ // this.myShip3.setVelocityY(0);
+}
+
+if(this.resbalar4==1)
+{
+ //this.myShip4.setVelocityX(0);
+ //this.myShip4.setVelocityY(0);
 }
 
     switch (cursor) {
+       case "STOPLEFT4":
+       if(this.resbalar4==0)
+        this.myShip4.setVelocityX(0);
+      break;
+      case "STOPLEFT3":
+      if(this.resbalar3==0)
+        this.myShip3.setVelocityX(0);
+      break;
+      case "STOPLEFT2":
+      if(this.resbalar2==0)
+        this.myShip2.setVelocityX(0);
+      break;
+      case "STOPLEFT":
+      if(this.resbalar==0)
+        this.myShip.setVelocityX(0);
+      break;
+       case "LEFT4":
+        this.myShip4.setVelocityX(-20*this.patin4);
+      break;
+      case "LEFT3":
+        this.myShip3.setVelocityX(-20*this.patin3);
+      break;
+      case "LEFT2":
+        this.myShip2.setVelocityX(-20*this.patin2);
+      break;
+
       case "LEFT":
 
       if(this.pause == 1)
@@ -5839,6 +6207,31 @@ this.menupausesprite3.visible = false;
    this.objetocolocarsprite.x = this.seleccionadoSprite.x ;
 }
          break;
+          case "STOPRIGHT4":
+          if(this.resbalar4==0)
+           this.myShip4.setVelocityX(0);
+         break;
+         case "STOPRIGHT3":
+         if(this.resbalar3==0)
+           this.myShip3.setVelocityX(0);
+         break;
+         case "STOPRIGHT2":
+         if(this.resbalar2==0)
+           this.myShip2.setVelocityX(0);
+         break;
+         case "STOPRIGHT":
+         if(this.resbalar==0)
+           this.myShip.setVelocityX(0);
+         break;
+         case "RIGHT4":
+           this.myShip4.setVelocityX(20*this.patin4);
+         break;
+         case "RIGHT3":
+           this.myShip3.setVelocityX(20*this.patin3);
+         break;
+         case "RIGHT2":
+           this.myShip2.setVelocityX(20*this.patin2);
+         break;
       case "RIGHT":
 
         if(this.pause == 1)
@@ -5877,6 +6270,31 @@ this.menupausesprite.visible = true;
       this.objetocolocarsprite.x = this.seleccionadoSprite.x ;
   }
          break;
+          case "STOPUP4":
+          if(this.resbalar4==0)
+          this.myShip4.setVelocityY(0);
+         break;
+          case "STOPUP3":
+          if(this.resbalar3==0)
+          this.myShip3.setVelocityY(0);
+         break;
+         case "STOPUP2":
+         if(this.resbalar2==0)
+          this.myShip2.setVelocityY(0);
+         break;
+         case "STOPUP":
+         if(this.resbalar==0)
+          this.myShip.setVelocityY(0);
+         break;
+           case "UP4":
+          this.myShip4.setVelocityY(-20*this.patin4);
+         break;
+          case "UP3":
+          this.myShip3.setVelocityY(-20*this.patin3);
+         break;
+         case "UP2":
+          this.myShip2.setVelocityY(-20*this.patin2);
+         break;
       case "UP":
           console.log("xd");
             this.myShip.setVelocityY(-20*this.patin);
@@ -5890,7 +6308,32 @@ this.objetocolocarsprite.y = this.seleccionadoSprite.y ;
 }
 
           break;
-      case "DOWN":
+           case "STOPDOWN4":
+           if(this.resbalar4==0)
+           this.myShip4.setVelocityY(0);
+          break;
+          case "STOPDOWN3":
+          if(this.resbalar3==0)
+           this.myShip3.setVelocityY(0);
+          break;
+          case "STOPDOWN2":
+          if(this.resbalar2==0)
+           this.myShip2.setVelocityY(0);
+          break;
+           case "STOPDOWN":
+           if(this.resbalar==0)
+           this.myShip.setVelocityY(0);
+          break;
+          case "DOWN4":
+           this.myShip4.setVelocityY(20*this.patin4);
+          break;
+          case "DOWN3":
+           this.myShip3.setVelocityY(20*this.patin3);
+          break;
+          case "DOWN2":
+           this.myShip2.setVelocityY(20*this.patin2);
+          break;
+          case "DOWN":
           console.log("xd");
           this.myShip.setVelocityY(20*this.patin);
 
@@ -5902,6 +6345,56 @@ this.seleccionadoSprite.y = this.seleccionadoSprite.y + 64;
 this.objetocolocarsprite.y = this.seleccionadoSprite.y ;
         
         }
+          break;
+          case "X4":
+
+          //PONER BOMBAS CON LA TELE
+              if(this.pause==0 && this.designer==0)
+          {
+        if( this.vidasInt4 >0)
+        {
+        if(this.bombasFull4.getLength()< this.bombas4)
+          {
+         this.bombasFull4.create(this.myShip4.x, this.myShip4.y, 'bomba');
+        this.countExplosion4 = 100;
+         }       
+    
+        }
+     }
+
+          break;
+            case "X3":
+
+             //PONER BOMBAS CON LA TELE
+              if(this.pause==0 && this.designer==0)
+          {
+        if( this.vidasInt3 >0)
+        {
+        if(this.bombasFull3.getLength()< this.bombas3)
+          {
+         this.bombasFull3.create(this.myShip3.x, this.myShip3.y, 'bomba');
+        this.countExplosion3 = 100;
+         }       
+    
+        }
+     }
+          break;
+          case "X2":
+
+               //PONER BOMBAS CON LA TELE
+              if(this.pause==0 && this.designer==0)
+          {
+        if( this.vidasInt2 >0)
+        {
+        if(this.bombasFull2.getLength()< this.bombas2)
+          {
+         this.bombasFull2.create(this.myShip2.x, this.myShip2.y, 'bomba');
+        this.countExplosion2 = 100;
+         }       
+    
+        }
+     }
+
           break;
       case "X":
 //ENPAUSE
@@ -7041,7 +7534,9 @@ if(this.seleccionInt ==24)
 
    if(this.seleccionInt ==25)
     {
+      if(this.mapaNumeroEditado +1 <= localStorage.getItem("mapasCreados"))  
       this.mapaNumeroEditado= this.mapaNumeroEditado + 1;
+
       this.mapaNumeroEditadoString.setText(this.mapaNumeroEditado);
 
       this.designer=1;
@@ -7187,7 +7682,7 @@ this.readySprite4.visible = false;
         {
             element.style.display = 'none'
 
-       this.scene.start('Scene1', { tematica:  this.tematica, personajeSelectP1:  this.personajeSeleccionadoP1, gamemode: this.gamemode, jugadores: this.jugadores , designer: this.designer, nombredata: this.nombreJ1, nombredata2: this.nombreJ2, nombredata3: this.nombreJ3, nombredata4: this.nombreJ4, mapaNumero: this.mapaNumeroEditado, mapaTipo: this.mapaTipo, designerMode: this.designerMode, music: this.music});
+       this.scene.start('Scene1', { tematica:  this.tematica, personajeSelectP1:  this.personajeSeleccionadoP1, gamemode: this.gamemode, jugadores: this.jugadores , designer: this.designer, nombredata: this.nombreJ1, nombredata2: this.nombreJ2, nombredata3: this.nombreJ3, nombredata4: this.nombreJ4, mapaNumero: this.mapaNumeroEditado, mapaTipo: this.mapaTipo, designerMode: this.designerMode, music: this.music, dificultad: this.dificultad});
         }
         
         if(this.seleccionInt==11)
