@@ -16,6 +16,7 @@
   <script type="text/javascript">
     var webSocket = {};
     var obj;
+    var element;
     var cursor = "";
   </script>
   <!--<script src="../Phaser/phaser.min.js" charset="utf-8"></script>-->
@@ -7340,10 +7341,13 @@ this.mapaDesplegado = 0;
 //var htmlString = '<input id="text" type="text" value="https://hogangnono.com" style="width:80%" /><br />';
     //  var domElement = this.add.dom(0, 0).createFromHTML(htmlString); 
         // this.cursors = this.input.keyboard.createCursorKeys();
-this.nombreJ1 = "Juan";
-this.nombreJ2 = "Marcos";
-this.nombreJ3 = "Luis";
-this.nombreJ4 = "Maria";
+
+
+this.nombreJ1 = localStorage.getItem("nombreJ1");
+this.nombreJ2 = localStorage.getItem("nombreJ2");
+this.nombreJ3 = localStorage.getItem("nombreJ3");
+this.nombreJ4 = localStorage.getItem("nombreJ4");
+
 
 
 this.personajeSeleccionadoP1 = 1;
@@ -7463,7 +7467,7 @@ this.input.keyboard.on('keydown_UP', moverMenuAbajo, this);
     }
 
 
-var element = document.getElementById('input-box')
+ element = document.getElementById('input-box')
         if (element && element.style.display === 'none') {
         //  element.style.display = 'block'
         element.style.display = 'none'
@@ -8195,6 +8199,48 @@ this.input.keyboard.on('keydown_P', estadoListo4, this);
 update()
 {
 
+
+  if(cursor.includes("NAME1"))
+  {
+      console.log(cursor);
+    var nombre = cursor.split(".");
+    this.nombreJ1 = nombre[1];
+      this.nombreJ1text.setText(this.nombreJ1);
+      localStorage.setItem("nombreJ1", this.nombreJ1);
+
+  }
+
+  if(cursor.includes("NAME2"))
+  {
+      console.log(cursor);
+     var nombre = cursor.split(".");
+    this.nombreJ2 = nombre[1];
+      
+    this.nombreJ2text.setText(this.nombreJ2);
+
+      localStorage.setItem("nombreJ2", this.nombreJ2);
+  }
+
+  if(cursor.includes("NAME3"))
+  {
+      console.log(cursor);
+     var nombre = cursor.split(".");
+    this.nombreJ3 = nombre[1];
+     this.nombreJ3text.setText(this.nombreJ3);
+
+      localStorage.setItem("nombreJ3", this.nombreJ3);
+  }
+
+  if(cursor.includes("NAME4"))
+  {
+      console.log(cursor);
+     var nombre = cursor.split(".");
+    this.nombreJ4 = nombre[1];
+    this.nombreJ4text.setText(this.nombreJ4);
+
+      localStorage.setItem("nombreJ4", this.nombreJ4);
+  }
+
 if(this.seleccionarDif == 1)
  this.dificultadsprite.visible = true;
 
@@ -8202,9 +8248,31 @@ if(this.seleccionarDif == 0)
  this.dificultadsprite.visible = false;
 
  switch (cursor) {
+
       case "LEFT":
-//ANDROID_LEFT
-if(this.pantalla ==1)
+
+
+  this.popupsprite.visible = false;
+
+
+if(this.seleccionarDif == 1)
+{
+  if(this.seleccionInt == 33)
+  {
+    this.seleccionInt=32;
+    return;
+  }
+
+
+  if(this.seleccionInt == 34)
+  {
+    this.seleccionInt=33;
+    return;
+  }
+}
+
+
+    if(this.pantalla ==1)
     {
          if(this.seleccionInt ==0)
             this.seleccionInt = 2;
@@ -8229,6 +8297,21 @@ if(this.pantalla ==1)
             this.seleccionInt = 23;
           else if(this.seleccionInt ==26)
             this.seleccionInt = 25;
+             //nuevas opciones
+           else if(this.seleccionInt ==31)
+            this.seleccionInt = 30;
+           else if(this.seleccionInt ==30)
+            this.seleccionInt = 22;
+
+               //nuevas opciones mapas
+           else if(this.seleccionInt ==29)
+            this.seleccionInt = 28;
+           else if(this.seleccionInt ==28)
+            this.seleccionInt = 27;
+           else if(this.seleccionInt ==27)
+            this.seleccionInt = 35;
+          else if(this.seleccionInt ==36)
+            this.seleccionInt = 29;
 
 
  else if(this.seleccionInt ==25)
@@ -8265,10 +8348,29 @@ if(this.pantalla ==1)
      }
 
          break;
-      case "RIGHT":
- //ANDROID_RIGHT        
 
- if(this.pantalla ==1)
+      case "RIGHT":
+
+
+if(this.seleccionarDif == 1)
+{
+  if(this.seleccionInt == 32)
+  {
+    this.seleccionInt=33;
+    return;
+  }
+
+
+  if(this.seleccionInt == 33)
+  {
+    this.seleccionInt=34;
+    return;
+  }
+}
+
+  this.popupsprite.visible = false;
+
+    if(this.pantalla ==1)
     {
          if(this.seleccionInt ==0)
             this.seleccionInt = 1;
@@ -8292,6 +8394,23 @@ if(this.pantalla ==1)
             this.seleccionInt = 24;
             else if(this.seleccionInt ==25)
             this.seleccionInt = 26;
+
+          //nuevas opciones
+           else if(this.seleccionInt ==22)
+            this.seleccionInt = 30;
+           else if(this.seleccionInt ==30)
+            this.seleccionInt = 31;
+
+             //nuevas opciones mapas
+           else if(this.seleccionInt ==27)
+            this.seleccionInt = 28;
+           else if(this.seleccionInt ==28)
+            this.seleccionInt = 29;
+          else if(this.seleccionInt ==29)
+            this.seleccionInt = 36;
+          else if(this.seleccionInt ==35)
+            this.seleccionInt = 27;
+
 
 
     }
@@ -8320,24 +8439,38 @@ if(this.pantalla ==1)
            else if(this.seleccionInt ==19)
             this.seleccionInt = 10;
      }
-       
+
+
 
          break;
-      case "UP":
- //ANDROID_UP   
 
+
+      case "UP":
+
+
+
+  this.popupsprite.visible = false;
 if(this.pantalla ==1)
     {
        if(this.seleccionInt ==8)
             this.seleccionInt = 25;
 
-     else if(this.seleccionInt ==25 || this.seleccionInt ==26)
-            this.seleccionInt = 23;
-
-           else if(this.seleccionInt ==23 || this.seleccionInt ==24)
+if(this.modoopciones==1)
+        {
+     if(this.seleccionInt ==27 ||this.seleccionInt ==28 || this.seleccionInt ==29 )
             this.seleccionInt = 20;
+        }
 
-else if(this.seleccionInt ==20 || this.seleccionInt ==21 || this.seleccionInt ==22)
+
+ if(this.modoopciones==2)
+        {
+    if(this.seleccionInt ==25 || this.seleccionInt ==26)
+        this.seleccionInt = 23;
+
+    else if(this.seleccionInt ==23 || this.seleccionInt ==24)
+            this.seleccionInt = 20;
+     }
+ if(this.seleccionInt ==20 || this.seleccionInt ==21 || this.seleccionInt ==22)
             this.seleccionInt = 0;
 
     else if(this.seleccionInt ==0 || this.seleccionInt ==1 || this.seleccionInt ==2)
@@ -8372,11 +8505,17 @@ else if(this.seleccionInt ==20 || this.seleccionInt ==21 || this.seleccionInt ==
             else if(this.seleccionInt ==14)
             this.seleccionInt = 11;
 
-        }    
+        }
+        
+
           break;
+
+
       case "DOWN":
- //ANDROID_DOWN
-if(this.pantalla ==1)
+
+
+  this.popupsprite.visible = false;
+    if(this.pantalla ==1)
     {
 
  if(this.seleccionInt == 25)
@@ -8384,13 +8523,24 @@ if(this.pantalla ==1)
             this.seleccionInt = 8;
       }
 
-      else if(this.seleccionInt ==23 || this.seleccionInt ==24)
+ if(this.modoopciones==1)
+        {
+     if(this.seleccionInt ==20 ||this.seleccionInt ==21 || this.seleccionInt ==22 )
+            this.seleccionInt = 27;
+          else if(this.seleccionInt ==27 ||this.seleccionInt ==28 || this.seleccionInt ==29 )
+          this.seleccionInt = 8;
+        }
+
+        if(this.modoopciones==2)
+        {
+      if(this.seleccionInt ==23 || this.seleccionInt ==24)
             this.seleccionInt = 25;
 
        else if(this.seleccionInt ==20 ||this.seleccionInt ==21 || this.seleccionInt ==22 )
             this.seleccionInt = 23;
+        }
 
-  else if(this.seleccionInt ==0 || this.seleccionInt ==1 || this.seleccionInt ==2)
+  if(this.seleccionInt ==0 || this.seleccionInt ==1 || this.seleccionInt ==2)
             this.seleccionInt = 20;
 
 
@@ -8430,13 +8580,120 @@ if(this.pantalla ==1)
 
         }
 
+
           break;
       case "X":
-//ANDROID_X
 
-this.sound.play('select');
+
+ this.popupsprite.visible = false;
+  this.sound.play('select');
+
+
+  if(this.seleccionarDif == 1)
+{
+  if(this.seleccionInt == 32)
+  {
+    this.dificultad =0;
+    this.seleccionarDif = 0;
+     this.seleccionInt =0;
+    return;
+  }
+
+  if(this.seleccionInt == 33)
+  {
+    this.dificultad =1;
+     this.seleccionarDif = 0;
+      this.seleccionInt =0;
+    return;
+  }
+
+    if(this.seleccionInt == 34)
+  {
+    this.dificultad =2;
+     this.seleccionarDif = 0;
+     this.seleccionInt =0;
+    return;
+  }
+}
+
     if(this.pantalla ==1)
     {
+
+
+if(this.seleccionInt ==30)
+    {
+            this.modoopciones = 1; 
+            this.menufondo.setTexture("fondo2");
+            this.mapaNumeroEditado = -1;
+            this.mapaNormalNumero = 1;
+            this.mapatipoSprite.visible = false;
+            this.mapaNumeroEditadoString.visible = false;
+this.designerSprite.visible = false;
+this.mapanormalSprite.visible = true;
+    }
+
+if(this.seleccionInt ==31)
+    {
+            this.modoopciones = 2;
+             this.menufondo.setTexture("fondo");
+             this.mapaNumeroEditado = 1;
+               this.mapaNumeroEditadoString.visible = true;
+                this.mapaNumeroEditadoString.setText(1);
+          this.designer = 0;
+             this.mapatipoSprite.visible = true;
+            this.designerSprite.visible = true;
+            this.mapanormalSprite.visible = false;
+    }
+
+   if(this.seleccionInt ==36)
+    {
+      if(this.mapaDesplegado - 3> -7)
+      {
+     this.mapaDesplegado = this.mapaDesplegado - 3;
+     this.mapaNumeroEditado = this.mapaNumeroEditado -3;
+          
+   }
+     if(this.mapaDesplegado ==-3)
+     this.menufondo.setTexture('fondo2mapa2');
+     else if(this.mapaDesplegado ==-6)
+     this.menufondo.setTexture('fondo2mapa3');
+
+     
+    }
+
+if(this.seleccionInt ==29)
+    {
+            this.mapaNormalNumero = 3;
+            this.designer = 1;
+             this.mapaNumeroEditado =-3 + this.mapaDesplegado;
+    }
+if(this.seleccionInt ==28)
+    {
+            this.mapaNormalNumero = 2;
+             this.designer = 1;
+             this.mapaNumeroEditado =-2 + this.mapaDesplegado;
+    }
+if(this.seleccionInt ==27)
+    {
+            this.mapaNormalNumero = 1;
+             this.designer = 1;
+             this.mapaNumeroEditado =-1 + this.mapaDesplegado;
+    }
+
+    if(this.seleccionInt ==35)
+    {
+      if(this.mapaDesplegado + 3<=0)
+      {
+     this.mapaDesplegado = this.mapaDesplegado + 3;
+    this.mapaNumeroEditado = this.mapaNumeroEditado + 3;
+   }
+   if(this.mapaDesplegado ==0)
+     this.menufondo.setTexture('fondo2');
+     else if(this.mapaDesplegado ==-3)
+     this.menufondo.setTexture('fondo2mapa2');
+
+ 
+    }
 
 if(this.seleccionInt ==26)
     {
@@ -8450,7 +8707,9 @@ if(this.seleccionInt ==24)
 
    if(this.seleccionInt ==25)
     {
+      if(this.mapaNumeroEditado +1 <= localStorage.getItem("mapasCreados"))  
       this.mapaNumeroEditado= this.mapaNumeroEditado + 1;
+
       this.mapaNumeroEditadoString.setText(this.mapaNumeroEditado);
 
       this.designer=1;
@@ -8478,11 +8737,13 @@ if(this.seleccionInt ==24)
 
     if(this.seleccionInt ==0)
     {
-   //DIFICULTAD
-      this.dificultadsprite.visible = true;
-
+      this.seleccionarDif = 1;
             this.jugadores =1; 
         this.gamemode =0;
+
+        //cambiar a seleccionar 
+        this.seleccionInt = 32;
+
     }
 
     if(this.seleccionInt ==1)
@@ -8491,12 +8752,48 @@ if(this.seleccionInt ==24)
         this.gamemode =1;
     }
 
+   
     if(this.seleccionInt ==2)
     { this.jugadores =2;
         this.gamemode =2;
 }
      if(this.seleccionInt ==3 && this.gamemode== 0)
         this.jugadores =1;
+    
+     if(this.seleccionInt ==3 && this.gamemode== 1)
+     {
+      if(this.seleccionInt ==3)
+      {
+        this.seleccionInt ==99;
+        this.popupsprite.visible = true;
+      }
+      else
+      {
+        this.seleccionInt = 3;
+         this.popupsprite.visible = false;
+      }
+
+      
+     }
+
+      if(this.seleccionInt ==3 && this.gamemode== 2)
+     {
+        if(this.seleccionInt ==3)
+        {
+        this.seleccionInt ==99;
+         this.popupsprite.visible = true;
+      }
+      else
+      {
+        this.seleccionInt = 3;
+         this.popupsprite.visible = false;
+      }
+
+     
+     }
+    
+
+    
 
     if(this.seleccionInt ==4)
         this.jugadores =2;
@@ -8558,7 +8855,7 @@ this.readySprite4.visible = false;
         {
             element.style.display = 'none'
 
-       this.scene.start('Scene1', { tematica:  this.tematica, personajeSelectP1:  this.personajeSeleccionadoP1, gamemode: this.gamemode, jugadores: this.jugadores , designer: this.designer, nombredata: this.nombreJ1, nombredata2: this.nombreJ2, nombredata3: this.nombreJ3, nombredata4: this.nombreJ4, mapaNumero: this.mapaNumeroEditado, mapaTipo: this.mapaTipo, designerMode: this.designerMode, music: this.music});
+       this.scene.start('Scene1', { tematica:  this.tematica, personajeSelectP1:  this.personajeSeleccionadoP1, gamemode: this.gamemode, jugadores: this.jugadores , designer: this.designer, nombredata: this.nombreJ1, nombredata2: this.nombreJ2, nombredata3: this.nombreJ3, nombredata4: this.nombreJ4, mapaNumero: this.mapaNumeroEditado, mapaTipo: this.mapaTipo, designerMode: this.designerMode, music: this.music, dificultad: this.dificultad});
         }
         
         if(this.seleccionInt==11)
@@ -8627,6 +8924,7 @@ this.readySprite4.visible = false;
         }
     }
 
+cursor = "XD";
 
       break;
 }
@@ -9062,7 +9360,12 @@ if(this.seleccionInt ==26)
 
 }
 
+
+cursor = "XD";
+
 }
+
+
 
 }
 
