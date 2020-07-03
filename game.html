@@ -287,6 +287,7 @@ this.load.image('pisor2', 'https://i.ibb.co/BT4bwd5/pisor2.png');
 
     this.load.image('bg', 'img/jugador.png');
    this.load.image('enemigo',  'img/enemigo.png');
+     this.load.image('enemigoquemado',  'img/enemigoquemado.png');
    this.load.image('ship',  'img/jugador.png');
       this.load.image('ship2',  'img/jugador2.png');
          this.load.image('ship3',  'img/jugador3.png');
@@ -1698,69 +1699,233 @@ this.physics.add.collider(this.enemigos,this.boxFuerte2, function(col1,col2){
    });
 
 this.physics.add.collider(this.enemigos,this.explosionUp,aumentarScore, function(col1,col2){
+
+      if(this.dificultad==2)
+    {
+    if(col1.getData('quemado')==1)
       col1.destroy();
-    
+      else
+      {
+      col1.setData('quemado', 1);
+    col1.setTexture('enemigoquemado');
+  }
+}else
+{
+    col1.destroy();
+ }   
+      col2.destroy();
+
+
    },this);
 
 this.physics.add.collider(this.enemigos,this.explosionDown, aumentarScore, function(col1,col2){
+
+   if(this.dificultad==2)
+    {
+    if(col1.getData('quemado')==1)
+      col1.destroy();
+      else
+      {
+      col1.setData('quemado', 1);
+    col1.setTexture('enemigoquemado');
+  }
+}else
+{
     col1.destroy();
+ }   
+      col2.destroy();
    
    },this);
 
 
 this.physics.add.collider(this.enemigos,this.explosionLeft, aumentarScore, function(col1,col2){
+   if(this.dificultad==2)
+    {
+    if(col1.getData('quemado')==1)
+      col1.destroy();
+      else
+      {
+      col1.setData('quemado', 1);
+    col1.setTexture('enemigoquemado');
+  }
+}else
+{
     col1.destroy();
+ }   
+      col2.destroy();
 
    },this);
 
 this.physics.add.collider(this.enemigos,this.explosionRight, aumentarScore, function(col1,col2){
-    col1.destroy();
 
+    if(this.dificultad==2)
+    {
+    if(col1.getData('quemado')==1)
+      col1.destroy();
+      else
+      {
+      col1.setData('quemado', 1);
+    col1.setTexture('enemigoquemado');
+  }
+}else
+{
+    col1.destroy();
+ }   
+      col2.destroy();
+ 
    },this);
 
 //2
 
 this.physics.add.collider(this.enemigos,this.explosionUp2,aumentarScore, function(col1,col2){
+if(this.dificultad==2)
+    {
+    if(col1.getData('quemado')==1)
       col1.destroy();
-    
+      else
+      {
+      col1.setData('quemado', 1);
+    col1.setTexture('enemigoquemado');
+  }
+}else
+{
+    col1.destroy();
+ }   
+      col2.destroy();
    },this);
 
 this.physics.add.collider(this.enemigos,this.explosionDown2, aumentarScore, function(col1,col2){
+if(this.dificultad==2)
+    {
+    if(col1.getData('quemado')==1)
+      col1.destroy();
+      else
+      {
+      col1.setData('quemado', 1);
+    col1.setTexture('enemigoquemado');
+  }
+}else
+{
     col1.destroy();
+ }   
+      col2.destroy();
    
    },this);
 
 
 this.physics.add.collider(this.enemigos,this.explosionLeft2, aumentarScore, function(col1,col2){
+
+if(this.dificultad==2)
+    {
+    if(col1.getData('quemado')==1)
+      col1.destroy();
+      else
+      {
+      col1.setData('quemado', 1);
+    col1.setTexture('enemigoquemado');
+  }
+}else
+{
     col1.destroy();
+ }   
+      col2.destroy();
 
    },this);
 
 this.physics.add.collider(this.enemigos,this.explosionRight2, aumentarScore, function(col1,col2){
+
+if(this.dificultad==2)
+    {
+    if(col1.getData('quemado')==1)
+      col1.destroy();
+      else
+      {
+      col1.setData('quemado', 1);
+    col1.setTexture('enemigoquemado');
+  }
+}else
+{
     col1.destroy();
+ }   
+      col2.destroy();
 
    },this);
 
 //3
 
 this.physics.add.collider(this.enemigos,this.explosionUp3,aumentarScore, function(col1,col2){
+
+if(this.dificultad==2)
+    {
+    if(col1.getData('quemado')==1)
       col1.destroy();
+      else
+      {
+      col1.setData('quemado', 1);
+    col1.setTexture('enemigoquemado');
+  }
+}else
+{
+    col1.destroy();
+ }   
+      col2.destroy();
     
    },this);
 
 this.physics.add.collider(this.enemigos,this.explosionDown3, aumentarScore, function(col1,col2){
+
+if(this.dificultad==2)
+    {
+    if(col1.getData('quemado')==1)
+      col1.destroy();
+      else
+      {
+      col1.setData('quemado', 1);
+    col1.setTexture('enemigoquemado');
+  }
+}else
+{
     col1.destroy();
-   
+ }   
+      col2.destroy();
    },this);
 
 
 this.physics.add.collider(this.enemigos,this.explosionLeft3, aumentarScore, function(col1,col2){
+
+if(this.dificultad==2)
+    {
+    if(col1.getData('quemado')==1)
+      col1.destroy();
+      else
+      {
+      col1.setData('quemado', 1);
+    col1.setTexture('enemigoquemado');
+  }
+}else
+{
     col1.destroy();
+ }   
+      col2.destroy();
 
    },this);
 
 this.physics.add.collider(this.enemigos,this.explosionRight3, aumentarScore, function(col1,col2){
+
+if(this.dificultad==2)
+    {
+    if(col1.getData('quemado')==1)
+      col1.destroy();
+      else
+      {
+      col1.setData('quemado', 1);
+    col1.setTexture('enemigoquemado');
+  }
+}else
+{
     col1.destroy();
+ }   
+      col2.destroy();
 
    },this);
 
@@ -1768,23 +1933,79 @@ this.physics.add.collider(this.enemigos,this.explosionRight3, aumentarScore, fun
 //4
 
 this.physics.add.collider(this.enemigos,this.explosionUp4,aumentarScore, function(col1,col2){
+
+if(this.dificultad==2)
+    {
+    if(col1.getData('quemado')==1)
       col1.destroy();
+      else
+      {
+      col1.setData('quemado', 1);
+    col1.setTexture('enemigoquemado');
+  }
+}else
+{
+    col1.destroy();
+ }   
+      col2.destroy();
     
    },this);
 
 this.physics.add.collider(this.enemigos,this.explosionDown4, aumentarScore, function(col1,col2){
+
+if(this.dificultad==2)
+    {
+    if(col1.getData('quemado')==1)
+      col1.destroy();
+      else
+      {
+      col1.setData('quemado', 1);
+    col1.setTexture('enemigoquemado');
+  }
+}else
+{
     col1.destroy();
+ }   
+      col2.destroy();
    
    },this);
 
 
 this.physics.add.collider(this.enemigos,this.explosionLeft4, aumentarScore, function(col1,col2){
+
+if(this.dificultad==2)
+    {
+    if(col1.getData('quemado')==1)
+      col1.destroy();
+      else
+      {
+      col1.setData('quemado', 1);
+    col1.setTexture('enemigoquemado');
+  }
+}else
+{
     col1.destroy();
+ }   
+      col2.destroy();
 
    },this);
 
 this.physics.add.collider(this.enemigos,this.explosionRight4, aumentarScore, function(col1,col2){
+
+if(this.dificultad==2)
+    {
+    if(col1.getData('quemado')==1)
+      col1.destroy();
+      else
+      {
+      col1.setData('quemado', 1);
+    col1.setTexture('enemigoquemado');
+  }
+}else
+{
     col1.destroy();
+ }   
+      col2.destroy();
 
    },this);
 
@@ -5712,8 +5933,12 @@ this.disminuirY = this.disminuirY+1;
 
 
 
-              if(this.dificultad == 1)
+              if(this.dificultad == 1 || this.dificultad == 2)
               {
+
+                  if((child.x -150 < this.myShip.x +62 +150 ) && (child.x +62 +50 > this.myShip.x  -150) 
+            && (child.y +62 +150 > this.myShip.y -150) && (child.y -50< this.myShip.y +62 +150))
+          {
             if(random >0 && random < 5 && child.x <this.myShip.x)
             child.setVelocityX(25*this.nivelInt +50);
 
@@ -5725,8 +5950,61 @@ this.disminuirY = this.disminuirY+1;
 
             if(random >0 && random < 5 && child.y >this.myShip.y)
             child.setVelocityY(-25*this.nivelInt-50);
-
+            }
             
+                if((child.x -150 < this.myShip2.x +62 +150 ) && (child.x +62 +50 > this.myShip2.x  -150) 
+            && (child.y +62 +150 > this.myShip2.y -150) && (child.y -50< this.myShip2.y +62 +150))
+          {
+            if(random >0 && random < 5 && child.x <this.myShip2.x)
+            child.setVelocityX(25*this.nivelInt +50);
+
+            if(random >0 && random < 5 && child.x >this.myShip2.x)
+            child.setVelocityX(-25*this.nivelInt -50);
+
+           if(random >0 && random < 5 && child.y <this.myShip2.y)
+            child.setVelocityY(25*this.nivelInt +50);
+
+            if(random >0 && random < 5 && child.y >this.myShip2.y)
+            child.setVelocityY(-25*this.nivelInt-50);
+            }
+            
+
+
+                if((child.x -150 < this.myShip3.x +62 +150 ) && (child.x +62 +50 > this.myShip3.x  -150) 
+            && (child.y +62 +150 > this.myShip3.y -150) && (child.y -50< this.myShip3.y +62 +150))
+          {
+            if(random >0 && random < 5 && child.x <this.myShip3.x)
+            child.setVelocityX(25*this.nivelInt +50);
+
+            if(random >0 && random < 5 && child.x >this.myShip3.x)
+            child.setVelocityX(-25*this.nivelInt -50);
+
+           if(random >0 && random < 5 && child.y <this.myShip3.y)
+            child.setVelocityY(25*this.nivelInt +50);
+
+            if(random >0 && random < 5 && child.y >this.myShip3.y)
+            child.setVelocityY(-25*this.nivelInt-50);
+            }
+            
+
+                if((child.x -150 < this.myShip4.x +62 +150 ) && (child.x +62 +50 > this.myShip4.x  -150) 
+            && (child.y +62 +150 > this.myShip4.y -150) && (child.y -50< this.myShip4.y +62 +150))
+          {
+            if(random >0 && random < 5 && child.x <this.myShip4.x)
+            child.setVelocityX(25*this.nivelInt +50);
+
+            if(random >0 && random < 5 && child.x >this.myShip4.x)
+            child.setVelocityX(-25*this.nivelInt -50);
+
+           if(random >0 && random < 5 && child.y <this.myShip4.y)
+            child.setVelocityY(25*this.nivelInt +50);
+
+            if(random >0 && random < 5 && child.y >this.myShip4.y)
+            child.setVelocityY(-25*this.nivelInt-50);
+            }
+            
+
+
 
             if(random ==20)
               {
@@ -5770,13 +6048,125 @@ this.disminuirY = this.disminuirY+1;
 
            this.bombasFull.create(posx, posy, 'bomba');
           this.countExplosion = 100;
-      
-               
+    
+           }
+
+           if((child.x -50 < this.myShip2.x +62 +50 ) && (child.x +62 +50 > this.myShip2.x  -50) 
+            && (child.y +62 +50 > this.myShip2.y -50) && (child.y -50< this.myShip2.y +62 +50))
+          {
+
+                           var posx = 0;
+                       var posy = 0;
+     
+          for (var i = 0; i <= 50; i++) 
+          {
+
+            //416
+            //128
+            if(416 + i*64 <= child.x+16)
+              posx = 416 + i*64
+
+
+          }
+
+          for (var i = 0; i <= 50; i++) 
+          {
+
+            //416
+            //128
+            if(128 + i*64 <= child.y+16)
+              posy = 128 + i*64
+
+            
+          
+        
+    
+         }
+
+           this.bombasFull.create(posx, posy, 'bomba');
+          this.countExplosion = 100;
+    
+           }
+
+           if((child.x -50 < this.myShip3.x +62 +50 ) && (child.x +62 +50 > this.myShip3.x  -50) 
+            && (child.y +62 +50 > this.myShip3.y -50) && (child.y -50< this.myShip3.y +62 +50))
+          {
+
+                           var posx = 0;
+                       var posy = 0;
+     
+          for (var i = 0; i <= 50; i++) 
+          {
+
+            //416
+            //128
+            if(416 + i*64 <= child.x+16)
+              posx = 416 + i*64
+
+
+          }
+
+          for (var i = 0; i <= 50; i++) 
+          {
+
+            //416
+            //128
+            if(128 + i*64 <= child.y+16)
+              posy = 128 + i*64
+
+            
+          
+        
+    
+         }
+
+           this.bombasFull.create(posx, posy, 'bomba');
+          this.countExplosion = 100;
+    
+           }
+
+           if((child.x -50 < this.myShip4.x +62 +50 ) && (child.x +62 +50 > this.myShip4.x  -50) 
+            && (child.y +62 +50 > this.myShip4.y -50) && (child.y -50< this.myShip4.y +62 +50))
+          {
+
+                           var posx = 0;
+                       var posy = 0;
+     
+          for (var i = 0; i <= 50; i++) 
+          {
+
+            //416
+            //128
+            if(416 + i*64 <= child.x+16)
+              posx = 416 + i*64
+
+
+          }
+
+          for (var i = 0; i <= 50; i++) 
+          {
+
+            //416
+            //128
+            if(128 + i*64 <= child.y+16)
+              posy = 128 + i*64
+
+            
+          
+        
+    
+         }
+
+           this.bombasFull.create(posx, posy, 'bomba');
+          this.countExplosion = 100;
+    
            }
 
            }
          }
             
+
+                
              if(random ==0)
             child.setVelocityX(25*this.nivelInt +50);
 
@@ -6118,10 +6508,12 @@ this.countBomb4 = 0;
         this.limpiarLlama4 =50;
  }
 
-if(this.resbalar==1)
+if(this.resbalar==0)
 {
+//  if (this.cursors.left.isUp) { 
  //this.myShip.setVelocityX(0);
  // this.myShip.setVelocityY(0);
+//}
 }
 if(this.resbalar2==1)
 {
