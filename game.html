@@ -916,10 +916,10 @@ if(this.jugadoresTotal >=4)
 
 
 
- this.myShip.setCollideWorldBounds(true);
- this.myShip2.setCollideWorldBounds(true);
- this.myShip3.setCollideWorldBounds(true);
- this.myShip4.setCollideWorldBounds(true);
+ //this.myShip.setCollideWorldBounds(true);
+ //this.myShip2.setCollideWorldBounds(true);
+ //this.myShip3.setCollideWorldBounds(true);
+ //this.myShip4.setCollideWorldBounds(true);
 
 
  //sprites de puntuacion
@@ -1458,7 +1458,7 @@ this.physics.add.collider(this.myShip4, this.explosionUp3,aumentarScore3, functi
 
     this.physics.add.collider(this.enemigos,this.wallkill);
 
-   this.physics.add.overlap(this.enemigos,this.wallkill, aumentarScore, function(col1,col2){
+   this.physics.add.overlap(this.enemigos,this.wallkill, null, function(col1,col2){
     col1.destroy();
    },this);
    
@@ -2026,6 +2026,7 @@ if(this.cooldownP2 ==0)
 
      this.myShip2.x = 10000;
    this.myShip2.y = 10000;
+   this.myShip2.visible = false;
    }
    else
    {
@@ -2057,6 +2058,7 @@ function bajarvidas3()
 
          this.myShip3.x = 10000;
    this.myShip3.y = 10000;
+   this.myShip3.visible = false;
 }
 else
 {
@@ -2086,6 +2088,7 @@ function bajarvidas4()
 
       this.myShip4.x = 10000;
    this.myShip4.y = 10000;
+   this.myShip4.visible = false;
 }
 else
 {
@@ -2142,7 +2145,7 @@ else
 
    this.myShip.x = 5000;
    this.myShip.y = 5000;
-    
+    this.myShip.visible = false;
 }
 
 
@@ -5080,6 +5083,7 @@ this.bombasFull2.children.iterate(child => {
       this.menuseleccion = 2;
       this.menupausesprite2.visible = true;
 
+if(this.game.sound!=null)
  this.game.sound.stopAll();
 
  this.ganadorText.setText("PERDISTE!");
@@ -5225,7 +5229,9 @@ for (var j = 1; j < 14; j++)
 //FIN REINICIO
  if(this.relojInt==1) //bajar vidas cuando el contador sea 0
  {
+  if(this.game.sound!=null)
 this.game.sound.stopAll();
+
 this.wallfallsong.play();
 if(this.gamemode == 1 || this.gamemode == 2 )
 {
@@ -6395,10 +6401,12 @@ if(this.bombasFull2.getLength()>0 && this.countExplosion2 ==0)
         })
 
      this.bombasFull2.children.iterate(child => {
+
+       if(child!=null)
+      {
         if (child.x == this.bomba2.x && child.y == this.bomba2.y) {
 
-  if(child!=null)
-      {
+ 
              //this.bomba = child;
             child.destroy(child, true);
             return;
@@ -6438,10 +6446,11 @@ if(this.bombasFull3.getLength()>0 && this.countExplosion3 ==0)
         })
 
      this.bombasFull3.children.iterate(child => {
+        if(child!=null)
+      {
         if (child.x == this.bomba3.x && child.y == this.bomba3.y) {
 
-  if(child!=null)
-      {
+
              //this.bomba = child;
             child.destroy(child, true);
             return;
@@ -6481,10 +6490,12 @@ if(this.bombasFull4.getLength()>0 && this.countExplosion4 ==0)
         })
 
      this.bombasFull4.children.iterate(child => {
-        if (child.x == this.bomba4.x && child.y == this.bomba4.y) {
 
   if(child!=null)
       {
+        if (child.x == this.bomba4.x && child.y == this.bomba4.y) {
+
+
              //this.bomba = child;
             child.destroy(child, true);
             return;
@@ -6742,52 +6753,123 @@ this.objetocolocarsprite.y = this.seleccionadoSprite.y ;
           case "X4":
 
           //PONER BOMBAS CON LA TELE
-              if(this.pause==0 && this.designer==0)
-          {
-        if( this.vidasInt4 >0)
+               if(this.pause==0 && this.designer==0)
+{
+if( this.vidasInt4 >0)
+{
+      var posx = 0;
+      var posy = 0;
+      if(this.bombasFull4.getLength()< this.bombas4)
         {
-        if(this.bombasFull4.getLength()< this.bombas4)
+          for (var i = 0; i <= 50; i++) 
           {
-         this.bombasFull4.create(this.myShip4.x, this.myShip4.y, 'bomba');
+
+            //416
+            //128
+            if(416 + i*64 <= this.myShip4.x+16)
+              posx = 416 + i*64
+
+
+          }
+
+          for (var i = 0; i <= 50; i++) 
+          {
+
+            //416
+            //128
+            if(128 + i*64 <= this.myShip4.y+16)
+              posy = 128 + i*64
+
+            
+          }
+         this.bombasFull4.create(posx, posy, 'bomba');
+        
         this.countExplosion4 = 100;
          }       
     
-        }
+}
      }
 
           break;
             case "X3":
 
              //PONER BOMBAS CON LA TELE
-              if(this.pause==0 && this.designer==0)
-          {
-        if( this.vidasInt3 >0)
+               if(this.pause==0 && this.designer==0)
+{
+if( this.vidasInt3 >0)
+{
+      var posx = 0;
+      var posy = 0;
+      if(this.bombasFull3.getLength()< this.bombas3)
         {
-        if(this.bombasFull3.getLength()< this.bombas3)
+          for (var i = 0; i <= 50; i++) 
           {
-         this.bombasFull3.create(this.myShip3.x, this.myShip3.y, 'bomba');
+
+            //416
+            //128
+            if(416 + i*64 <= this.myShip3.x+16)
+              posx = 416 + i*64
+
+
+          }
+
+          for (var i = 0; i <= 50; i++) 
+          {
+
+            //416
+            //128
+            if(128 + i*64 <= this.myShip3.y+16)
+              posy = 128 + i*64
+
+            
+          }
+         this.bombasFull3.create(posx, posy, 'bomba');
+        
         this.countExplosion3 = 100;
          }       
     
-        }
+}
      }
           break;
           case "X2":
 
                //PONER BOMBAS CON LA TELE
               if(this.pause==0 && this.designer==0)
-          {
-        if( this.vidasInt2 >0)
+{
+if( this.vidasInt2 >0)
+{
+      var posx = 0;
+      var posy = 0;
+      if(this.bombasFull2.getLength()< this.bombas2)
         {
-        if(this.bombasFull2.getLength()< this.bombas2)
+          for (var i = 0; i <= 50; i++) 
           {
-         this.bombasFull2.create(this.myShip2.x, this.myShip2.y, 'bomba');
+
+            //416
+            //128
+            if(416 + i*64 <= this.myShip2.x+16)
+              posx = 416 + i*64
+
+
+          }
+
+          for (var i = 0; i <= 50; i++) 
+          {
+
+            //416
+            //128
+            if(128 + i*64 <= this.myShip2.y+16)
+              posy = 128 + i*64
+
+            
+          }
+         this.bombasFull2.create(posx, posy, 'bomba');
+        
         this.countExplosion2 = 100;
          }       
     
-        }
+}
      }
-
           break;
       case "X":
 //ENPAUSE
@@ -6842,16 +6924,40 @@ this.objetocolocarsprite.y = this.seleccionadoSprite.y ;
 
       //PONER BOMBAS CON LA TELE
               if(this.pause==0 && this.designer==0)
-          {
-        if( this.vidasInt >0)
+{
+if( this.vidasInt >0)
+{
+      var posx = 0;
+      var posy = 0;
+      if(this.bombasFull.getLength()< this.bombas)
         {
-        if(this.bombasFull.getLength()< this.bombas)
+          for (var i = 0; i <= 50; i++) 
           {
-         this.bombasFull.create(this.myShip.x, this.myShip.y, 'bomba');
+
+            //416
+            //128
+            if(416 + i*64 <= this.myShip.x+16)
+              posx = 416 + i*64
+
+
+          }
+
+          for (var i = 0; i <= 50; i++) 
+          {
+
+            //416
+            //128
+            if(128 + i*64 <= this.myShip.y+16)
+              posy = 128 + i*64
+
+            
+          }
+         this.bombasFull.create(posx, posy, 'bomba');
+        
         this.countExplosion = 100;
          }       
     
-        }
+}
      }
 
 //poner DISENADOR
